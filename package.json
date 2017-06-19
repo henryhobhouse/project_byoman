@@ -4,7 +4,9 @@
   "description": "basic PacMan game",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./app/app.js"
+
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/henryhobhouse/project_byoman/issues"
   },
-  "homepage": "https://github.com/henryhobhouse/project_byoman#readme"
+  "homepage": "https://github.com/henryhobhouse/project_byoman#readme",
+  "dependencies": {
+    "ecstatic": "^2.2.1"
+  }
 }
