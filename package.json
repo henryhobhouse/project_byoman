@@ -4,9 +4,8 @@
   "description": "basic PacMan game",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./app/app.js"
-
+    "test": "jasmine",
+    "start": "jasmine-node spec"
   },
   "repository": {
     "type": "git",
@@ -20,5 +19,8 @@
   "homepage": "https://github.com/henryhobhouse/project_byoman#readme",
   "dependencies": {
     "ecstatic": "^2.2.1"
+  },
+  "devDependencies": {
+    "jasmine-node": "^1.14.5"
   }
 }
