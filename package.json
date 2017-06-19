@@ -4,8 +4,8 @@
   "description": "basic PacMan game",
   "main": "server.js",
   "scripts": {
-    "test": "jasmine",
-    "start": "jasmine-node spec"
+    "test": "jasmine-node spec",
+    "start": "node ./app/app.js"
   },
   "repository": {
     "type": "git",
