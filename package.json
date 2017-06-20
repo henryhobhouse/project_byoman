@@ -4,8 +4,8 @@
   "description": "basic PacMan game",
   "main": "server.js",
   "scripts": {
-    "test": "jasmine",
-    "start": "jasmine-node spec"
+    "test": "jasmine-node test",
+    "start": "node ./app/app.js"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,8 @@
     "ecstatic": "^2.2.1"
   },
   "devDependencies": {
-    "jasmine-node": "^1.14.5"
+    "eslint": "^4.0.0",
+    "jasmine-node": "^1.14.5",
+    "rewire": "^2.5.2"
   }
 }
