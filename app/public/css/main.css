@@ -1,0 +1,14 @@
+/*.canvas-container {
+   width: 100%;
+   text-align:center;
+}*/
+
+canvas {
+  background: silver;
+  display: block;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+}
