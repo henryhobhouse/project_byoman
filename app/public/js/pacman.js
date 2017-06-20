@@ -1,13 +1,11 @@
 'use strict';
-var canvas = document.getElementById('canvas');
-var ctx = canvas.getContext('2d');
 
 function PacMan () {
   this.game = true;
   var posX = 30;
   var posY = 20;
 
-  this.radius = 10;
+  this.radius = 5;
   this.fill = 'yellow';
 
   this.draw = function(){
@@ -19,5 +17,4 @@ function PacMan () {
   };
 }
 
-var pacman = new PacMan;
-pacman.draw();
+module.exports = PacMan;
