@@ -3,7 +3,7 @@ describe("Pacman", function() {
   beforeEach(function() {
     pacman = new PacMan
   });
-  
+
   it('has an X position', function(){
     expect(pacman.posX).not.toBeNull();
   });
