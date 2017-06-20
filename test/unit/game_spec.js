@@ -8,9 +8,5 @@ describe("Pacman", function() {
       PacMan = app.__get__('PacMan');
       pacman = new PacMan
     });
-
-    it('test testing - has game variable', function() {
-      expect(pacman.game).toBeTruthy();
-    });
   });
 });
