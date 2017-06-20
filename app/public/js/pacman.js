@@ -5,7 +5,7 @@ function PacMan () {
   var posX = 30;
   var posY = 20;
 
-  this.radius = 5;
+  this.radius = 10;
   this.fill = 'yellow';
 
   this.draw = function(){
