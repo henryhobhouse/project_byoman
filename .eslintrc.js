@@ -23,5 +23,6 @@ module.exports = {
             "always"
         ],
         "no-unused-vars": "off"
+        "no-undef": "off"
     }
 };
