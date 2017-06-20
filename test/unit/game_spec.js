@@ -1,6 +1,6 @@
 var rewire = require("rewire");
 
-describe("TicTacToe", function() {
+describe("Pacman", function() {
   var app = rewire('../../app/public/js/pacman.js');
 
   describe('Post initialization', function() {
