@@ -1,3 +1,4 @@
+// Food looks best when drawn at intervals of 20
 function Food(x, y) {
 
   var posX = x;
