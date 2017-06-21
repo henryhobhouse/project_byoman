@@ -3,11 +3,12 @@ const GameDrawer = function(canvasId, game){
   var ctx = canvas.getContext('2d');
   var canvasSize = { x: canvas.width, y: canvas.height }
   this.game = game
+  this.game.createPacmanObject(canvasSize);
   var self = this;
 
   var tick = function() {
     self.update();
-    self.draw(ctx);
+    self.draw(ctx, canvasSize);
     requestAnimationFrame(tick);
   };
 
@@ -19,8 +20,8 @@ GameDrawer.prototype = {
     this.game.update();
   },
 
-  draw: function(ctx) {
-    this.game.draw();
+  draw: function(ctx, canvasSize) {
+    this.game.draw(ctx, canvasSize);
   }
 };
 

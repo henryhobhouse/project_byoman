@@ -1,3 +1,3 @@
 window.onload = function() {
-  new GameDrawer('canvas');
+  new GameDrawer('canvas', new Game());
 };
