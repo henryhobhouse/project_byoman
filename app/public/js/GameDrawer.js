@@ -4,6 +4,7 @@ const GameDrawer = function(canvasId, game){
   var canvasSize = { x: canvas.width, y: canvas.height }
   this.game = game
   var self = this;
+
   var tick = function() {
     self.update();
     self.draw(ctx);
@@ -19,6 +20,14 @@ GameDrawer.prototype = {
   },
 
   draw: function(ctx) {
-
+    this.game.draw();
   }
+};
+
+var drawImg = function(ctx, body) {
+  ctx.drawImage( body.img,
+                 body.canvasPos.x,
+                 body.canvasPos.y,
+                 body.img.width,
+                 body.img.height )
 };
