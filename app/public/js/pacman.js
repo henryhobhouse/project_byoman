@@ -1,4 +1,4 @@
-'use strict';
+// 'use strict';
 
 function PacMan(canvasSize) {
   var img = new Image();
