@@ -1,22 +1,29 @@
+var PacMan = require('../../app/public/js/pacman.js')
+
 describe("Pacman", function() {
+// var pacman;
+// var DoubleCanvasSize;
+//
+//   beforeEach(function() {
+//     DoubleCanvasSize = { x: 640, y: 540 }
+//     pacman = new PacMan(DoubleCanvasSize)
+//     console.log(pacman)
+//   });
 
-  beforeEach(function() {
-    pacman = new PacMan
-  });
-  
-  it('has an X position', function(){
-    expect(pacman.posX).not.toBeNull();
-  });
+  // it('has an Image', function(){
+  //   console.log(new PacMan)
+  //   expect(pacman.img).not.toBeNull();
+  // });
 
-  it('has an Y position', function(){
-    expect(pacman.posY).not.toBeNull();
-  });
-
-  it('has a radius of at least 5', function(){
-    expect(pacman.radius).not.toBeLessThan(5);
-  });
-
-  it('is yellow', function(){
-    expect(pacman.fill).toEqual("yellow")
-  });
+  // it('has an Y position', function(){
+  //   expect(pacman.posY).not.toBeNull();
+  // });
+  //
+  // it('has a radius of at least 5', function(){
+  //   expect(pacman.radius).not.toBeLessThan(5);
+  // });
+  //
+  // it('is yellow', function(){
+  //   expect(pacman.fill).toEqual("yellow")
+  // });
 });
