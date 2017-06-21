@@ -17,8 +17,8 @@ describe("Food", function() {
      expect(food.posY).not.toBeNull();
     });
 
-    it('has a radius of 1', function(){
-     expect(food.radius).toEqual(1);
+    it('has a radius of 3', function(){
+     expect(food.radius).toEqual(3);
     });
   });
 });
