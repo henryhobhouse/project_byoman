@@ -1,20 +1,19 @@
 'use strict';
 
-function PacMan () {
-  this.game = true;
-  var posX = 30;
-  var posY = 20;
+function PacMan(canvasSize) {
+  var img = new Image();
+  img.src = '../img/red_bird.png';
+  this.img = img;
+  this.xSpeed = 0;
+  this.ySpeed = 0;
+  this.canvasPos = { x:100, y: 20 };
+  this.canvasSize = canvasSize;
+  this.keyboard = new Keyboard();
 
-  this.radius = 10;
-  this.fill = 'yellow';
-
-  this.draw = function(){
-    ctx.beginPath();
-    ctx.arc(posX, posY, this.radius, 0, 2 * Math.PI, false);
-    ctx.fillStyle = this.fill;
-    ctx.fill();
-    ctx.closePath();
+  this.direction = function(x, y) {
+    this.xSpeed = x;
+    this.ySPeed = y;
   };
-}
+};
 
 module.exports = PacMan;

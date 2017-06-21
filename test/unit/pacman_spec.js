@@ -1,9 +1,11 @@
+var PacMan = require('../../app/public/js/pacman.js')
+
 describe("Pacman", function() {
 
   beforeEach(function() {
     pacman = new PacMan
   });
-  
+
   it('has an X position', function(){
     expect(pacman.posX).not.toBeNull();
   });

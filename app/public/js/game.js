@@ -1,5 +1,12 @@
-var canvas = document.getElementById('canvas');
-var ctx = canvas.getContext('2d');
+var Game = function(Pacman) {
+  this.bodies = [Pacman]
+};
 
-var pacman = new PacMan;
-pacman.draw();
+Game.prototype = {
+  update: function() {
+    for (var i = 0; i < this.bodies.length; i++) {
+      this.bodies[i].update();
+    }
+  },
+
+};
