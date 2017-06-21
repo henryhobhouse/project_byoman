@@ -1,5 +1,5 @@
 var Game = function() {
-  this.bodies = []
+  this.bodies = [];
 };
 
 Game.prototype = {
@@ -12,13 +12,13 @@ Game.prototype = {
   draw: function(ctx, canvasSize) {
     ctx.clearRect(0, 0, canvasSize.x, canvasSize.y);
     for ( var i = 0; i < this.bodies.length; i++) {
-      drawImg(ctx, this.bodies[i])
+      drawImg(ctx, this.bodies[i]);
     }
   },
 
   createPacmanObject: function(canvasSize) {
     var pacman = new PacMan(canvasSize);
-    this.bodies.push(pacman)
+    this.bodies.push(pacman);
   }
 
 };
