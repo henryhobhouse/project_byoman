@@ -14,7 +14,7 @@ function PacMan(canvasSize) {
     this.xSpeed = x;
     this.ySpeed = y;
   };
-};
+}
 
 PacMan.prototype = {
 
@@ -32,11 +32,11 @@ PacMan.prototype = {
     if (this._yPos() > this.canvasSize.y - this.img.height || this._yPos() < 0){
       this.direction(0, 0);
     } else if (this._xPos() > this.canvasSize.x - this.img.width || this._xPos() < 0) {
-      this.direction(0, 0)
+      this.direction(0, 0);
     }
 
-    this.canvasPos.x += this.xSpeed
-    this.canvasPos.y += this.ySpeed
+    this.canvasPos.x += this.xSpeed;
+    this.canvasPos.y += this.ySpeed;
   },
 
   _yPos: function() {

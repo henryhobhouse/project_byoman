@@ -1,8 +1,8 @@
 var GameDrawer = function(canvasId, game){
   var canvas = document.getElementById(canvasId);
   var ctx = canvas.getContext('2d');
-  var canvasSize = { x: canvas.width, y: canvas.height }
-  this.game = game
+  var canvasSize = { x: canvas.width, y: canvas.height };
+  this.game = game;
   this.game.createPacmanObject(canvasSize);
   var self = this;
 
@@ -26,9 +26,10 @@ GameDrawer.prototype = {
 };
 
 var drawImg = function(ctx, body) {
-  ctx.drawImage( body.img,
-                 body.canvasPos.x,
-                 body.canvasPos.y,
-                 body.img.width,
-                 body.img.height )
+  ctx.drawImage(
+    body.img,
+    body.canvasPos.x,
+    body.canvasPos.y,
+    body.img.width,
+    body.img.height );
 };

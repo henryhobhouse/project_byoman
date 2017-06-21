@@ -5,7 +5,7 @@ var Keyboard = function() {
     left: false,
     right: false,
     leftPress: false
-  }
+  };
 
   window.onkeydown = function(e) {
     var kc = e.keyCode;
@@ -27,5 +27,5 @@ var Keyboard = function() {
     else if (kc === 40) Keys.down = false;
   };
 
-  this.keys = Keys
+  this.keys = Keys;
 };
