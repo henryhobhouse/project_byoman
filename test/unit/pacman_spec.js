@@ -1,4 +1,3 @@
-var PacMan = require('../../app/public/js/pacman.js')
 
 describe("Pacman", function() {
 // var pacman;
