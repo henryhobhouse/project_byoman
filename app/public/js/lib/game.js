@@ -1,5 +1,7 @@
 var Game = function() {
   this.bodies = [];
+
+  this.food = [];
 };
 
 Game.prototype = {
@@ -17,5 +19,16 @@ Game.prototype = {
   createScoreObject: function() {
     var score = new Score();
     this.bodies.push(score);
+  },
+
+  createDots: function() {
+    var numCols = 27;
+    var numRows = 32;
+    for (var c =0; c < numCols; c++){
+      for (var r = 0; r < numRows; r++){
+        food = new Food(c* 20 +20,r*20 + 20);
+        this.food.push(food);
+      }
+    }
   }
 };
