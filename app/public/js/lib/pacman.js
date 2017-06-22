@@ -1,7 +1,4 @@
-var PacMan = function(canvasSize,
-                      image = new Image(),
-                      controller = new Keyboard()
-                     ){
+var PacMan = function(canvasSize, image, controller){
   var img = image;
   img.src = '/img/pacman.png';
   this.img = img;
