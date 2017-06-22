@@ -22,8 +22,11 @@ require.config({
     'keyboard': 'lib/keyboard',
     'pacman': 'lib/pacman',
     'food': 'lib/food',
-    'score': 'lib/score'
+    'score': 'lib/score',
+    'canteen': 'lib/canteen.min'
   },
+
+
 
   shim: {
     'underscore': {

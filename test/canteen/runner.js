@@ -1,17 +1,6 @@
 mocha.setup('bdd');
 var assert = chai.assert;
 
-beforeEach(function() {
-  var canvas = document.createElement('canvas'),
-    context = canvas.getContext('2d');
-
-  canvas.width = 600;
-  canvas.height = 100;
-
-  this.currentTest.canvas = canvas;
-  this.currentTest.context = context;
-});
-
 afterEach(function() {
   var test = this.currentTest,
     testElements = document.getElementsByClassName('test'),

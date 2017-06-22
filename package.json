@@ -23,6 +23,7 @@
     "requirejs": "^2.3.3"
   },
   "devDependencies": {
+    "canvas": "^1.6.5",
     "chai": "^4.0.2",
     "eslint": "^4.0.0",
     "jasmine": "^2.6.0",
