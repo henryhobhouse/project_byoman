@@ -2,7 +2,7 @@
 
 function PacMan(canvasSize) {
   var img = new Image();
-  img.src = '/img/redBird.png';
+  img.src = '/img/pacman.png';
   this.img = img;
   this.xSpeed = 0;
   this.ySpeed = 0;

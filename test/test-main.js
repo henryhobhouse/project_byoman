@@ -21,6 +21,7 @@ require.config({
     'gamedrawer': 'lib/gamedrawer',
     'keyboard': 'lib/keyboard',
     'pacman': 'lib/pacman',
+    'food': 'lib/food'
   },
 
   shim: {
