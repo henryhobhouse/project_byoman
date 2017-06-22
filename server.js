@@ -9,7 +9,8 @@ function start(route, handle) {
     console.log("request for  " + pathname + " received!");
     if ( pathname.substring(0, 4) == '/js/' ||
          pathname.substring(0, 5) == '/css/' ||
-         pathname.substring(0, 5) == '/img/') {
+         pathname.substring(0, 5) == '/img/' ||
+         pathname == '/favicon.ico'){
       ecstatic(request, response);
     } else {
       route(handle, pathname, response);
