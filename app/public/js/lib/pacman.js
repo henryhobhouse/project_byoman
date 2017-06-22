@@ -1,10 +1,13 @@
-// 'use strict';
+/* eslint-disable */
 
-function PacMan(canvasSize, image = new Image(), controller = new Keyboard()) {
+var PacMan = function(canvasSize,
+                      image = new Image(),
+                      controller = new Keyboard()
+                     ){
   var img = image;
   img.src = '/img/pacman.png';
   this.img = img;
-  this.xSpeed = 0;
+  this.xSpeed = 0
   this.ySpeed = 0;
   this.canvasPos = { x:100, y: 100 };
   this.canvasSize = canvasSize;
