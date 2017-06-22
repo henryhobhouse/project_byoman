@@ -10,12 +10,15 @@ GameDrawer = function(canvasId, game, test){
     canvasSize = { x: canvasId.width, y: canvasId.height };
   }
   this.game = game;
+  this.game.createScoreObject();
   this.game.createPacmanObject(canvasSize);
+  var score = this.game.createScoreObject();
   var self = this;
 
   var tick = function() {
     self.update();
     self.draw(ctx, canvasSize);
+    self.drawScore(ctx);
     requestAnimationFrame(tick);
   };
 
@@ -37,6 +40,13 @@ GameDrawer.prototype = {
       drawImg(ctx, this.game.bodies[i]);
     }
   },
+  
+  drawScore: function(ctx, canvasSize, score){
+    var scoreString = this.game.score[0].value.toString();
+    ctx.font = '24px pacfont';
+    ctx.fillStyle = 'white';
+    ctx.fillText('Score: ' + scoreString, 0, 24);
+  }
 };
 
 var drawImg = function(ctx, body) {

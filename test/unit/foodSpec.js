@@ -1,8 +1,8 @@
-define(['keyboard', 'pacman', 'food'], function() {
+define(['food'], function() {
   describe("Food", function() {
     describe('Post initialization', function() {
       beforeEach(function() {
-        food = new Food();
+        food = new Food(5, 5);
       });
 
       it('Has an X coordinate', function(){
