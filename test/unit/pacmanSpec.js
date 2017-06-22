@@ -4,6 +4,8 @@ define(['pacman'], function() {
     var fakeCanvasSize;
     var fakeKeyboard;
     var fakeImage;
+    var image;
+    var keyboard;
 
     fakeCanvasSize = { x: 640, y: 540};
 
@@ -24,10 +26,9 @@ define(['pacman'], function() {
     }
 
     describe('initialization', function() {
-
       beforeEach(function() {
-        var image = new fakeImage();
-        var keyboard = new fakeKeyboard();
+        image = new fakeImage();
+        keyboard = new fakeKeyboard();
         pacman = new PacMan(fakeCanvasSize, image, keyboard)
       });
 
@@ -36,16 +37,22 @@ define(['pacman'], function() {
       });
 
       it('has a speed of 0 on the x axis', function() {
-        expect(pacman.xSpeed).toEqual(0)
+        expect(pacman.xSpeed).toEqual(0);
       });
 
       it('has a speed of 0 on the y axis', function() {
-        expect(pacman.ySpeed).toEqual(0)
+        expect(pacman.ySpeed).toEqual(0);
       });
 
+      it('positioned on the canvas where x and y are eqaul to 100', function() {
+        expect(pacman.canvasPos.x).toEqual(100);
+        expect(pacman.canvasPos.y).toEqual(100);
+      });
 
+      it('has a keyboard to control input', function() {
+        expect(pacman.keyboard).toEqual(keyboard)
+      });
     });
-
 
   });
 });
