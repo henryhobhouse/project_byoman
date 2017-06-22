@@ -1,14 +1,14 @@
 // 'use strict';
 
-function PacMan(canvasSize) {
-  var img = new Image();
+function PacMan(canvasSize, image = new Image(), controller = new Keyboard()) {
+  var img = image;
   img.src = '/img/pacman.png';
   this.img = img;
   this.xSpeed = 0;
   this.ySpeed = 0;
   this.canvasPos = { x:100, y: 100 };
   this.canvasSize = canvasSize;
-  this.keyboard = new Keyboard();
+  this.keyboard = controller;
 
   this.direction = function(x, y) {
     this.xSpeed = x;
