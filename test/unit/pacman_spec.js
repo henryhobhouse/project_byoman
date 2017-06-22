@@ -1,5 +1,3 @@
-var PacMan = require('../../app/public/js/lib/pacman.js')
-
 describe("Pacman", function() {
 var pacman;
 var DoubleCanvasSize;
