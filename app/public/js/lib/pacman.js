@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 var PacMan = function(canvasSize,
                       image = new Image(),
                       controller = new Keyboard()
