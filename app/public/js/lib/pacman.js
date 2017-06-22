@@ -49,5 +49,3 @@ PacMan.prototype = {
   }
 
 };
-
-module.exports = PacMan;
