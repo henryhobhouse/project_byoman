@@ -20,7 +20,8 @@
   "dependencies": {
     "ecstatic": "^2.2.1",
     "jsdom": "^11.0.0",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "requirejs": "^2.3.3"
   },
   "devDependencies": {
     "eslint": "^4.0.0",
