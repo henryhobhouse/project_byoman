@@ -23,10 +23,8 @@ require.config({
     'pacman': 'lib/pacman',
     'food': 'lib/food',
     'score': 'lib/score',
-    'canteen': 'lib/canteen.min'
+    'canteen': 'assets/canteen'
   },
-
-
 
   shim: {
     'underscore': {
