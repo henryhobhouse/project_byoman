@@ -21,7 +21,10 @@ GameDrawer.prototype = {
   },
 
   draw: function(ctx, canvasSize) {
-    this.game.draw(ctx, canvasSize);
+    ctx.clearRect(0, 0, canvasSize.x, canvasSize.y);
+    for ( var i = 0; i < this.game.bodies.length; i++) {
+      drawImg(ctx, this.game.bodies[i]);
+    }
   }
 };
 
