@@ -5,6 +5,7 @@ define(['pacman'], function() {
       keyboard = new fakeKeyboard();
       pacman = new PacMan(fakeCanvasSize, image, keyboard)
     });
+    
     var pacman;
     var fakeCanvasSize;
     var fakeKeyboard;
