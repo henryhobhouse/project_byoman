@@ -23,6 +23,7 @@
     "requirejs": "^2.3.3"
   },
   "devDependencies": {
+    "mocha": "^3.4.2",
     "chai": "^4.0.2",
     "eslint": "^4.0.0",
     "jasmine": "^2.6.0",
@@ -31,7 +32,6 @@
     "karma-jasmine": "^1.1.0",
     "karma-phantomjs-launcher": "^1.0.4",
     "karma-requirejs": "^1.1.0",
-    "mocha": "^3.4.2",
     "nodemon": "^1.11.0",
     "phantomjs-prebuilt": "^2.1.7"
   }
