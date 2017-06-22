@@ -1,5 +1,6 @@
 var Game = function() {
   this.bodies = [];
+  this.score = [];
 };
 
 Game.prototype = {
@@ -16,6 +17,6 @@ Game.prototype = {
 
   createScoreObject: function() {
     var score = new Score();
-    this.bodies.push(score);
+    this.score.push(score);
   }
 };
