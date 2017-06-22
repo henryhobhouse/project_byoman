@@ -12,6 +12,10 @@ Game.prototype = {
   createPacmanObject: function(canvasSize) {
     var pacman = new PacMan(canvasSize, new Image(), new Keyboard());
     this.bodies.push(pacman);
-  }
+  },
 
+  createScoreObject: function() {
+    var score = new Score();
+    this.bodies.push(score);
+  }
 };
