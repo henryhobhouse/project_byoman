@@ -6,8 +6,10 @@ function start(route, handle) {
 
   function onRequest(request, response) {
     var pathname = url.parse(request.url).pathname;
-    console.log('request for  " + pathname + " received!');
-    if (pathname.substring(0, 4) == '/js/' || pathname.substring(0, 5) == '/css/') {
+    console.log("request for  " + pathname + " received!");
+    if ( pathname.substring(0, 4) == '/js/' ||
+         pathname.substring(0, 5) == '/css/' ||
+         pathname.substring(0, 5) == '/img/') {
       ecstatic(request, response);
     } else {
       route(handle, pathname, response);
