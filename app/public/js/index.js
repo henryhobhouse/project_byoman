@@ -5,6 +5,7 @@ requirejs.config({
     game: 'game.js',
     gamedrawer: 'gamedrawer.js',
     keyboard: 'keyboard.js',
-    pacman: 'pacman.js'
+    pacman: 'pacman.js',
+    food: 'food.js'
   }
 });

@@ -6,7 +6,7 @@ function start(route, handle) {
 
   function onRequest(request, response) {
     var pathname = url.parse(request.url).pathname;
-    console.log("request for  " + pathname + " received!");
+    console.log('request for  ' + pathname + ' received!'); // eslint-disable-line
     if ( pathname.substring(0, 4) == '/js/' ||
          pathname.substring(0, 5) == '/css/' ||
          pathname.substring(0, 5) == '/img/' ||
@@ -18,7 +18,7 @@ function start(route, handle) {
   }
 
   http.createServer(onRequest).listen(3000);
-  console.log('Server has started');
+  console.log('Server has started'); // eslint-disable-line
 }
 
 exports.start = start;
