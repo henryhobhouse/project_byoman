@@ -4,5 +4,5 @@ node_js:
 before_script:
 
 script:
-  - "jasmine-node test"
+  - "karma start"
   - "eslint ./app"
