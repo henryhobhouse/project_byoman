@@ -23,7 +23,7 @@ require.config({
     'pacman': 'lib/pacman',
     'food': 'lib/food',
     'score': 'lib/score',
-    'canteen': 'assets/canteen'
+    'pacmanhelper': 'helpers/pmhelper'
   },
 
   shim: {

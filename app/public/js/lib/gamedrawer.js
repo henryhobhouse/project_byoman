@@ -1,29 +1,31 @@
 GameDrawer = function(canvasId, game, test){
   var ctx;
   var canvasSize;
-  if (test !== 'yes') {
-    var canvas = document.getElementById(canvasId);
-    ctx = canvas.getContext('2d');
-    canvasSize = { x: canvas.width, y: canvas.height };
+  if (test === 'yes') {
+    var canvas = document.createElement('canvas');
+    canvas.id     = 'canvas';
+    canvas.width  = 100;
+    canvas.height = 100;
   } else {
-    ctx = canvasId.getContext('2d');
-    canvasSize = { x: canvasId.width, y: canvasId.height };
+    canvas = document.getElementById(canvasId);
   }
+  ctx = canvas.getContext('2d');
+  canvasSize = { x: canvas.width, y: canvas.height };
   this.game = game;
   this.game.createScoreObject();
   this.game.createPacmanObject(canvasSize);
   var score = this.game.createScoreObject();
   var self = this;
 
+  this.context = function() {
+    return [self, ctx];
+  };
+
   var tick = function() {
     self.update();
     self.draw(ctx, canvasSize);
     self.drawScore(ctx);
     requestAnimationFrame(tick);
-  };
-
-  this.context = function() {
-    return ctx;
   };
 
   tick();
@@ -40,7 +42,7 @@ GameDrawer.prototype = {
       drawImg(ctx, this.game.bodies[i]);
     }
   },
-  
+
   drawScore: function(ctx, canvasSize, score){
     var scoreString = this.game.score[0].value.toString();
     ctx.font = '24px pacfont';
