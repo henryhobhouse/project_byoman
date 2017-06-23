@@ -13,7 +13,6 @@ var GameDrawer = function(canvasId, game){
     self.drawDots();
     requestAnimationFrame(tick);
   };
-
   tick();
 };
 
@@ -25,7 +24,7 @@ GameDrawer.prototype = {
   draw: function(ctx, canvasSize) {
     ctx.clearRect(0, 0, canvasSize.x, canvasSize.y);
     for ( var i = 0; i < this.game.bodies.length; i++) {
-      drawImg(ctx, this.game.bodies[i]);
+      this.game.bodies[i].draw(ctx);
     }
   },
 
@@ -52,4 +51,13 @@ var drawFood = function(ctx, food){
     ctx.fillStyle = food.fill,
     ctx.fill(),
     ctx.closePath() );
+};
+
+var drawText = function(ctx, body) {
+  ctx.font = body.font;
+  ctx.fillStyle = body.color;
+  ctx.fillText(
+    body.text,
+    body.canvasPos.x,
+    body.canvasPos.y);
 };

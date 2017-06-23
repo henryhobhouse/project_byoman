@@ -1,12 +1,8 @@
-define(['keyboard', 'pacman', 'food'], function() {
+define(['food'], function() {
   describe("Food", function() {
     describe('Post initialization', function() {
       beforeEach(function() {
-<<<<<<< Updated upstream
-        food = new Food();
-=======
         food = new Food(20, 20);
->>>>>>> Stashed changes
       });
 
       it('Has an X coordinate', function(){
