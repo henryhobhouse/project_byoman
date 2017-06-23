@@ -24,7 +24,7 @@ GameDrawer.prototype = {
     for ( var i = 0; i < this.game.bodies.length; i++) {
       this.game.bodies[i].draw(ctx);
     }
-  }
+  },
 };
 
 var drawImg = function(ctx, body) {
