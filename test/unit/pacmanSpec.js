@@ -1,36 +1,11 @@
-define(['pacman'], function() {
+define(['pacman', 'pacmanhelper'], function() {
   describe("Pacman", function() {
     beforeEach(function() {
       image = new fakeImage();
       keyboard = new fakeKeyboard();
       pacman = new PacMan(fakeCanvasSize, image, keyboard)
     });
-    var pacman;
-    var fakeCanvasSize;
-    var fakeKeyboard;
-    var fakeImage;
-    var image;
-    var keyboard;
 
-    fakeCanvasSize = { x: 640, y: 540};
-
-    fakeKeyboard = function() {
-      var Keys = {
-        up: false,
-        down: false,
-        left: false,
-        right: false,
-        leftPress: false
-      };
-
-      this.keys = Keys
-    }
-
-    fakeImage = function() {
-      this.src = '/img/pacman.png';
-      this.height = 50;
-      this.width = 50;
-    }
     describe('initialization', function() {
 
       it('has an image source', function() {

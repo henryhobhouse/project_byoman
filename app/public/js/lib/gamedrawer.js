@@ -1,16 +1,30 @@
-var GameDrawer = function(canvasId, game){
-  var canvas = document.getElementById(canvasId);
-  var ctx = canvas.getContext('2d');
-  var canvasSize = { x: canvas.width, y: canvas.height };
+GameDrawer = function(canvasId, game, test){
+  var ctx;
+  var canvasSize;
+  if (test === 'yes') {
+    var canvas = document.createElement('canvas');
+    canvas.id     = 'canvas';
+    canvas.width  = 100;
+    canvas.height = 100;
+  } else {
+    canvas = document.getElementById(canvasId);
+  }
+  ctx = canvas.getContext('2d');
+  canvasSize = { x: canvas.width, y: canvas.height };
   this.game = game;
   this.game.createPacmanObject(canvasSize);
   var self = this;
+
+  this.context = function() {
+    return [self, ctx];
+  };
 
   var tick = function() {
     self.update();
     self.draw(ctx, canvasSize);
     requestAnimationFrame(tick);
   };
+
   tick();
 };
 
