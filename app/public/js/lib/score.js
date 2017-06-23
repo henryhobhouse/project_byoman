@@ -4,11 +4,15 @@ var Score = function() {
   this.color = 'white';
   this.canvasPos = { x: 0, y: 24 };
   this.text = 'Score: ' + this.value.toString();
+  this.collission = false;
 };
 
 Score.prototype = {
   update: function() {
-    this.value += 10;
+    if (this.collission == true) {
+      this.value += 10;
+      this.text = 'Score: ' + this.value.toString();
+    }
   },
 
   draw: function(ctx) {
