@@ -32,6 +32,10 @@ PacMan.prototype = {
     this.canvasPos.y += this.ySpeed;
   },
 
+  draw: function(ctx) {
+    drawImg(ctx, this);
+  },
+
   velocity: function(x, y) {
     this.xSpeed = x;
     this.ySpeed = y;

@@ -3,15 +3,13 @@ var GameDrawer = function(canvasId, game){
   var ctx = canvas.getContext('2d');
   var canvasSize = { x: canvas.width, y: canvas.height };
   this.game = game;
-  this.game.createScoreObject();
   this.game.createPacmanObject(canvasSize);
-  var score = this.game.createScoreObject();
+  this.game.createScoreObject();
   var self = this;
 
   var tick = function() {
     self.update();
     self.draw(ctx, canvasSize);
-    self.drawScore(ctx);
     requestAnimationFrame(tick);
   };
   tick();
@@ -25,15 +23,8 @@ GameDrawer.prototype = {
   draw: function(ctx, canvasSize) {
     ctx.clearRect(0, 0, canvasSize.x, canvasSize.y);
     for ( var i = 0; i < this.game.bodies.length; i++) {
-      drawImg(ctx, this.game.bodies[i]);
+      this.game.bodies[i].draw(ctx);
     }
-  },
-
-  drawScore: function(ctx, canvasSize, score){
-    var scoreString = this.game.score[0].value.toString();
-    ctx.font = '24px pacfont';
-    ctx.fillStyle = 'white';
-    ctx.fillText('Score: ' + scoreString, 0, 24);
   }
 };
 
@@ -44,4 +35,13 @@ var drawImg = function(ctx, body) {
     body.canvasPos.y,
     body.img.width,
     body.img.height );
+};
+
+var drawText = function(ctx, body) {
+  ctx.font = body.font;
+  ctx.fillStyle = body.color;
+  ctx.fillText(
+    body.text,
+    body.canvasPos.x,
+    body.canvasPos.y);
 };
