@@ -4,7 +4,6 @@ var GameDrawer = function(canvasId, game){
   var canvasSize = { x: canvas.width, y: canvas.height };
   this.game = game;
   this.game.createPacmanObject(canvasSize);
-  this.game.createScoreObject();
   var self = this;
 
   var tick = function() {
