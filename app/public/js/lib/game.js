@@ -14,19 +14,19 @@ Game.prototype = {
 
     for (var j = 0; j < this.bodies.foods.length; j++) {
       this.collision.foodColliding(this.bodies.pacman, this.bodies.foods[j]);
-      if (this.collision.food == true) {
-        var index = this.bodies.foods.indexOf(this.bodies.foods[j]);
-        this.bodies.foods.splice(index, 1);
-        this.bodies.score.updatefood();
-        this.bodies.score.update();
-      }
+      if (this.collision.food == true) { this.destroyFood(j); }
     }
   },
-
   createFoodObjects: function(){
     for (i = 0; i < levelone.foodlocs.length; i++) {
       var food = new Food(levelone.foodlocs[i][0], levelone.foodlocs[i][1]);
       this.bodies.foods.push(food);
     }
+  },
+  destroyFood: function(j) {
+    var index = this.bodies.foods.indexOf(this.bodies.foods[j]);
+    this.bodies.foods.splice(index, 1);
+    this.bodies.score.updatefood();
+    this.bodies.score.update();
   }
 };
