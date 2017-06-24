@@ -9,6 +9,9 @@ Renderer.prototype = {
     for ( var i = 0; i < bodies.foods.length; i++) {
       bodies.foods[i].draw(this);
     }
+    for ( var j = 0; j < bodies.walls.length; j++) {
+      bodies.walls[j].draw(this);
+    }
     bodies.pacman.draw(this);
     bodies.score.draw(this);
   },

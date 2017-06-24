@@ -1,8 +1,12 @@
 var Collision = function() {
   this.food = false;
+  this.wall = false;
 };
 
 Collision.prototype = {
+  wallColliding: function(obj1, obj2) {
+    isColliding(obj1, obj2) ? this.wall = true : this.wall = false;
+  },
   foodColliding: function(obj1, obj2) {
     isColliding(obj1, obj2) ? this.food = true : this.food = false;
   }

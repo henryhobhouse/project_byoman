@@ -3,8 +3,8 @@ var Score = function() {
   this.font = '24px pacfont';
   this.color = 'white';
   this.canvasPos = {
-    x: levelone.scoreloc[0],
-    y: levelone.scoreloc[1]
+    x: levelone.scorePos[0],
+    y: levelone.scorePos[1]
   };
   this.text = 'Score: ' + this.value.toString();
 };

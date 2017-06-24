@@ -8,7 +8,8 @@ define([
   'score',
   'controller',
   'collision',
-  'levelone'
+  'levelone',
+  'wall'
 ], function() {
   new Controller('canvas');
 });

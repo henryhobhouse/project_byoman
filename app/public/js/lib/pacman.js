@@ -8,8 +8,8 @@ var PacMan = function(image, controller){
   this.xSpeed = 0;
   this.ySpeed = 0;
   this.canvasPos = {
-    x: levelone.pacmanloc[0],
-    y: levelone.pacmanloc[1]
+    x: levelone.pacmanPos[0],
+    y: levelone.pacmanPos[1]
   };
   this.keyboard = controller;
 };
