@@ -1,5 +1,6 @@
-var Renderer = function(ctx){
+var Renderer = function(ctx, canCenter){
   this.ctx = ctx;
+  this.canCenter = canCenter;
 };
 
 Renderer.prototype = {
@@ -14,8 +15,8 @@ Renderer.prototype = {
   drawImg: function(body) {
     this.ctx.drawImage(
       body.img,
-      body.canvasPos.x - body.size.x / 2,
-      body.canvasPos.y - body.size.y / 2,
+      body.canvasPos.x - body.size.x / 2 + this.canCenter.x,
+      body.canvasPos.y - body.size.x / 2 + this.canCenter.y,
       body.img.width,
       body.img.height );
   },
@@ -24,14 +25,14 @@ Renderer.prototype = {
     this.ctx.fillStyle = body.color;
     this.ctx.fillText(
       body.text,
-      body.canvasPos.x,
-      body.canvasPos.y);
+      body.canvasPos.x + this.canCenter.x,
+      body.canvasPos.y + this.canCenter.y);
   },
   drawCircle: function(body, circlestart, circlefinish) {
     this.ctx.beginPath();
     this.ctx.arc(
-      body.canvasPos.x,
-      body.canvasPos.y,
+      body.canvasPos.x + this.canCenter.x,
+      body.canvasPos.y + this.canCenter.y,
       body.radius,
       circlestart,
       circlefinish,

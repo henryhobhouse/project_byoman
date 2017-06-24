@@ -10,7 +10,7 @@ define(['food'], function() {
       });
 
       it('has a Y coordinate', function(){
-       expect(food.canvasPos.y).toEqual(20);
+       expect(food.canvasPos.y).toEqual(20 + 40);
       });
 
       it('has a radius of 3', function(){

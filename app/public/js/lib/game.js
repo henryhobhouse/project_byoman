@@ -11,10 +11,11 @@ var Game = function() {
 Game.prototype = {
   update: function() {
     this.bodies.pacman.update();
-
     for (var j = 0; j < this.bodies.foods.length; j++) {
       this.collision.foodColliding(this.bodies.pacman, this.bodies.foods[j]);
-      if (this.collision.food == true) { this.destroyFood(j); }
+      if (this.collision.food == true) {
+        this.destroyFood(j);
+      }
     }
   },
   createFoodObjects: function(){
