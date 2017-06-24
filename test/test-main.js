@@ -23,7 +23,8 @@ require.config({
     'pacman': 'lib/pacman',
     'food': 'lib/food',
     'score': 'lib/score',
-    'pmspechelper': 'helpers/pmspechelper'
+    'pmspechelper': 'helpers/pmspechelper',
+    'levelone': 'lib/levelone'
   },
 
   shim: {
