@@ -1,15 +1,14 @@
 // Food looks best when drawn at intervals of 40
 function Food(xPos, yPos) {
-  this.canvasPos = { x: xPos, y: yPos };
+  this.canvasPos = { x: xPos , y: yPos };
   this.radius = 3;
+  this.size = { x: 2 * this.radius, y: 2 * this.radius };
   this.fill = 'white';
+  this.circlestart = 0;
+  this.circlefinish = 2 * Math.PI;
 
-  this.draw = function(ctx){
-    ctx.beginPath();
-    ctx.arc(xPos, yPos, this.radius, 0, 2 * Math.PI, false);
-    ctx.fillStyle = this.fill;
-    ctx.fill();
-    ctx.closePath();
+  this.draw = function(renderer){
+    renderer.drawCircle(this, this.circlestart, this.circlefinish);
   };
 
   this.update = function(){

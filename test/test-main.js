@@ -22,7 +22,9 @@ require.config({
     'keyboard': 'lib/keyboard',
     'pacman': 'lib/pacman',
     'food': 'lib/food',
-    'score': 'lib/score'
+    'score': 'lib/score',
+    'pmspechelper': 'helpers/pmspechelper',
+    'levelone': 'lib/levelone'
   },
 
   shim: {

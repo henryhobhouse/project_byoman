@@ -1,36 +1,11 @@
-define(['pacman'], function() {
+define(['pacman', 'pmspechelper'], function() {
   describe("Pacman", function() {
     beforeEach(function() {
       image = new fakeImage();
       keyboard = new fakeKeyboard();
-      pacman = new PacMan(fakeCanvasSize, image, keyboard)
+      pacman = new PacMan(image, keyboard)
     });
-    var pacman;
-    var fakeCanvasSize;
-    var fakeKeyboard;
-    var fakeImage;
-    var image;
-    var keyboard;
 
-    fakeCanvasSize = { x: 640, y: 540};
-
-    fakeKeyboard = function() {
-      var Keys = {
-        up: false,
-        down: false,
-        left: false,
-        right: false,
-        leftPress: false
-      };
-
-      this.keys = Keys
-    }
-
-    fakeImage = function() {
-      this.src = '/img/pacman.png';
-      this.height = 50;
-      this.width = 50;
-    }
     describe('initialization', function() {
 
       it('has an image source', function() {
@@ -68,14 +43,6 @@ define(['pacman'], function() {
           pacman.update();
           expect(pacman.canvasPos.y).toEqual(100 - 3)
         });
-
-        it("sets x and y speed to 0 upon collision with the top of canvas", function() {
-          pacman.canvasPos.y = 2;
-          pacman.keyboard.keys.up = true;
-          pacman.update();
-          expect(pacman.xSpeed).toEqual(0);
-          expect(pacman.ySpeed).toEqual(0);
-        });
       });
 
       describe('When the down arrow key is pressed', function() {
@@ -91,13 +58,6 @@ define(['pacman'], function() {
           expect(pacman.canvasPos.y).toEqual(100 + 3)
         });
 
-        it("sets x and y speed to 0 upon collision with the bottom of canvas", function() {
-          pacman.canvasPos.y = 488;
-          pacman.keyboard.keys.down = true;
-          pacman.update();
-          expect(pacman.xSpeed).toEqual(0);
-          expect(pacman.ySpeed).toEqual(0);
-        });
       });
 
       describe('When the right arrow key is pressed', function() {
@@ -112,14 +72,6 @@ define(['pacman'], function() {
           pacman.update();
           expect(pacman.canvasPos.x).toEqual(100 + 3)
         });
-
-        it("sets x and y speed to 0 upon collision with the right side of canvas", function() {
-          pacman.canvasPos.x = 588;
-          pacman.keyboard.keys.right = true;
-          pacman.update();
-          expect(pacman.xSpeed).toEqual(0);
-          expect(pacman.ySpeed).toEqual(0);
-        });
       });
 
       describe('When the left arrow key is pressed', function() {
@@ -133,14 +85,6 @@ define(['pacman'], function() {
           pacman.keyboard.keys.left = true;
           pacman.update();
           expect(pacman.canvasPos.x).toEqual(100 - 3)
-        });
-
-        it("sets x and y speed to 0 upon collision with the left side of canvas", function() {
-          pacman.canvasPos.x = 2;
-          pacman.keyboard.keys.left = true;
-          pacman.update();
-          expect(pacman.xSpeed).toEqual(0);
-          expect(pacman.ySpeed).toEqual(0);
         });
       });
     });

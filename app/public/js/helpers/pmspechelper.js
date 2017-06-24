@@ -1,14 +1,3 @@
-beforeEach(function () {
-
-});
-
-var pacman;
-var fakeCanvasSize;
-var fakeKeyboard;
-var fakeImage;
-var image;
-var keyboard;
-
 fakeCanvasSize = { x: 640, y: 540};
 
 fakeKeyboard = function() {
@@ -19,12 +8,11 @@ fakeKeyboard = function() {
     right: false,
     leftPress: false
   };
-
-  this.keys = Keys
-}
+  this.keys = Keys;
+};
 
 fakeImage = function() {
   this.src = '/img/pacman.png';
   this.height = 50;
   this.width = 50;
-}
+};

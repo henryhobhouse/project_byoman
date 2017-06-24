@@ -1,11 +1,16 @@
-var PacMan = function(canvasSize, image, controller){
+var PacMan = function(image, controller){
   var img = image;
   img.src = '/img/pacman.png';
   this.img = img;
+  this.img.width = 20;
+  this.img.height = 20;
+  this.size = { x: this.img.width, y: this.img.height }
   this.xSpeed = 0
   this.ySpeed = 0;
-  this.canvasPos = { x:100, y: 100 };
-  this.canvasSize = canvasSize;
+  this.canvasPos = {
+    x: levelone.pacmanloc[0],
+    y: levelone.pacmanloc[1]
+  };
   this.keyboard = controller;
 }
 
@@ -22,18 +27,12 @@ PacMan.prototype = {
       this.velocity(0, 3);
     }
 
-    if (this._yPos() > this.canvasSize.y - this.img.height || this._yPos() < 0){
-      this.velocity(0, 0);
-    } else if (this._xPos() > this.canvasSize.x - this.img.width || this._xPos() < 0) {
-      this.velocity(0, 0);
-    }
-
     this.canvasPos.x += this.xSpeed;
     this.canvasPos.y += this.ySpeed;
   },
 
-  draw: function(ctx) {
-    drawImg(ctx, this);
+  draw: function(renderer) {
+    renderer.drawImg(this);
   },
 
   velocity: function(x, y) {

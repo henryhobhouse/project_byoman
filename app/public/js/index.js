@@ -3,10 +3,13 @@ requirejs.config({
   baseUrl: 'js/lib',
   path: {
     game: 'game.js',
-    gamedrawer: 'gamedrawer.js',
+    renderer: 'renderer.js',
     keyboard: 'keyboard.js',
     pacman: 'pacman.js',
     food: 'food.js',
-    score: 'score.js'
+    score: 'score.js',
+    controller: 'controller.js',
+    collision: 'collision.js',
+    levelone: 'levelone.js'
   }
 });
