@@ -11,14 +11,13 @@ var Game = function() {
 
 Game.prototype = {
   update: function() {
-    // console.log(this.bodies)
     this.bodies.pacman.update();
 
     for (var j = 0; j < this.bodies.foods.length; j++) {
-      // console.log(this.bodies.pacman)
-      // console.log(this.bodies.foods[j])
       this.collision.foodColliding(this.bodies.pacman, this.bodies.foods[j]);
       if (this.collision.food == true) {
+        var index = this.bodies.foods.indexOf(this.bodies.foods[j]);
+        this.bodies.foods.splice(index, 1);
         this.bodies.score.updatefood();
         this.bodies.score.update();
       }

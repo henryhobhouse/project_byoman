@@ -1,7 +1,7 @@
 // Food looks best when drawn at intervals of 40
 function Food(xPos, yPos) {
   this.canvasPos = { x: xPos , y: yPos };
-  this.radius = 5;
+  this.radius = 3;
   this.size = { x: 2 * this.radius, y: 2 * this.radius };
   this.fill = 'white';
   this.circlestart = 0;
