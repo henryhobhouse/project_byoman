@@ -3,8 +3,7 @@ var Game = function() {
   this.score = new Score();
   var pacman = new PacMan(new Image(), new Keyboard());
   this.bodies = { pacman: pacman, foods: [], score: this.score };
-  this.coordinates = [[140,40], [140,80], [140,120], [140, 160], [180,40], [180,80], [180, 120], [180,160], [220,40], [220,80], [220,120], [220,160], [260,40],
-    [260,80], [260, 120], [260,160]];
+  this.coordinates = [];
   this.createFoodObjects();
   this.collision = new Collision();
 };
@@ -25,9 +24,8 @@ Game.prototype = {
   },
 
   createFoodObjects: function(){
-    var numberOfCoordinates = this.coordinates.length;
-    for (i = 0; i < numberOfCoordinates; i++) {
-      var food = new Food(this.coordinates[i][0], this.coordinates[i][1]);
+    for (i = 0; i < levelone.foodlocs.length; i++) {
+      var food = new Food(levelone.foodlocs[i][0], levelone.foodlocs[i][1]);
       this.bodies.foods.push(food);
     }
   }

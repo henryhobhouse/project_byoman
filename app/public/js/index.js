@@ -9,6 +9,7 @@ requirejs.config({
     food: 'food.js',
     score: 'score.js',
     controller: 'controller.js',
-    collision: 'collision.js'
+    collision: 'collision.js',
+    levelone: 'levelone.js'
   }
 });
