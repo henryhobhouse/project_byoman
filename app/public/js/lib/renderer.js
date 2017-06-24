@@ -24,5 +24,19 @@ Renderer.prototype = {
       body.text,
       body.canvasPos.x,
       body.canvasPos.y);
-  }
+  },
+  drawCircle: function(body, circlestart, circlefinish) {
+    this.ctx.beginPath();
+    this.ctx.arc(
+      body.canvasPos.x,
+      body.canvasPos.y,
+      body.radius,
+      circlestart,
+      circlefinish,
+      false
+    );
+    this.ctx.fillStyle = this.fill;
+    this.ctx.fill();
+    this.ctx.closePath();
+  },
 };

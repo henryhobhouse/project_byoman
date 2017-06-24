@@ -1,3 +1,4 @@
+// Interface between redenering and logic objects
 var Controller = function(canvasId) {
   var canvas = document.getElementById(canvasId);
   var ctx = canvas.getContext('2d');
@@ -5,7 +6,7 @@ var Controller = function(canvasId) {
   this.game = new Game();
   this.renderer = new Renderer(ctx);
   var self = this;
-  
+
   var tick = function() {
     self.game.update();
     self.renderer.draw(self.canvasSize, self.game.bodies);

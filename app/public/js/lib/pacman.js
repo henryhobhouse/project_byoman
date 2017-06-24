@@ -5,7 +5,6 @@ var PacMan = function(image, controller){
   this.xSpeed = 0
   this.ySpeed = 0;
   this.canvasPos = { x:100, y: 100 };
-  // this.canvasSize = canvasSize;
   this.keyboard = controller;
 }
 

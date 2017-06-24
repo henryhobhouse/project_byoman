@@ -3,13 +3,11 @@ function Food(xPos, yPos) {
   this.canvasPos = { x: xPos, y: yPos };
   this.radius = 3;
   this.fill = 'white';
+  this.circlestart = 0;
+  this.circlefinish = 2 * Math.PI;
 
   this.draw = function(renderer){
-    renderer.ctx.beginPath();
-    renderer.ctx.arc(xPos, yPos, this.radius, 0, 2 * Math.PI, false);
-    renderer.ctx.fillStyle = this.fill;
-    renderer.ctx.fill();
-    renderer.ctx.closePath();
+    renderer.drawCircle(this, this.circlestart, this.circlefinish);
   };
 
   this.update = function(){
