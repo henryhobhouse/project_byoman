@@ -1,4 +1,4 @@
-define(['score'], function() {
+define(['score', 'levelone'], function() {
   describe("Score", function() {
     var score;
     beforeEach(function() {
@@ -24,15 +24,23 @@ define(['score'], function() {
       })
     });
 
-    describe('update', function() {
+    describe('updateFood', function() {
       it("changes score value by 10", function() {
-        score.collission = true;
-        score.update();
+        score.updateFood();
         expect(score.value).toEqual(10)
       });
+    });
 
-      it("updates score text to show new score", function() {
-        score.collission = true;
+    describe('updateEatGhost', function() {
+      it("changes score value by 200", function() {
+        score.updateEatGhost();
+        expect(score.value).toEqual(200)
+      });
+    });
+
+    describe('update', function() {
+      it("changes score text to show new score", function() {
+        score.updateFood();
         score.update();
         expect(score.text).toEqual('Score: 10')
       });
