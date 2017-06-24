@@ -5,8 +5,11 @@ var Collision = function() {
 
 Collision.prototype = {
   wallColliding: function(obj1, obj2) {
-    this.wallcollide = isColliding(obj1, obj2);
-    obj1.canvasPos.y > obj2.canvasPos.y ? this.wall.up = true : this.wall.up = false;
+    if (isColliding(obj1, obj2) === true) {
+      obj1.canvasPos.y > obj2.canvasPos.y ? this.wall.up = true : null;
+    } else {
+      this.wall = { up: false, down: false, right: false, left: false };
+    }
   },
   foodColliding: function(obj1, obj2) {
     isColliding(obj1, obj2) ? this.food = true : this.food = false;

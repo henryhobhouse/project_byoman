@@ -4,7 +4,7 @@ var Renderer = function(ctx, canCenter){
 };
 
 Renderer.prototype = {
-  draw: function(canvasSize, bodies) {
+  draw: function(canvasSize, bodies, frames) {
     this.ctx.clearRect(0, 0, canvasSize.x, canvasSize.y);
     for ( var i = 0; i < bodies.foods.length; i++) {
       bodies.foods[i].draw(this);
@@ -14,6 +14,10 @@ Renderer.prototype = {
     }
     bodies.pacman.draw(this);
     bodies.score.draw(this);
+    // The below three lines is purely for development testing
+    this.ctx.font = '24px pacfont';
+    this.ctx.fillStyle = 'white';
+    this.ctx.fillText('FPS: '+frames, 180+ this.canCenter.x,-340+ this.canCenter.y);
   },
   drawImg: function(body) {
     this.ctx.drawImage(

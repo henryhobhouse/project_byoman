@@ -47,11 +47,10 @@ Game.prototype = {
   checkWallCollision: function() {
     for (var j = 0; j < this.bodies.walls.length; j++) {
       this.collision.wallColliding(this.bodies.pacman, this.bodies.walls[j]);
-      if (this.collision.wallcollide === true) {
+      if (this.collision.wall.up === true) {
+        this.bodies.pacman.wallColliding = this.collision.wall;
         this.bodies.pacman.velocity(0, 0);
       }
-      this.bodies.pacman.wallColliding = this.collision.wall;
-
     }
   }
 };
