@@ -18,6 +18,8 @@ Renderer.prototype = {
     this.ctx.font = '24px pacfont';
     this.ctx.fillStyle = 'white';
     this.ctx.fillText('FPS: '+frames, 180+ this.canCenter.x,-340+ this.canCenter.y);
+    var wall = new Wall(new Image());
+    wall.draw(this);
   },
   drawImg: function(body) {
     this.ctx.drawImage(
@@ -48,5 +50,25 @@ Renderer.prototype = {
     this.ctx.fillStyle = this.fill;
     this.ctx.fill();
     this.ctx.closePath();
+  },
+  drawTile: function(body,x,y){
+    this.ctx.drawImage(
+      body.img,
+      body.img.width * x + 260,
+      body.img.height * y,
+      body.img.width,
+      body.img.height );
+  },
+  drawMap: function(body){
+    for(var y = 0; y < levelone.map.length; y++) {
+      for(var x = 0; x < levelone.map[0].length; x++){
+        switch(levelone.map[y][x]) {
+        case 0:
+          this.drawTile(body,x,y);
+          break;
+        default:
+        }
+      }
+    }
   },
 };

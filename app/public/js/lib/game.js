@@ -5,7 +5,6 @@ var Game = function() {
   this.bodies = { pacman: pacman, foods: [], score: this.score, walls: [] };
   this.coordinates = [];
   this.createFoodObjects();
-  this.createWallObjects();
   this.collision = new Collision();
 };
 
@@ -19,15 +18,6 @@ Game.prototype = {
     for (i = 0; i < levelone.foodPos.length; i++) {
       var food = new Food(levelone.foodPos[i][0], levelone.foodPos[i][1]);
       this.bodies.foods.push(food);
-    }
-  },
-  createWallObjects: function(){
-    for (i = 0; i < levelone.wallPos.length; i++) {
-      var wall = new Wall(new Image(),
-                          levelone.wallPos[i][0],
-                          levelone.wallPos[i][1]
-                          );
-      this.bodies.walls.push(wall);
     }
   },
   destroyFood: function(j) {
