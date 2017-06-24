@@ -13,10 +13,12 @@ Score.prototype = {
   update: function() {
     this.text = 'Score: ' + this.value.toString();
   },
-  updatefood: function() {
+
+  updateFood: function() {
     this.value += 10;
   },
-  updateatghost: function() {
+
+  updateEatGhost: function() {
     this.value += 200;
   },
 

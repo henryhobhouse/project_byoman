@@ -27,7 +27,7 @@ Game.prototype = {
   destroyFood: function(j) {
     var index = this.bodies.foods.indexOf(this.bodies.foods[j]);
     this.bodies.foods.splice(index, 1);
-    this.bodies.score.updatefood();
+    this.bodies.score.updateFood();
     this.bodies.score.update();
   }
 };
