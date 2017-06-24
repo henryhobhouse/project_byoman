@@ -15,7 +15,7 @@ Score.prototype = {
     }
   },
 
-  draw: function(ctx) {
-    drawText(ctx, this);
+  draw: function(renderer) {
+    renderer.drawText(this);
   }
 };

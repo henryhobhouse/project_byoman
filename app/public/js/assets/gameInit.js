@@ -1,3 +1,3 @@
-define(['gamedrawer', 'game', 'keyboard', 'pacman', 'food', 'score'], function() {
-  new GameDrawer('canvas', new Game());
+define(['renderer', 'game', 'keyboard', 'pacman', 'food', 'score', 'controller'], function() {
+  new Controller('canvas');
 });

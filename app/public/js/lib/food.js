@@ -4,12 +4,12 @@ function Food(xPos, yPos) {
   this.radius = 3;
   this.fill = 'white';
 
-  this.draw = function(ctx){
-    ctx.beginPath();
-    ctx.arc(xPos, yPos, this.radius, 0, 2 * Math.PI, false);
-    ctx.fillStyle = this.fill;
-    ctx.fill();
-    ctx.closePath();
+  this.draw = function(renderer){
+    renderer.ctx.beginPath();
+    renderer.ctx.arc(xPos, yPos, this.radius, 0, 2 * Math.PI, false);
+    renderer.ctx.fillStyle = this.fill;
+    renderer.ctx.fill();
+    renderer.ctx.closePath();
   };
 
   this.update = function(){
