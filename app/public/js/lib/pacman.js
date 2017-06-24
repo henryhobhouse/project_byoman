@@ -7,6 +7,7 @@ var PacMan = function(image, controller){
   this.size = { x: this.img.width, y: this.img.height };
   this.xSpeed = 0;
   this.ySpeed = 0;
+  this.wallColliding = { up: false, down: false, left: false, right: false };
   this.canvasPos = {
     x: levelone.pacmanPos[0],
     y: levelone.pacmanPos[1]
@@ -17,7 +18,7 @@ var PacMan = function(image, controller){
 PacMan.prototype = {
 
   update: function() {
-    if (this.keyboard.keys.up){
+    if (this.keyboard.keys.up && this.wallColliding.up === false){
       this.velocity(0, -3);
     } else if (this.keyboard.keys.left){
       this.velocity(-3, 0);
