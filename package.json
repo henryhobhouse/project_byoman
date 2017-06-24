@@ -19,7 +19,6 @@
   "homepage": "https://github.com/henryhobhouse/project_byoman#readme",
   "dependencies": {
     "ecstatic": "^2.2.1",
-    "jsdom": "^11.0.0",
     "requirejs": "^2.3.3"
   },
   "devDependencies": {
