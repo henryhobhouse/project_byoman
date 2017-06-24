@@ -8,6 +8,7 @@ requirejs.config({
     pacman: 'pacman.js',
     food: 'food.js',
     score: 'score.js',
-    controller: 'controller.js'
+    controller: 'controller.js',
+    collision: 'collision.js'
   }
 });

@@ -5,15 +5,17 @@ var Renderer = function(ctx){
 Renderer.prototype = {
   draw: function(canvasSize, bodies) {
     this.ctx.clearRect(0, 0, canvasSize.x, canvasSize.y);
-    for ( var i = 0; i < bodies.length; i++) {
-      bodies[i].draw(this);
+    for ( var i = 0; i < bodies.foods.length; i++) {
+      bodies.foods[i].draw(this);
     }
+    bodies.pacman.draw(this);
+    bodies.score.draw(this);
   },
   drawImg: function(body) {
     this.ctx.drawImage(
       body.img,
-      body.canvasPos.x,
-      body.canvasPos.y,
+      body.canvasPos.x - body.size.x / 2,
+      body.canvasPos.y - body.size.y / 2,
       body.img.width,
       body.img.height );
   },
