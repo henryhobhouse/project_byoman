@@ -64,10 +64,10 @@ PacMan.prototype = {
   },
 
   neighbouringTiles: function() {
-    levelone.map[this.currentY][this.currentX+1] === 1 ? this.right = true: this.right = false;
-    levelone.map[this.currentY][this.currentX-1] === 1 ? this.left = true: this.left = false;
-    levelone.map[this.currentY+1][this.currentX] === 1 ? this.down = true: this.down = false;
-    levelone.map[this.currentY-1][this.currentX] === 1 ? this.up = true: this.up = false;
+    levelone.path[this.currentY][this.currentX+1] === 1 ? this.right = true: this.right = false;
+    levelone.path[this.currentY][this.currentX-1] === 1 ? this.left = true: this.left = false;
+    levelone.path[this.currentY+1][this.currentX] === 1 ? this.down = true: this.down = false;
+    levelone.path[this.currentY-1][this.currentX] === 1 ? this.up = true: this.up = false;
   },
 
   wallCollision: function() {
