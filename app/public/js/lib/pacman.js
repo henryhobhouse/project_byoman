@@ -6,27 +6,44 @@ var PacMan = function(image, controller, gridX, gridY, tileSize){
   this.img.height = 20;
   this.xSpeed = 0;
   this.ySpeed = 0;
-  this.wallColliding = { up: false, down: false, left: false, right: false };
   this.posX = gridX * tileSize;
   this.posY = gridY * tileSize;
   this.keyboard = controller;
+  this.currentX = gridX;
+  this.currentY = gridY;
 };
 
 PacMan.prototype = {
 
   update: function() {
-    if (this.keyboard.keys.up && this.wallColliding.up === false){
+    if (this.keyboard.keys.up && this.up === true && this.posX/20 === this.currentX ){
       this.velocity(0, -3);
-    } else if (this.keyboard.keys.left){
+      this.dir = 'up';
+      this.posX = this.currentX * 20;
+    } else if (this.keyboard.keys.left && this.left === true && this.posY/20 === this.currentY ){
       this.velocity(-3, 0);
-    } else if (this.keyboard.keys.right){
+      this.dir = 'left';
+      this.posY = this.currentY * 20;
+    } else if (this.keyboard.keys.right && this.right === true && this.posY/20 === this.currentY ){
       this.velocity(3, 0);
-    } else if (this.keyboard.keys.down){
+      this.dir = 'right';
+      this.posY = this.currentY * 20;
+    } else if (this.keyboard.keys.down && this.down === true && this.posX/20 === this.currentX ){
       this.velocity(0, 3);
+      this.dir = 'down';
+      this.posX = this.currentX * 20;
     }
 
     this.posX += this.xSpeed;
     this.posY += this.ySpeed;
+    this.currentGrid();
+    this.neighbouringTiles();
+    this.wallCollision();
+  },
+
+  currentGrid: function() {
+    this.currentX = (this.posX+10)/20 | 0;
+    this.currentY = (this.posY+10)/20 | 0;
   },
 
   draw: function(renderer) {
@@ -44,6 +61,30 @@ PacMan.prototype = {
 
   _xPos: function() {
     return this.posX + this.xSpeed;
+  },
+
+  neighbouringTiles: function() {
+    levelone.map[this.currentY][this.currentX+1] === 1 ? this.right = true: this.right = false;
+    levelone.map[this.currentY][this.currentX-1] === 1 ? this.left = true: this.left = false;
+    levelone.map[this.currentY+1][this.currentX] === 1 ? this.down = true: this.down = false;
+    levelone.map[this.currentY-1][this.currentX] === 1 ? this.up = true: this.up = false;
+  },
+
+  wallCollision: function() {
+    if (this.right === false && this.dir === 'right' && this.posX/20 >= this.currentX) {
+      this.velocity(0,0);
+      this.posX = this.currentX * 20;
+    } else if (this.left === false && this.dir === 'left' && this.posX/20 <= this.currentX) {
+      this.velocity(0,0);
+      this.posX = this.currentX * 20;
+    } else if (this.up === false && this.dir === 'up' && this.posY/20 <= this.currentY) {
+      this.velocity(0,0);
+      this.posY = this.currentY * 20;
+    } else if (this.down === false && this.dir === 'down' && this.posY/20 >= this.currentY) {
+      this.velocity(0,0);
+      this.posY = this.currentY * 20;
+    }
   }
+
 
 };

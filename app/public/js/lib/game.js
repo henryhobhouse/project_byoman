@@ -12,7 +12,6 @@ Game.prototype = {
   update: function() {
     this.bodies.pacman.update();
     this.checkFoodCollision();
-    // this.checkWallCollision();
   },
   mapObjects: function(){
     for(var y = 0; y < levelone.map.length; y++) {
@@ -48,14 +47,5 @@ Game.prototype = {
     this.bodies.foods.splice(index, 1);
     this.bodies.score.scoreFood();
     this.bodies.score.update();
-  }
-  // checkWallCollision: function() {
-  //   for (var j = 0; j < this.bodies.walls.length; j++) {
-  //     this.collision.wallColliding(this.bodies.pacman, this.bodies.walls[j]);
-  //     if (this.collision.wall.up === true) {
-  //       this.bodies.pacman.wallColliding = this.collision.wall;
-  //       this.bodies.pacman.velocity(0, 0);
-  //     }
-  //   }
-  // }
+  },
 };
