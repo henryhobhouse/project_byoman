@@ -16,25 +16,17 @@ var PacMan = function(image, controller, gridX, gridY, tileSize){
 PacMan.prototype = {
 
   update: function() {
-    if (this.keyboard.keys.up && this.up === true && this.posX/20 === this.currentX ){
-      this.velocity(0, -3);
-      this._xGridAlign();
-    } else if (this.keyboard.keys.left && this.left === true && this.posY/20 === this.currentY ){
-      this.velocity(-3, 0);
-      this._yGridAlign();
-    } else if ( this.keyboard.keys.right && this.right === true && this.posY/20 === this.currentY ){
-      this.velocity(3, 0);
-      this._yGridAlign();
-    } else if (this.keyboard.keys.down && this.down === true && this.posX/20 === this.currentX ){
-      this.velocity(0, 3);
-      this._xGridAlign();
-    }
+    if (this.keyboard.keys.up) { this.intendedDirection = 'up'; }
+    else if (this.keyboard.keys.left) { this.intendedDirection = 'left'; }
+    else if (this.keyboard.keys.right) { this.intendedDirection = 'right'; }
+    else if (this.keyboard.keys.down) { this.intendedDirection = 'down'; }
 
     this.posX += this.xSpeed;
     this.posY += this.ySpeed;
     this.currentGrid();
     this.availablePath();
     this.wallBounce();
+    this.nextMove();
   },
 
   currentGrid: function() {
@@ -71,6 +63,40 @@ PacMan.prototype = {
     } else if (this.down === false && this.ySpeed > 0 && this.posY/20 >= this.currentY) {
       this.velocity(0,0);
       this._yGridAlign();
+    }
+  },
+
+  nextMove: function() {
+    switch (this.intendedDirection) {
+    case 'left':
+      if (this.left === true && this.posY/20 === this.currentY) {
+        this.velocity(-3, 0);
+        this.intendedDirection = null;
+        this._yGridAlign();
+      }
+      break;
+    case 'right':
+      if (this.right === true && this.posY/20 === this.currentY) {
+        this.velocity(3, 0);
+        this.intendedDirection = null;
+        this._yGridAlign();
+      }
+      break;
+    case 'up':
+      if (this.up === true && this.posX/20 === this.currentX) {
+        this.velocity(0, -3);
+        this.intendedDirection = null;
+        this._xGridAlign();
+      }
+      break;
+    case 'down':
+      if (this.down === true && this.posX/20 === this.currentX) {
+        this.velocity(0, 3);
+        this.intendedDirection = null;
+        this._xGridAlign();
+      }
+      break;
+    default:
     }
   },
 
