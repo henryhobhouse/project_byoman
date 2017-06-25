@@ -1,16 +1,13 @@
 body {
-  background-color: 'black'
-}
-
-h1 {
-  text-align: center;
+  background-color: black;
 }
 
 #game {
-    width: 480px;
+    width: 560px;
     height: 720px;
+    position: relative;
     margin: 0 auto;
-    border: 2px solid red
+    border: 2px solid red;
 }
 
 canvas {
@@ -22,5 +19,5 @@ canvas {
 }
 
 #pac-UI {
-  z-index: 2
+  z-index: 0
 }

@@ -1,11 +1,13 @@
 // Interface between redenering and logic objects
 var Controller = function(layerId,staticId) {
   var TILESIZE = 20;
-  var canvas = document.getElementById(layerId);
-  var ctx = canvas.getContext('2d');
-  this.canvasSize = { x: canvas.width, y: canvas.height };
-  this.game = new Game();
-  this.renderer = new Renderer(ctx, TILESIZE);
+  var layerCanvas = document.getElementById(layerId);
+  var layerctx = layerCanvas.getContext('2d');
+  var staticCanvas = document.getElementById(staticId);
+  var staticctx = staticCanvas.getContext('2d');
+  this.canvasSize = { x: staticCanvas.width, y: staticCanvas.height };
+  this.game = new Game(TILESIZE);
+  this.renderer = new Renderer(layerctx, staticctx, TILESIZE);
   this.currentSecond = 0;
   this.frameCount = 0;
   this.framesLastSecond = 0;
@@ -18,6 +20,8 @@ var Controller = function(layerId,staticId) {
     requestAnimationFrame(tick);
   };
   tick();
+  this.renderer.drawstatic(this.canvasSize, this.game.bodies);
+
 };
 
 // As temporary method - not pushed into own onject

@@ -1,6 +1,6 @@
 var Score = function() {
   this.value = 0;
-  this.font = '24px pacfont';
+  this.font = '24px';
   this.color = 'white';
   this.posX = levelone.scorePos[0];
   this.posY = levelone.scorePos[1];
@@ -9,7 +9,7 @@ var Score = function() {
 
 Score.prototype = {
   update: function() {
-    this.text = 'SCORE: ' + this.value.toString();
+    this.text = 'Score: ' + this.value.toString();
   },
 
   scoreFood: function() {
