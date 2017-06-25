@@ -2,23 +2,21 @@ var Score = function() {
   this.value = 0;
   this.font = '24px pacfont';
   this.color = 'white';
-  this.canvasPos = {
-    x: levelone.scorePos[0],
-    y: levelone.scorePos[1]
-  };
+  this.posX = levelone.scorePos[0];
+  this.posY = levelone.scorePos[1];
   this.text = 'Score: ' + this.value.toString();
 };
 
 Score.prototype = {
   update: function() {
-    this.text = 'Score: ' + this.value.toString();
+    this.text = 'SCORE: ' + this.value.toString();
   },
 
-  updateFood: function() {
+  scoreFood: function() {
     this.value += 10;
   },
 
-  updateEatGhost: function() {
+  scoreEatGhost: function() {
     this.value += 200;
   },
 

@@ -1,11 +1,11 @@
 // Interface between redenering and logic objects
-var Controller = function(canvasId) {
-  var canvas = document.getElementById(canvasId);
+var Controller = function(layerId,staticId) {
+  var TILESIZE = 20;
+  var canvas = document.getElementById(layerId);
   var ctx = canvas.getContext('2d');
   this.canvasSize = { x: canvas.width, y: canvas.height };
-  var canvasCenter = {x: canvas.width / 2, y: canvas.height / 2};
   this.game = new Game();
-  this.renderer = new Renderer(ctx, canvasCenter);
+  this.renderer = new Renderer(ctx, TILESIZE);
   this.currentSecond = 0;
   this.frameCount = 0;
   this.framesLastSecond = 0;
@@ -14,7 +14,15 @@ var Controller = function(canvasId) {
   var tick = function() {
     self.game.update();
     self.renderer.draw(self.canvasSize, self.game.bodies, self.framesLastSecond);
-    //the below variable and if statement for development purposes only. 
+    self.fps(self); // For development purposes. Remove for production
+    requestAnimationFrame(tick);
+  };
+  tick();
+};
+
+// As temporary method - not pushed into own onject
+Controller.prototype = {
+  fps: function(self) {
     var sec = Math.floor(Date.now()/1000);
     if(sec!=self.currentSecond) {
       self.currentSecond = sec;
@@ -23,7 +31,5 @@ var Controller = function(canvasId) {
     } else {
       self.frameCount++;
     }
-    requestAnimationFrame(tick);
-  };
-  tick();
+  }
 };

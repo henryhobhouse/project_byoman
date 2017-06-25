@@ -1,9 +1,26 @@
-canvas {
-  background: black;
-  display: block;
-  margin: 0 auto;
+body {
+  background-color: 'black'
 }
 
 h1 {
   text-align: center;
+}
+
+#game {
+    width: 480px;
+    height: 720px;
+    margin: 0 auto;
+    border: 2px solid red
+}
+
+canvas {
+  position: absolute;
+}
+
+#pac-background {
+  z-index: 1
+}
+
+#pac-UI {
+  z-index: 2
 }

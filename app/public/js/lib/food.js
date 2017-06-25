@@ -2,7 +2,8 @@
 function Food(xPos, yPos) {
   this.canvasPos = { x: xPos, y: yPos + 40};
   this.radius = 3;
-  this.size = { x: 2 * this.radius, y: 2 * this.radius };
+  this.posX = 2 * this.radius;
+  this.posY = 2 * this.radius;
   this.fill = 'white';
   this.circlestart = 0;
   this.circlefinish = 2 * Math.PI;

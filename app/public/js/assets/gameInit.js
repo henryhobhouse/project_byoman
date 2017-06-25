@@ -11,5 +11,5 @@ define([
   'levelone',
   'wall'
 ], function() {
-  new Controller('canvas');
+  new Controller('pac-UI', 'pac-background');
 });
