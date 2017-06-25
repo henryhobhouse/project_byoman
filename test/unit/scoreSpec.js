@@ -26,21 +26,21 @@ define(['score', 'levelone'], function() {
 
     describe('updateFood', function() {
       it("changes score value by 10", function() {
-        score.updateFood();
+        score.scoreFood();
         expect(score.value).toEqual(10)
       });
     });
 
     describe('updateEatGhost', function() {
       it("changes score value by 200", function() {
-        score.updateEatGhost();
+        score.scoreEatGhost();
         expect(score.value).toEqual(200)
       });
     });
 
     describe('update', function() {
       it("changes score text to show new score", function() {
-        score.updateFood();
+        score.scoreFood();
         score.update();
         expect(score.text).toEqual('Score: 10')
       });
