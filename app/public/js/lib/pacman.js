@@ -18,27 +18,23 @@ PacMan.prototype = {
   update: function() {
     if (this.keyboard.keys.up && this.up === true && this.posX/20 === this.currentX ){
       this.velocity(0, -3);
-      this.dir = 'up';
-      this.posX = this.currentX * 20;
+      this._xGridAlign();
     } else if (this.keyboard.keys.left && this.left === true && this.posY/20 === this.currentY ){
       this.velocity(-3, 0);
-      this.dir = 'left';
-      this.posY = this.currentY * 20;
-    } else if (this.keyboard.keys.right && this.right === true && this.posY/20 === this.currentY ){
+      this._yGridAlign();
+    } else if ( this.keyboard.keys.right && this.right === true && this.posY/20 === this.currentY ){
       this.velocity(3, 0);
-      this.dir = 'right';
-      this.posY = this.currentY * 20;
+      this._yGridAlign();
     } else if (this.keyboard.keys.down && this.down === true && this.posX/20 === this.currentX ){
       this.velocity(0, 3);
-      this.dir = 'down';
-      this.posX = this.currentX * 20;
+      this._xGridAlign();
     }
 
     this.posX += this.xSpeed;
     this.posY += this.ySpeed;
     this.currentGrid();
-    this.neighbouringTiles();
-    this.wallCollision();
+    this.availablePath();
+    this.wallBounce();
   },
 
   currentGrid: function() {
@@ -55,36 +51,34 @@ PacMan.prototype = {
     this.ySpeed = y;
   },
 
-  _yPos: function() {
-    return this.posY + this.ySpeed;
-  },
-
-  _xPos: function() {
-    return this.posX + this.xSpeed;
-  },
-
-  neighbouringTiles: function() {
+  availablePath: function() {
     levelone.path[this.currentY][this.currentX+1] === 1 ? this.right = true: this.right = false;
     levelone.path[this.currentY][this.currentX-1] === 1 ? this.left = true: this.left = false;
     levelone.path[this.currentY+1][this.currentX] === 1 ? this.down = true: this.down = false;
     levelone.path[this.currentY-1][this.currentX] === 1 ? this.up = true: this.up = false;
   },
 
-  wallCollision: function() {
-    if (this.right === false && this.dir === 'right' && this.posX/20 >= this.currentX) {
+  wallBounce: function() {
+    if (this.right === false && this.xSpeed > 0 && this.posX/20 >= this.currentX) {
       this.velocity(0,0);
-      this.posX = this.currentX * 20;
-    } else if (this.left === false && this.dir === 'left' && this.posX/20 <= this.currentX) {
+      this._xGridAlign();
+    } else if (this.left === false && this.xSpeed < 0 && this.posX/20 <= this.currentX) {
       this.velocity(0,0);
-      this.posX = this.currentX * 20;
-    } else if (this.up === false && this.dir === 'up' && this.posY/20 <= this.currentY) {
+      this._xGridAlign();
+    } else if (this.up === false && this.ySpeed < 0 && this.posY/20 <= this.currentY) {
       this.velocity(0,0);
-      this.posY = this.currentY * 20;
-    } else if (this.down === false && this.dir === 'down' && this.posY/20 >= this.currentY) {
+      this._yGridAlign();
+    } else if (this.down === false && this.ySpeed > 0 && this.posY/20 >= this.currentY) {
       this.velocity(0,0);
-      this.posY = this.currentY * 20;
+      this._yGridAlign();
     }
+  },
+
+  _yGridAlign: function() {
+    this.posY = this.currentY * 20;
+  },
+
+  _xGridAlign: function() {
+    this.posX = this.currentX * 20;
   }
-
-
 };

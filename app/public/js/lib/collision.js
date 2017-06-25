@@ -3,7 +3,6 @@ var Collision = function() {
 };
 
 Collision.prototype = {
-
   foodColliding: function(obj1, obj2) {
     isColliding(obj1, obj2) ? this.food = true : this.food = false;
   }
