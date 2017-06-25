@@ -6,27 +6,40 @@ var PacMan = function(image, controller, gridX, gridY, tileSize){
   this.img.height = 20;
   this.xSpeed = 0;
   this.ySpeed = 0;
-  this.wallColliding = { up: false, down: false, left: false, right: false };
   this.posX = gridX * tileSize;
   this.posY = gridY * tileSize;
   this.keyboard = controller;
+  this.currentX = gridX;
+  this.currentY = gridY;
 };
 
 PacMan.prototype = {
 
   update: function() {
-    if (this.keyboard.keys.up && this.wallColliding.up === false){
+    if (this.keyboard.keys.up && this.up === true && this.posX/20 === this.currentX ){
       this.velocity(0, -3);
-    } else if (this.keyboard.keys.left){
+      this._xGridAlign();
+    } else if (this.keyboard.keys.left && this.left === true && this.posY/20 === this.currentY ){
       this.velocity(-3, 0);
-    } else if (this.keyboard.keys.right){
+      this._yGridAlign();
+    } else if ( this.keyboard.keys.right && this.right === true && this.posY/20 === this.currentY ){
       this.velocity(3, 0);
-    } else if (this.keyboard.keys.down){
+      this._yGridAlign();
+    } else if (this.keyboard.keys.down && this.down === true && this.posX/20 === this.currentX ){
       this.velocity(0, 3);
+      this._xGridAlign();
     }
 
     this.posX += this.xSpeed;
     this.posY += this.ySpeed;
+    this.currentGrid();
+    this.availablePath();
+    this.wallBounce();
+  },
+
+  currentGrid: function() {
+    this.currentX = (this.posX+10)/20 | 0;
+    this.currentY = (this.posY+10)/20 | 0;
   },
 
   draw: function(renderer) {
@@ -38,12 +51,34 @@ PacMan.prototype = {
     this.ySpeed = y;
   },
 
-  _yPos: function() {
-    return this.posY + this.ySpeed;
+  availablePath: function() {
+    levelone.path[this.currentY][this.currentX+1] === 1 ? this.right = true: this.right = false;
+    levelone.path[this.currentY][this.currentX-1] === 1 ? this.left = true: this.left = false;
+    levelone.path[this.currentY+1][this.currentX] === 1 ? this.down = true: this.down = false;
+    levelone.path[this.currentY-1][this.currentX] === 1 ? this.up = true: this.up = false;
   },
 
-  _xPos: function() {
-    return this.posX + this.xSpeed;
-  }
+  wallBounce: function() {
+    if (this.right === false && this.xSpeed > 0 && this.posX/20 >= this.currentX) {
+      this.velocity(0,0);
+      this._xGridAlign();
+    } else if (this.left === false && this.xSpeed < 0 && this.posX/20 <= this.currentX) {
+      this.velocity(0,0);
+      this._xGridAlign();
+    } else if (this.up === false && this.ySpeed < 0 && this.posY/20 <= this.currentY) {
+      this.velocity(0,0);
+      this._yGridAlign();
+    } else if (this.down === false && this.ySpeed > 0 && this.posY/20 >= this.currentY) {
+      this.velocity(0,0);
+      this._yGridAlign();
+    }
+  },
 
+  _yGridAlign: function() {
+    this.posY = this.currentY * 20;
+  },
+
+  _xGridAlign: function() {
+    this.posX = this.currentX * 20;
+  }
 };
