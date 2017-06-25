@@ -3,7 +3,7 @@ define(['pacman', 'pmspechelper'], function() {
     beforeEach(function() {
       image = new fakeImage();
       keyboard = new fakeKeyboard();
-      pacman = new PacMan(image, keyboard)
+      pacman = new PacMan(image, keyboard, 1, 1, 20)
     });
 
     describe('initialization', function() {
@@ -20,9 +20,9 @@ define(['pacman', 'pmspechelper'], function() {
         expect(pacman.ySpeed).toEqual(0);
       });
 
-      it('positioned on the canvas where x and y are eqaul to 100', function() {
-        expect(pacman.canvasPos.x).toEqual(100);
-        expect(pacman.canvasPos.y).toEqual(100);
+      it('positioned on the canvas where x and y are equal to 100', function() {
+        expect(pacman.posX).toEqual(20);
+        expect(pacman.posY).toEqual(20);
       });
 
       it('has a keyboard to control input', function() {
@@ -41,7 +41,7 @@ define(['pacman', 'pmspechelper'], function() {
         it("updates the position of pacman on the y axis", function() {
           pacman.keyboard.keys.up = true;
           pacman.update();
-          expect(pacman.canvasPos.y).toEqual(100 - 3)
+          expect(pacman.posY).toEqual(20 - 3)
         });
       });
 
@@ -55,7 +55,7 @@ define(['pacman', 'pmspechelper'], function() {
         it("updates the position of pacman on the y axis", function() {
           pacman.keyboard.keys.down = true;
           pacman.update();
-          expect(pacman.canvasPos.y).toEqual(100 + 3)
+          expect(pacman.posY).toEqual(20 + 3)
         });
 
       });
@@ -70,7 +70,7 @@ define(['pacman', 'pmspechelper'], function() {
         it("updates the position of pacman on the x axis", function() {
           pacman.keyboard.keys.right = true;
           pacman.update();
-          expect(pacman.canvasPos.x).toEqual(100 + 3)
+          expect(pacman.posX).toEqual(20 + 3)
         });
       });
 
@@ -84,7 +84,7 @@ define(['pacman', 'pmspechelper'], function() {
         it("updates the position of pacman on the x axis", function() {
           pacman.keyboard.keys.left = true;
           pacman.update();
-          expect(pacman.canvasPos.x).toEqual(100 - 3)
+          expect(pacman.posX).toEqual(20 - 3)
         });
       });
     });

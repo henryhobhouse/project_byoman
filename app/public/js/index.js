@@ -10,6 +10,7 @@ requirejs.config({
     score: 'score.js',
     controller: 'controller.js',
     collision: 'collision.js',
-    levelone: 'levelone.js'
+    levelone: 'levelone.js',
+    wall: 'wall.js'
   }
 });

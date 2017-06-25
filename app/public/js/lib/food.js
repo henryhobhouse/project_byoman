@@ -1,8 +1,8 @@
 // Food looks best when drawn at intervals of 40
-function Food(xPos, yPos) {
-  this.canvasPos = { x: xPos, y: yPos + 40};
+function Food(gridX, gridY, tileSize) {
   this.radius = 3;
-  this.size = { x: 2 * this.radius, y: 2 * this.radius };
+  this.posX = gridX * tileSize + tileSize / 2;
+  this.posY = gridY * tileSize + tileSize / 2;
   this.fill = 'white';
   this.circlestart = 0;
   this.circlefinish = 2 * Math.PI;

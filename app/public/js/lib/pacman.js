@@ -1,23 +1,21 @@
-var PacMan = function(image, controller){
+var PacMan = function(image, controller, gridX, gridY, tileSize){
   var img = image;
   img.src = '/img/pacman.png';
   this.img = img;
   this.img.width = 20;
   this.img.height = 20;
-  this.size = { x: this.img.width, y: this.img.height };
   this.xSpeed = 0;
   this.ySpeed = 0;
-  this.canvasPos = {
-    x: levelone.pacmanloc[0],
-    y: levelone.pacmanloc[1]
-  };
+  this.wallColliding = { up: false, down: false, left: false, right: false };
+  this.posX = gridX * tileSize;
+  this.posY = gridY * tileSize;
   this.keyboard = controller;
 };
 
 PacMan.prototype = {
 
   update: function() {
-    if (this.keyboard.keys.up){
+    if (this.keyboard.keys.up && this.wallColliding.up === false){
       this.velocity(0, -3);
     } else if (this.keyboard.keys.left){
       this.velocity(-3, 0);
@@ -27,12 +25,12 @@ PacMan.prototype = {
       this.velocity(0, 3);
     }
 
-    this.canvasPos.x += this.xSpeed;
-    this.canvasPos.y += this.ySpeed;
+    this.posX += this.xSpeed;
+    this.posY += this.ySpeed;
   },
 
   draw: function(renderer) {
-    renderer.drawImg(this);
+    renderer.drawTile(this);
   },
 
   velocity: function(x, y) {
@@ -41,11 +39,11 @@ PacMan.prototype = {
   },
 
   _yPos: function() {
-    return this.canvasPos.y + this.ySpeed;
+    return this.posY + this.ySpeed;
   },
 
   _xPos: function() {
-    return this.canvasPos.x + this.xSpeed;
+    return this.posX + this.xSpeed;
   }
 
 };

@@ -2,15 +2,15 @@ define(['food'], function() {
   describe("Food", function() {
     describe('Post initialization', function() {
       beforeEach(function() {
-        food = new Food(20, 20);
+        food = new Food(1, 1, 20);
       });
 
       it('Has an X coordinate', function(){
-       expect(food.canvasPos.x).toEqual(20);
+       expect(food.posX).toEqual(30);
       });
 
       it('has a Y coordinate', function(){
-       expect(food.canvasPos.y).toEqual(20 + 40);
+       expect(food.posY).toEqual(30);
       });
 
       it('has a radius of 3', function(){
