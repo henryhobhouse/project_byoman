@@ -26,8 +26,6 @@ var Controller = function(animateId,fixedId,uiId) {
     self.checkFoodUpdate();
   };
   tick();
-
-
 };
 
 // As temporary method - not pushed into own onject

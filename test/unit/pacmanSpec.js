@@ -22,8 +22,8 @@ define(['pacman', 'pmspechelper'], function() {
       });
 
       it('positioned on the canvas where x and y are equal to 100', function() {
-        expect(pacman.posX).toEqual(20);
-        expect(pacman.posY).toEqual(20);
+        expect(pacman.posX).toEqual(16);
+        expect(pacman.posY).toEqual(16);
       });
 
       it('has a keyboard to control input', function() {
