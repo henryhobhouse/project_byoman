@@ -32,7 +32,7 @@ PacMan.prototype = {
     this.motionrules.escapeSide();
   },
   draw: function(renderer) {
-    renderer.drawPacman(this);
+    renderer.drawAnimatedObject(this);
   },
   velocity: function(x, y) {
     this.xSpeed = x;

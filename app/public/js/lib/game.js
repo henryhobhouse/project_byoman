@@ -1,7 +1,7 @@
 //controls game logic. Does not see canvas or anything to do with rendering
 var Game = function(tileSize) {
   this.tileSize = tileSize;
-  this.bodies = { pacman: null, foods: [], score: null, walls: [] };
+  this.bodies = { pacman: null, foods: [], score: null, walls: [], ghosts: [] };
   this.coordinates = [];
   this.collision = new Collision(this.tileSize);
   this.mapObjects();
@@ -33,6 +33,13 @@ Game.prototype = {
         case 4:
           score = new Score(x, y, this.tileSize);
           this.bodies.score = score;
+          break;
+        case 5:
+          console.log("Here I am before the creation");
+          redGhost = new Ghost(new Image(), x, y, this.tileSize);
+          console.log("I have been created");
+          this.bodies.ghosts.push(redGhost);
+          console.log(this.bodies.ghosts);
           break;
         default:
         }
