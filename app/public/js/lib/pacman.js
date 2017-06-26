@@ -26,22 +26,19 @@ PacMan.prototype = {
   update: function() {
     if (this.keyboard.keys.up) {
       this.intendedDirection = 'up';
-      this.frameIndex.y = 2;
     }
     else if (this.keyboard.keys.left) {
       this.intendedDirection = 'left';
-      this.frameIndex.y = 3;
     }
     else if (this.keyboard.keys.right) {
       this.intendedDirection = 'right';
-      this.frameIndex.y = 0;
     }
     else if (this.keyboard.keys.down) {
       this.intendedDirection = 'down';
-      this.frameIndex.y = 1;
     }
     this.posX += this.xSpeed;
     this.posY += this.ySpeed;
+    this.animation();
     this.motionrules.currentGrid();
     this.motionrules.availablePath();
     this.motionrules.wallBounce();
@@ -51,6 +48,19 @@ PacMan.prototype = {
   draw: function(renderer) {
     renderer.drawSprite(this);
   },
+
+  animation: function() {
+    if (this.xSpeed < 0) {
+      this.frameIndex.y = 3;
+    } else if (this.xSpeed > 0) {
+      this.frameIndex.y = 0;
+    } else if (this.ySpeed < 0) {
+      this.frameIndex.y = 2;
+    } else if (this.ySpeed > 0) {
+      this.frameIndex.y = 1;
+    }
+  },
+
   velocity: function(x, y) {
     this.xSpeed = x;
     this.ySpeed = y;
