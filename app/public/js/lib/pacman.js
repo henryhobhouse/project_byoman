@@ -2,15 +2,16 @@ var PacMan = function(image, controller, gridX, gridY, tileSize){
   var img = image;
   img.src = '/img/pacman.png';
   this.img = img;
-  this.img.width = 20;
-  this.img.height = 20;
+  this.img.width = 30;
+  this.img.height = 30;
   this.xSpeed = 0;
   this.ySpeed = 0;
-  this.posX = gridX * tileSize;
-  this.posY = gridY * tileSize;
+  this.posX = gridX * tileSize - 5;
+  this.posY = gridY * tileSize - 5;
   this.keyboard = controller;
   this.currentX = gridX;
   this.currentY = gridY;
+  this.intendedDirection = 'left';
 };
 
 PacMan.prototype = {
@@ -30,12 +31,12 @@ PacMan.prototype = {
   },
 
   currentGrid: function() {
-    this.currentX = (this.posX+10)/20 | 0;
-    this.currentY = (this.posY+10)/20 | 0;
+    this.currentX = (this.posX+5)/20 | 0;
+    this.currentY = (this.posY+5)/20 | 0;
   },
 
   draw: function(renderer) {
-    renderer.drawTile(this);
+    renderer.drawPacman(this);
   },
 
   velocity: function(x, y) {
@@ -51,16 +52,16 @@ PacMan.prototype = {
   },
 
   wallBounce: function() {
-    if (this.right === false && this.xSpeed > 0 && this.posX/20 >= this.currentX) {
+    if (this.right === false && this.xSpeed > 0 && (this.posX+6)/20 >= this.currentX) {
       this.velocity(0,0);
       this._xGridAlign();
-    } else if (this.left === false && this.xSpeed < 0 && this.posX/20 <= this.currentX) {
+    } else if (this.left === false && this.xSpeed < 0 && (this.posX+4)/20 <= this.currentX) {
       this.velocity(0,0);
       this._xGridAlign();
-    } else if (this.up === false && this.ySpeed < 0 && this.posY/20 <= this.currentY) {
+    } else if (this.up === false && this.ySpeed < 0 && (this.posY+3)/20 >= this.currentY) {
       this.velocity(0,0);
       this._yGridAlign();
-    } else if (this.down === false && this.ySpeed > 0 && this.posY/20 >= this.currentY) {
+    } else if (this.down === false && this.ySpeed > 0 && (this.posY+4)/20 <= this.currentY) {
       this.velocity(0,0);
       this._yGridAlign();
     }
@@ -69,28 +70,28 @@ PacMan.prototype = {
   nextMove: function() {
     switch (this.intendedDirection) {
     case 'left':
-      if (this.left === true && this.posY/20 === this.currentY) {
+      if (this.left === true && (this.posY+5)/20 >= this.currentY) {
         this.velocity(-3, 0);
         this.intendedDirection = null;
         this._yGridAlign();
       }
       break;
     case 'right':
-      if (this.right === true && this.posY/20 === this.currentY) {
+      if (this.right === true && (this.posY+4)/20 <= this.currentY) {
         this.velocity(3, 0);
         this.intendedDirection = null;
         this._yGridAlign();
       }
       break;
     case 'up':
-      if (this.up === true && this.posX/20 === this.currentX) {
+      if (this.up === true && (this.posX+5)/20 >= this.currentX) {
         this.velocity(0, -3);
         this.intendedDirection = null;
         this._xGridAlign();
       }
       break;
     case 'down':
-      if (this.down === true && this.posX/20 === this.currentX) {
+      if (this.down === true && (this.posX+4)/20 <= this.currentX) {
         this.velocity(0, 3);
         this.intendedDirection = null;
         this._xGridAlign();
@@ -101,10 +102,10 @@ PacMan.prototype = {
   },
 
   _yGridAlign: function() {
-    this.posY = this.currentY * 20;
+    this.posY = this.currentY * 20 - 5;
   },
 
   _xGridAlign: function() {
-    this.posX = this.currentX * 20;
+    this.posX = this.currentX * 20 - 5;
   }
 };

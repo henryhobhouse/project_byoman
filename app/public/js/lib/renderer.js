@@ -30,6 +30,15 @@ Renderer.prototype = {
       20
     );
   },
+  drawPacman: function(body){
+    this.ctxui.drawImage(
+      body.img,
+      body.posX,
+      body.posY,
+      body.img.width,
+      body.img.height
+    );
+  },
   drawTile: function(body){
     this.ctxui.drawImage(
       body.img,
