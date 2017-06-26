@@ -3,11 +3,10 @@ var PacMan = function(image, controller, gridX, gridY, tileSize){
   img.src = '/img/pacman_sprite.png';
   this.img = img;
   this.img.size = 25;
-  // new
   this.frameIndex = {x:0, y:0};
   this.frameWidth = this.img.size;
   this.frameHeight = 128 / 4;
-
+  this.animationCycle = 0;
   this.xSpeed = 0;
   this.ySpeed = 0;
   this.speed = 3;
@@ -36,6 +35,8 @@ PacMan.prototype = {
     else if (this.keyboard.keys.down) {
       this.intendedDirection = 'down';
     }
+    this.animationCycle += 0.1;
+    this.frameIndex.x = Math.floor(this.animationCycle) % 10;
     this.posX += this.xSpeed;
     this.posY += this.ySpeed;
     this.animation();
