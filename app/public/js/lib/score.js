@@ -1,9 +1,9 @@
-var Score = function(x, y) {
+var Score = function(x, y, tileSize) {
   this.value = 0;
   this.font = '24px pacfont';
   this.color = 'white';
-  this.posX = x;
-  this.posY = y;
+  this.posX = x * tileSize;
+  this.posY = y * tileSize;
   this.text = 'Score: ' + this.value.toString();
 };
 

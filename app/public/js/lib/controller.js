@@ -53,7 +53,6 @@ Controller.prototype = {
     // Will only call this method for the first second.
     if (this.delayticker < 10) {
       this.renderer.drawFixed(this.game.bodies.walls);
-      this.renderer.drawUi(this.game.bodies);
       this.delayticker++;
     }
   }

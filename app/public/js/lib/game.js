@@ -31,7 +31,7 @@ Game.prototype = {
           this.bodies.pacman = pacman;
           break;
         case 4:
-          score = new Score(x, y);
+          score = new Score(x, y, this.tileSize);
           this.bodies.score = score;
           break;
         default:

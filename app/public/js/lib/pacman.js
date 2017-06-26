@@ -7,12 +7,12 @@ var PacMan = function(image, controller, gridX, gridY, tileSize){
   this.ySpeed = 0;
   this.speed = 2;
   this.tileSize = tileSize;
-  this.offset = (this.img.size - tileSize)/2;
-  this.posX = gridX * this.tileSize - this.offset;
-  this.posY = gridY * this.tileSize - this.offset;
-  this.keyboard = controller;
   this.currentX = gridX;
   this.currentY = gridY;
+  this.offset = (this.img.size - tileSize)/2;
+  this.posX = this.currentX * this.tileSize - this.offset;
+  this.posY = this.currentY * this.tileSize - this.offset;
+  this.keyboard = controller;
   this.intendedDirection = 'left';
 };
 
@@ -30,11 +30,22 @@ PacMan.prototype = {
     this.availablePath();
     this.wallBounce();
     this.nextMove();
+    this.escapeSide();
   },
 
   currentGrid: function() {
     this.currentX = (this.posX+this.offset)/this.tileSize | 0;
     this.currentY = (this.posY+this.offset)/this.tileSize | 0;
+  },
+
+  escapeSide: function() {
+    if (this.posX <= -this.offset) {
+      this.posX = 575 - this.offset;
+      this.xSpeed = -this.speed;
+    } else if (this.posX >= 575 - this.offset) {
+      this.posX = -this.offset;
+      this.xSpeed = this.speed;
+    }
   },
 
   draw: function(renderer) {
