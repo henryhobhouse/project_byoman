@@ -45,9 +45,6 @@ PacMan.prototype = {
     this.motionrules.nextMove();
     this.motionrules.escapeSide();
 
-    console.log('height: '+this.img.height)
-    console.log('width: '+this.img.width)
-
   },
   draw: function(renderer) {
     renderer.drawSprite(this);
