@@ -1,8 +1,13 @@
 var PacMan = function(image, controller, gridX, gridY, tileSize){
   var img = image;
-  img.src = '/img/pacman.png';
+  img.src = '/img/sprite_test_transparent.png';
   this.img = img;
-  this.img.size = 28;
+  this.img.size = 25;
+  // new
+  this.frameIndex = {x:0, y:0};
+  this.frameWidth = this.img.size;
+  this.frameHeight = 119 / 4;
+
   this.xSpeed = 0;
   this.ySpeed = 0;
   this.speed = 3;
@@ -19,12 +24,21 @@ var PacMan = function(image, controller, gridX, gridY, tileSize){
 
 PacMan.prototype = {
   update: function() {
-    if (this.keyboard.keys.up) { this.intendedDirection = 'up'; }
-    else if (this.keyboard.keys.left) { this.intendedDirection = 'left'; }
-    else if (this.keyboard.keys.right) { this.intendedDirection = 'right'; }
-    else if (this.keyboard.keys.down) { this.intendedDirection = 'down'; }
+    if (this.keyboard.keys.up) {
+      this.intendedDirection = 'up';
+    }
+    else if (this.keyboard.keys.left) {
+      this.intendedDirection = 'left';
+    }
+    else if (this.keyboard.keys.right) {
+      this.intendedDirection = 'right';
+    }
+    else if (this.keyboard.keys.down) {
+      this.intendedDirection = 'down';
+    }
     this.posX += this.xSpeed;
     this.posY += this.ySpeed;
+    this.animation();
     this.motionrules.currentGrid();
     this.motionrules.availablePath();
     this.motionrules.wallBounce();
@@ -32,8 +46,21 @@ PacMan.prototype = {
     this.motionrules.escapeSide();
   },
   draw: function(renderer) {
-    renderer.drawAnimatedObject(this);
+    renderer.drawSprite(this);
   },
+
+  animation: function() {
+    if (this.xSpeed < 0) {
+      this.frameIndex.y = 3;
+    } else if (this.xSpeed > 0) {
+      this.frameIndex.y = 0;
+    } else if (this.ySpeed < 0) {
+      this.frameIndex.y = 2;
+    } else if (this.ySpeed > 0) {
+      this.frameIndex.y = 1;
+    }
+  },
+
   velocity: function(x, y) {
     this.xSpeed = x;
     this.ySpeed = y;
