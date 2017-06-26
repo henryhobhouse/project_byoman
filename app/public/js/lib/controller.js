@@ -26,6 +26,8 @@ var Controller = function(animateId,fixedId,uiId) {
     self.checkFoodUpdate();
   };
   tick();
+
+
 };
 
 // As temporary method - not pushed into own onject
@@ -52,6 +54,7 @@ Controller.prototype = {
   delayStatic: function() {
     // Will only call this method for the first second.
     if (this.delayticker < 10) {
+      if (this.delayticker < 2) {this.renderer.drawUi(this.game.bodies);}
       this.renderer.drawFixed(this.game.bodies.walls);
       this.delayticker++;
     }
