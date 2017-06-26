@@ -1,8 +1,13 @@
 var PacMan = function(image, controller, gridX, gridY, tileSize){
   var img = image;
-  img.src = '/img/pacman.png';
+  img.src = '/img/sprite_test_transparent.png';
   this.img = img;
   this.img.size = 28;
+  // new
+  this.frameIndex = {x:0, y:0};
+  this.frameWidth = this.img.size;
+  this.frameHeight = this.img.size/4;
+
   this.xSpeed = 0;
   this.ySpeed = 0;
   this.speed = 2; // Has to be an even number
@@ -32,7 +37,7 @@ PacMan.prototype = {
     this.motionrules.escapeSide();
   },
   draw: function(renderer) {
-    renderer.drawAnimatedObject(this);
+    renderer.drawSprite(this);
   },
   velocity: function(x, y) {
     this.xSpeed = x;
