@@ -5,6 +5,7 @@ var Game = function(tileSize) {
   this.coordinates = [];
   this.collision = new Collision(this.tileSize);
   this.mapObjects();
+  this.load = false;
 };
 
 Game.prototype = {

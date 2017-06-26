@@ -1,25 +1,25 @@
-var Renderer = function(ctxui, ctxstatic, tileSize){
+var Renderer = function(ctxui, ctxstatic, tileSize, canvasSize){
   this.ctxui = ctxui;
   this.ctxstatic = ctxstatic;
   this.tileSize = tileSize;
+  this.canvasSize = canvasSize;
 };
 
 Renderer.prototype = {
-  draw: function(canvasSize, bodies, frames) {
-    this.ctxui.clearRect(0, 0, canvasSize.x, canvasSize.y);
+  draw: function(bodies, frames) {
+    this.ctxui.clearRect(0, 0, this.canvasSize.x, this.canvasSize.y);
     for ( var i = 0; i < bodies.foods.length; i++) {
       bodies.foods[i].draw(this);
-    }
-    for ( var j = 0; j < bodies.walls.length; j++) {
-      bodies.walls[j].draw(this);
     }
     bodies.pacman.draw(this);
     bodies.score.draw(this);
     // The below function is purely for development testing
     this.drawFps(frames);
   },
-  drawstatic: function(canvasSize, bodies) {
-    this.ctxstatic.clearRect(0, 0, canvasSize.x, canvasSize.y);
+  drawStatic: function(walls) {
+    for ( var j = 0; j < walls.length; j++) {
+      walls[j].draw(this);
+    }
   },
   // drawFps temp function. Remove for production
   drawFps: function(frames) {
@@ -41,7 +41,7 @@ Renderer.prototype = {
     );
   },
   drawTile: function(body){
-    this.ctxui.drawImage(
+    this.ctxstatic.drawImage(
       body.img,
       body.posX,
       body.posY,

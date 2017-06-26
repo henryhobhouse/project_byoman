@@ -5,23 +5,24 @@ var Controller = function(layerId,staticId) {
   var layerctx = layerCanvas.getContext('2d');
   var staticCanvas = document.getElementById(staticId);
   var staticctx = staticCanvas.getContext('2d');
-  this.canvasSize = { x: staticCanvas.width, y: staticCanvas.height };
+  var canvasSize = { x: staticCanvas.width, y: staticCanvas.height };
+  this.delayticker = 0;
   this.game = new Game(TILESIZE);
-  this.renderer = new Renderer(layerctx, staticctx, TILESIZE);
+  this.renderer = new Renderer(layerctx, staticctx, TILESIZE, canvasSize);
+
   this.currentSecond = 0;
   this.frameCount = 0;
   this.framesLastSecond = 0;
-  var self = this;
 
+  var self = this;
   var tick = function() {
     self.game.update();
-    self.renderer.draw(self.canvasSize, self.game.bodies, self.framesLastSecond);
+    self.renderer.draw(self.game.bodies, self.framesLastSecond);
     self.fps(self); // For development purposes. Remove for production
     requestAnimationFrame(tick);
+    self.delayStatic();
   };
   tick();
-  this.renderer.drawstatic(this.canvasSize, this.game.bodies);
-
 };
 
 // As temporary method - not pushed into own onject
@@ -34,6 +35,13 @@ Controller.prototype = {
       self.frameCount = 1;
     } else {
       self.frameCount++;
+    }
+  },
+
+  delayStatic: function() {
+    if (this.delaytick < 10) {
+      this.renderer.drawStatic(this.game.bodies.walls);
+      this.delayticker++;
     }
   }
 };
