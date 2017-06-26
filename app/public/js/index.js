@@ -11,6 +11,7 @@ requirejs.config({
     controller: 'controller.js',
     collision: 'collision.js',
     levelone: 'levelone.js',
-    wall: 'wall.js'
+    wall: 'wall.js',
+    motionrules: 'motionrules.js'
   }
 });

@@ -1,11 +1,12 @@
 //controls game logic. Does not see canvas or anything to do with rendering
 var Game = function(tileSize) {
-  this.score = new Score();
   this.tileSize = tileSize;
-  this.bodies = { pacman: null, foods: [], score: this.score, walls: [] };
+  this.bodies = { pacman: null, foods: [], score: null, walls: [] };
   this.coordinates = [];
-  this.collision = new Collision();
+  this.collision = new Collision(this.tileSize);
   this.mapObjects();
+  this.load = false;
+  this.foodUpdate = false;
 };
 
 Game.prototype = {
@@ -29,6 +30,10 @@ Game.prototype = {
           var pacman = new PacMan(new Image(), new Keyboard(), x, y, this.tileSize);
           this.bodies.pacman = pacman;
           break;
+        case 4:
+          score = new Score(x, y, this.tileSize);
+          this.bodies.score = score;
+          break;
         default:
         }
       }
@@ -47,5 +52,6 @@ Game.prototype = {
     this.bodies.foods.splice(index, 1);
     this.bodies.score.scoreFood();
     this.bodies.score.update();
+    this.foodUpdate = true;
   },
 };

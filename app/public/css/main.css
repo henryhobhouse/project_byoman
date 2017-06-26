@@ -3,7 +3,7 @@ body {
 }
 
 #game {
-    width: 560px;
+    width: 600px;
     height: 720px;
     position: relative;
     margin: 0 auto;
@@ -14,10 +14,14 @@ canvas {
   position: absolute;
 }
 
-#pac-background {
+#pac-fixed {
+  z-index: 3
+}
+
+#pac-ui {
   z-index: 1
 }
 
-#pac-UI {
-  z-index: 0
+#pac-animate {
+  z-index: 2
 }

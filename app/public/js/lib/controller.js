@@ -1,27 +1,31 @@
 // Interface between redenering and logic objects
-var Controller = function(layerId,staticId) {
+var Controller = function(animateId,fixedId,uiId) {
   var TILESIZE = 20;
-  var layerCanvas = document.getElementById(layerId);
-  var layerctx = layerCanvas.getContext('2d');
-  var staticCanvas = document.getElementById(staticId);
-  var staticctx = staticCanvas.getContext('2d');
-  this.canvasSize = { x: staticCanvas.width, y: staticCanvas.height };
+  var animateCanvas = document.getElementById(animateId);
+  var animateCtx = animateCanvas.getContext('2d');
+  var fixedCanvas = document.getElementById(fixedId);
+  var fixedCtx = fixedCanvas.getContext('2d');
+  var uiCanvas = document.getElementById(uiId);
+  var uiCtx = uiCanvas.getContext('2d');
+  var canvasSize = { x: fixedCanvas.width, y: fixedCanvas.height };
+  this.delayticker = 0;
   this.game = new Game(TILESIZE);
-  this.renderer = new Renderer(layerctx, staticctx, TILESIZE);
+  this.renderer = new Renderer(animateCtx, fixedCtx, uiCtx, TILESIZE, canvasSize);
+
   this.currentSecond = 0;
   this.frameCount = 0;
   this.framesLastSecond = 0;
-  var self = this;
 
+  var self = this;
   var tick = function() {
     self.game.update();
-    self.renderer.draw(self.canvasSize, self.game.bodies, self.framesLastSecond);
+    self.renderer.drawAnimate(self.game.bodies, self.framesLastSecond);
     self.fps(self); // For development purposes. Remove for production
     requestAnimationFrame(tick);
+    self.delayStatic();
+    self.checkFoodUpdate();
   };
   tick();
-  this.renderer.drawstatic(this.canvasSize, this.game.bodies);
-
 };
 
 // As temporary method - not pushed into own onject
@@ -34,6 +38,23 @@ Controller.prototype = {
       self.frameCount = 1;
     } else {
       self.frameCount++;
+    }
+  },
+
+  checkFoodUpdate: function() {
+    if (this.game.foodUpdate === true) {
+      this.renderer.drawUi(this.game.bodies);
+      this.game.foodUpdate = false;
+    }
+  },
+
+  // As renderer doesn't know about game, this method allows game to load first
+  delayStatic: function() {
+    // Will only call this method for the first second.
+    if (this.delayticker < 10) {
+      if (this.delayticker < 2) {this.renderer.drawUi(this.game.bodies);}
+      this.renderer.drawFixed(this.game.bodies.walls);
+      this.delayticker++;
     }
   }
 };
