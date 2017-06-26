@@ -1,12 +1,12 @@
 var PacMan = function(image, controller, gridX, gridY, tileSize){
   var img = image;
-  img.src = '/img/sprite_test_transparent.png';
+  img.src = '/img/pacman_sprite.png';
   this.img = img;
   this.img.size = 25;
   // new
   this.frameIndex = {x:0, y:0};
   this.frameWidth = this.img.size;
-  this.frameHeight = 119 / 4;
+  this.frameHeight = 128 / 4;
 
   this.xSpeed = 0;
   this.ySpeed = 0;
@@ -44,6 +44,7 @@ PacMan.prototype = {
     this.motionrules.wallBounce();
     this.motionrules.nextMove();
     this.motionrules.escapeSide();
+
   },
   draw: function(renderer) {
     renderer.drawSprite(this);
@@ -51,13 +52,13 @@ PacMan.prototype = {
 
   animation: function() {
     if (this.xSpeed < 0) {
-      this.frameIndex.y = 3;
+      this.frameIndex.y = 1;
     } else if (this.xSpeed > 0) {
       this.frameIndex.y = 0;
     } else if (this.ySpeed < 0) {
       this.frameIndex.y = 2;
     } else if (this.ySpeed > 0) {
-      this.frameIndex.y = 1;
+      this.frameIndex.y = 3;
     }
   },
 
