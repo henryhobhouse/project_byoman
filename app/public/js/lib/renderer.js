@@ -10,6 +10,7 @@ Renderer.prototype = {
   drawAnimate: function(bodies, frames) {
     this.animateCtx.clearRect(0, 0, this.canvasSize.x, this.canvasSize.y);
     bodies.pacman.draw(this);
+    bodies.ghosts[0].draw(this);
     // The below function is purely for development testing
     this.drawFps(frames);
   },
@@ -35,7 +36,7 @@ Renderer.prototype = {
       20
     );
   },
-  drawPacman: function(body){
+  drawAnimatedObject: function(body){
     this.animateCtx.drawImage(
       body.img,
       body.posX,
