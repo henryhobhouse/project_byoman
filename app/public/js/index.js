@@ -12,6 +12,7 @@ requirejs.config({
     collision: 'collision.js',
     levelone: 'levelone.js',
     wall: 'wall.js',
-    motionrules: 'motionrules.js'
+    motionrules: 'motionrules.js',
+    ghost: 'ghost.js'
   }
 });

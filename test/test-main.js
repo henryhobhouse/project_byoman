@@ -24,7 +24,8 @@ require.config({
     'food': 'lib/food',
     'score': 'lib/score',
     'pmspechelper': 'helpers/pmspechelper',
-    'levelone': 'lib/levelone'
+    'levelone': 'lib/levelone',
+    'ghost': 'lib/ghost'
   },
 
   shim: {
