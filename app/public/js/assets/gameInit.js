@@ -10,7 +10,8 @@ define([
   'collision',
   'levelone',
   'wall',
-  'motionrules'
+  'motionrules',
+  'ghost'
 ], function() {
   new Controller('pac-animate', 'pac-fixed', 'pac-ui');
 });
