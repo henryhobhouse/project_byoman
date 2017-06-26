@@ -14,10 +14,14 @@ canvas {
   position: absolute;
 }
 
-#pac-background {
+#pac-fixed {
+  z-index: 3
+}
+
+#pac-ui {
   z-index: 1
 }
 
-#pac-UI {
-  z-index: 0
+#pac-animate {
+  z-index: 2
 }

@@ -1,38 +1,42 @@
-var Renderer = function(ctxui, ctxstatic, tileSize, canvasSize){
-  this.ctxui = ctxui;
-  this.ctxstatic = ctxstatic;
+var Renderer = function(animateCtx, fixedCtx, uiCtx, tileSize, canvasSize){
+  this.animateCtx = animateCtx;
+  this.fixedCtx = fixedCtx;
+  this.uiCtx = uiCtx;
   this.tileSize = tileSize;
   this.canvasSize = canvasSize;
 };
 
 Renderer.prototype = {
-  draw: function(bodies, frames) {
-    this.ctxui.clearRect(0, 0, this.canvasSize.x, this.canvasSize.y);
-    for ( var i = 0; i < bodies.foods.length; i++) {
-      bodies.foods[i].draw(this);
-    }
+  drawAnimate: function(bodies, frames) {
+    this.animateCtx.clearRect(0, 0, this.canvasSize.x, this.canvasSize.y);
     bodies.pacman.draw(this);
-    bodies.score.draw(this);
     // The below function is purely for development testing
     this.drawFps(frames);
   },
-  drawStatic: function(walls) {
+  drawFixed: function(walls) {
     for ( var j = 0; j < walls.length; j++) {
       walls[j].draw(this);
     }
   },
+  drawUi: function(bodies) {
+    this.uiCtx.clearRect(0, 0, this.canvasSize.x, this.canvasSize.y);
+    for ( var i = 0; i < bodies.foods.length; i++) {
+      bodies.foods[i].draw(this);
+    }
+    bodies.score.draw(this);
+  },
   // drawFps temp function. Remove for production
   drawFps: function(frames) {
-    this.ctxui.font = '24px pacfont';
-    this.ctxui.fillStyle = 'white';
-    this.ctxui.fillText(
+    this.animateCtx.font = '24px pacfont';
+    this.animateCtx.fillStyle = 'white';
+    this.animateCtx.fillText(
       'FPS: ' + frames,
       400,
       20
     );
   },
   drawPacman: function(body){
-    this.ctxui.drawImage(
+    this.animateCtx.drawImage(
       body.img,
       body.posX,
       body.posY,
@@ -41,7 +45,7 @@ Renderer.prototype = {
     );
   },
   drawTile: function(body){
-    this.ctxstatic.drawImage(
+    this.fixedCtx.drawImage(
       body.img,
       body.posX,
       body.posY,
@@ -50,17 +54,17 @@ Renderer.prototype = {
     );
   },
   drawText: function(body) {
-    this.ctxui.font = body.font;
-    this.ctxui.fillStyle = body.color;
-    this.ctxui.fillText(
+    this.uiCtx.font = body.font;
+    this.uiCtx.fillStyle = body.color;
+    this.uiCtx.fillText(
       body.text,
       body.posX,
       body.posY + 20
     );
   },
   drawCircle: function(body, circlestart, circlefinish) {
-    this.ctxui.beginPath();
-    this.ctxui.arc(
+    this.uiCtx.beginPath();
+    this.uiCtx.arc(
       body.posX,
       body.posY,
       body.radius,
@@ -68,9 +72,9 @@ Renderer.prototype = {
       circlefinish,
       false
     );
-    this.ctxui.fillStyle = this.fill;
-    this.ctxui.fill();
-    this.ctxui.closePath();
+    this.uiCtx.fillStyle = this.fill;
+    this.uiCtx.fill();
+    this.uiCtx.closePath();
   },
 
 };

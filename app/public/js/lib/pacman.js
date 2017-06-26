@@ -5,7 +5,7 @@ var PacMan = function(image, controller, gridX, gridY, tileSize){
   this.img.size = 28;
   this.xSpeed = 0;
   this.ySpeed = 0;
-  this.speed = 3;
+  this.speed = 2;
   this.tileSize = tileSize;
   this.offset = (this.img.size - tileSize)/2;
   this.posX = gridX * this.tileSize - this.offset;
@@ -72,31 +72,31 @@ PacMan.prototype = {
   nextMove: function() {
     switch (this.intendedDirection) {
     case 'left':
-      if ( this.left === true && (this.posY+this.offset+1)/this.tileSize >= this.currentY) {
+      if ( this.left === true && (this.posY+this.offset)/this.tileSize === this.currentY) {
         this.velocity(-this.speed, 0);
         this.intendedDirection = null;
-        this._yGridAlign();
+        // this._yGridAlign();
       }
       break;
     case 'right':
-      if (this.right === true && (this.posY+this.offset-1)/this.tileSize <= this.currentY) {
+      if (this.right === true && (this.posY+this.offset)/this.tileSize === this.currentY) {
         this.velocity(this.speed, 0);
         this.intendedDirection = null;
-        this._yGridAlign();
+        // this._yGridAlign();
       }
       break;
     case 'up':
-      if (this.up === true && (this.posX+this.offset+1)/this.tileSize >= this.currentX) {
+      if (this.up === true && (this.posX+this.offset)/this.tileSize === this.currentX) {
         this.velocity(0, -this.speed);
         this.intendedDirection = null;
-        this._xGridAlign();
+        // this._xGridAlign();
       }
       break;
     case 'down':
-      if (this.down === true && (this.posX+this.offset-1)/this.tileSize <= this.currentX) {
+      if (this.down === true && (this.posX+this.offset)/this.tileSize === this.currentX) {
         this.velocity(0, this.speed);
         this.intendedDirection = null;
-        this._xGridAlign();
+        // this._xGridAlign();
       }
       break;
     default:

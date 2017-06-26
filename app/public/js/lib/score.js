@@ -1,6 +1,6 @@
 var Score = function(x, y) {
   this.value = 0;
-  this.font = '24px';
+  this.font = '24px pacfont';
   this.color = 'white';
   this.posX = x;
   this.posY = y;

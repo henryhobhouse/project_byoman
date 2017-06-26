@@ -6,6 +6,7 @@ var Game = function(tileSize) {
   this.collision = new Collision(this.tileSize);
   this.mapObjects();
   this.load = false;
+  this.foodUpdate = false;
 };
 
 Game.prototype = {
@@ -51,5 +52,6 @@ Game.prototype = {
     this.bodies.foods.splice(index, 1);
     this.bodies.score.scoreFood();
     this.bodies.score.update();
+    this.foodUpdate = true;
   },
 };
