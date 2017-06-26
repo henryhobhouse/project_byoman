@@ -65,18 +65,14 @@ PacMan.prototype = {
   },
 
   wallBounce: function() {
-    if (this.right === false && this.xSpeed > 0 && (this.posX+this.offset)/this.tileSize >= this.currentX) {
+    if (this.right === false && this.xSpeed > 0 && (this.posX+this.offset)/this.tileSize === this.currentX) {
       this.velocity(0,0);
-      this._xGridAlign();
-    } else if (this.left === false && this.xSpeed < 0 && (this.posX-this.offset)/this.tileSize <= this.currentX) {
+    } else if (this.left === false && this.xSpeed < 0 && (this.posX+this.offset)/this.tileSize === this.currentX) {
       this.velocity(0,0);
-      this._xGridAlign();
-    } else if (this.up === false && this.ySpeed < 0 && (this.posY+this.offset)/this.tileSize >= this.currentY) {
+    } else if (this.up === false && this.ySpeed < 0 && (this.posY+this.offset)/this.tileSize === this.currentY) {
       this.velocity(0,0);
-      this._yGridAlign();
-    } else if (this.down === false && this.ySpeed > 0 && (this.posY-this.offset)/this.tileSize <= this.currentY) {
+    } else if (this.down === false && this.ySpeed > 0 && (this.posY+this.offset)/this.tileSize === this.currentY) {
       this.velocity(0,0);
-      this._yGridAlign();
     }
   },
 
@@ -86,39 +82,27 @@ PacMan.prototype = {
       if ( this.left === true && (this.posY+this.offset)/this.tileSize === this.currentY) {
         this.velocity(-this.speed, 0);
         this.intendedDirection = null;
-        // this._yGridAlign();
       }
       break;
     case 'right':
       if (this.right === true && (this.posY+this.offset)/this.tileSize === this.currentY) {
         this.velocity(this.speed, 0);
         this.intendedDirection = null;
-        // this._yGridAlign();
       }
       break;
     case 'up':
       if (this.up === true && (this.posX+this.offset)/this.tileSize === this.currentX) {
         this.velocity(0, -this.speed);
         this.intendedDirection = null;
-        // this._xGridAlign();
       }
       break;
     case 'down':
       if (this.down === true && (this.posX+this.offset)/this.tileSize === this.currentX) {
         this.velocity(0, this.speed);
         this.intendedDirection = null;
-        // this._xGridAlign();
       }
       break;
     default:
     }
   },
-
-  _yGridAlign: function() {
-    this.posY = this.currentY * this.tileSize - this.offset;
-  },
-
-  _xGridAlign: function() {
-    this.posX = this.currentX * this.tileSize - this.offset;
-  }
 };

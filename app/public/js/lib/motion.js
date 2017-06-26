@@ -1,3 +1,0 @@
-var Motion = function() {
-
-};
