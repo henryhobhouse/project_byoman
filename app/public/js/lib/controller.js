@@ -11,21 +11,10 @@ var Controller = function(animateId,fixedId,uiId) {
   this.delayticker = 0;
   this.game = new Game(TILESIZE);
   this.renderer = new Renderer(animateCtx, fixedCtx, uiCtx, TILESIZE, canvasSize);
-
   this.currentSecond = 0;
   this.frameCount = 0;
   this.framesLastSecond = 0;
-
-  var self = this;
-  var tick = function() {
-    self.game.update();
-    self.renderer.drawAnimate(self.game.bodies, self.framesLastSecond);
-    self.fps(self); // For development purposes. Remove for production
-    requestAnimationFrame(tick);
-    self.delayStatic();
-    self.checkFoodUpdate();
-  };
-  tick();
+  this.tick();
 };
 
 // As temporary method - not pushed into own onject
@@ -39,6 +28,14 @@ Controller.prototype = {
     } else {
       self.frameCount++;
     }
+  },
+  tick: function() {
+    this.game.update();
+    this.renderer.drawAnimate(this.game.bodies, this.framesLastSecond);
+    this.fps(this); // For development purposes. Remove for production
+    requestAnimationFrame(this.tick.bind(this));
+    this.delayStatic();
+    this.checkFoodUpdate();
   },
 
   checkFoodUpdate: function() {
