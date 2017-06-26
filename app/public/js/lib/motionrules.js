@@ -14,10 +14,10 @@ MotionRules.prototype = {
     }
   },
   availablePath: function() {
-    levelone.path[this.object.currentY][this.object.currentX+1] === 1 ? this.right = true : this.right = false;
-    levelone.path[this.object.currentY][this.object.currentX-1] === 1 ? this.left = true : this.left = false;
-    levelone.path[this.object.currentY+1][this.object.currentX] === 1 ? this.down = true : this.down = false;
-    levelone.path[this.object.currentY-1][this.object.currentX] === 1 ? this.up = true : this.up = false;
+    this.right = levelone.path[this.object.currentY][this.object.currentX+1] === 1;
+    this.left = levelone.path[this.object.currentY][this.object.currentX-1] === 1;
+    this.down = levelone.path[this.object.currentY+1][this.object.currentX] === 1;
+    this.up = levelone.path[this.object.currentY-1][this.object.currentX] === 1;
   },
   wallBounce: function() {
     if (this.right === false && this.object.xSpeed > 0 && this.onTileCenter('X-RIGHT') === true ) {
