@@ -21,6 +21,7 @@ Renderer.prototype = {
   drawstatic: function(canvasSize, bodies) {
     this.ctxstatic.clearRect(0, 0, canvasSize.x, canvasSize.y);
   },
+  // drawFps temp function. Remove for production
   drawFps: function(frames) {
     this.ctxui.font = '24px pacfont';
     this.ctxui.fillStyle = 'white';
@@ -35,8 +36,8 @@ Renderer.prototype = {
       body.img,
       body.posX,
       body.posY,
-      body.img.width,
-      body.img.height
+      body.img.size,
+      body.img.size
     );
   },
   drawTile: function(body){
