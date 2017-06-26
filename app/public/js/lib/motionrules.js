@@ -14,22 +14,22 @@ MotionRules.prototype = {
     }
   },
   availablePath: function() {
-    this.right = levelone.path[this.object.currentY][this.object.currentX+1] === 1;
-    this.left = levelone.path[this.object.currentY][this.object.currentX-1] === 1;
-    this.down = levelone.path[this.object.currentY+1][this.object.currentX] === 1;
-    this.up = levelone.path[this.object.currentY-1][this.object.currentX] === 1;
+    this.object.direction.right = levelone.path[this.object.currentY][this.object.currentX+1] === 1;
+    this.object.direction.left = levelone.path[this.object.currentY][this.object.currentX-1] === 1;
+    this.object.direction.down = levelone.path[this.object.currentY+1][this.object.currentX] === 1;
+    this.object.direction.up = levelone.path[this.object.currentY-1][this.object.currentX] === 1;
   },
   wallBounce: function() {
-    if (this.right === false && this.object.xSpeed > 0 && this.onTileCenter('X-RIGHT') === true ) {
+    if (this.object.direction.right === false && this.object.xSpeed > 0 && this.onTileCenter('X-RIGHT') === true ) {
       this.object.velocity(0,0);
       this._xGridAlign();
-    } else if (this.left === false && this.object.xSpeed < 0 && this.onTileCenter('X-LEFT') === true ) {
+    } else if (this.object.direction.left === false && this.object.xSpeed < 0 && this.onTileCenter('X-LEFT') === true ) {
       this.object.velocity(0,0);
       this._xGridAlign();
-    } else if (this.up === false && this.object.ySpeed < 0 &&  this.onTileCenter('Y-UP') === true ) {
+    } else if (this.object.direction.up === false && this.object.ySpeed < 0 &&  this.onTileCenter('Y-UP') === true ) {
       this.object.velocity(0,0);
       this._yGridAlign();
-    } else if (this.down === false && this.object.ySpeed > 0 && this.onTileCenter('Y-DOWN')  === true ) {
+    } else if (this.object.direction.down === false && this.object.ySpeed > 0 && this.onTileCenter('Y-DOWN')  === true ) {
       this.object.velocity(0,0);
       this._yGridAlign();
     }
@@ -49,29 +49,29 @@ MotionRules.prototype = {
   nextMove: function() {
     switch (this.object.intendedDirection) {
     case 'left':
-      if (this.left === true && this.object.ySpeed <= 0 && this.onTileCenter('Y-DOWN') ||
-          this.left === true && this.object.ySpeed >= 0 && this.onTileCenter('Y-UP')) {
+      if (this.object.direction.left === true && this.object.ySpeed <= 0 && this.onTileCenter('Y-DOWN') ||
+          this.object.direction.left === true && this.object.ySpeed >= 0 && this.onTileCenter('Y-UP')) {
         this.object.velocity(-this.object.speed, 0);
         this._yGridAlign();
       }
       break;
     case 'right':
-      if (this.right === true && this.object.ySpeed <= 0 &&  this.onTileCenter('Y-DOWN') ||
-          this.right === true && this.object.ySpeed >= 0 && this.onTileCenter('Y-UP')) {
+      if (this.object.direction.right === true && this.object.ySpeed <= 0 &&  this.onTileCenter('Y-DOWN') ||
+          this.object.direction.right === true && this.object.ySpeed >= 0 && this.onTileCenter('Y-UP')) {
         this.object.velocity(this.object.speed, 0);
         this._yGridAlign();
       }
       break;
     case 'up':
-      if (this.up === true && this.object.xSpeed >= 0 && this.onTileCenter('X-RIGHT') ||
-          this.up === true && this.object.xSpeed <= 0 && this.onTileCenter('X-LEFT')) {
+      if (this.object.direction.up === true && this.object.xSpeed >= 0 && this.onTileCenter('X-RIGHT') ||
+          this.object.direction.up === true && this.object.xSpeed <= 0 && this.onTileCenter('X-LEFT')) {
         this.object.velocity(0, -this.object.speed);
         this._xGridAlign();
       }
       break;
     case 'down':
-      if (this.down === true && this.object.xSpeed >= 0 && this.onTileCenter('X-RIGHT') ||
-          this.down === true && this.object.xSpeed <= 0 && this.onTileCenter('X-LEFT') ) {
+      if (this.object.direction.down === true && this.object.xSpeed >= 0 && this.onTileCenter('X-RIGHT') ||
+          this.object.direction.down === true && this.object.xSpeed <= 0 && this.onTileCenter('X-LEFT') ) {
         this.object.velocity(0, this.object.speed);
         this._xGridAlign();
       }

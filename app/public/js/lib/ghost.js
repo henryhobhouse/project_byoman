@@ -9,10 +9,14 @@ var Ghost = function(image,gridX, gridY, tileSize){
   this.tileSize = tileSize;
   this.currentX = gridX;
   this.currentY = gridY;
+  this.direction = {right: false, left: false, up: false, down: false};
+  this.targetX = 20;
+  this.targetY = 0;
   this.offset = (this.img.size - tileSize)/2;
   this.posX = this.currentX * this.tileSize - this.offset;
   this.posY = this.currentY * this.tileSize - this.offset;
   this.motionrules = new MotionRules(this);
+  this.intendedDirection = 'right';
 };
 
 Ghost.prototype = {

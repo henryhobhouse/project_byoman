@@ -12,6 +12,7 @@ var Game = function(tileSize) {
 Game.prototype = {
   update: function() {
     this.bodies.pacman.update();
+    this.bodies.ghosts[0].update();
     this.checkFoodCollision();
   },
   mapObjects: function(){
