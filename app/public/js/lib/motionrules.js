@@ -1,6 +1,8 @@
 // Animated Object Helper to keep code DRY
 var MotionRules = function(object) {
   this.object = object;
+  this.floatingGridX = (this.object.posX+this.object.offset)/this.object.tileSize;
+  this.floatingGridY = (this.object.posY+this.object.offset)/this.object.tileSize;
 };
 
 MotionRules.prototype = {
@@ -20,42 +22,46 @@ MotionRules.prototype = {
     levelone.path[this.object.currentY-1][this.object.currentX] === 1 ? this.up = true : this.up = false;
   },
   wallBounce: function() {
-    if (this.right === false && this.object.xSpeed > 0 && (this.object.posX+this.object.offset)/this.object.tileSize === this.object.currentX) {
+    if (this.right === false && this.object.xSpeed > 0 && onTileCenter('X')) {
       this.object.velocity(0,0);
-    } else if (this.left === false && this.object.xSpeed < 0 && (this.object.posX+this.object.offset)/this.object.tileSize === this.object.currentX) {
+    } else if (this.left === false && this.object.xSpeed < 0 && onTileCenter('X')) {
       this.object.velocity(0,0);
-    } else if (this.up === false && this.object.ySpeed < 0 && (this.object.posY+this.object.offset)/this.object.tileSize === this.object.currentY) {
+    } else if (this.up === false && this.object.ySpeed < 0 &&  onTileCenter('Y')) {
       this.object.velocity(0,0);
-    } else if (this.down === false && this.object.ySpeed > 0 && (this.object.posY+this.object.offset)/this.object.tileSize === this.object.currentY) {
+    } else if (this.down === false && this.object.ySpeed > 0 && onTileCenter('Y')) {
       this.object.velocity(0,0);
     }
   },
   currentGrid: function() {
-    this.object.currentX = (this.object.posX+this.object.offset)/this.object.tileSize | 0;
-    this.object.currentY = (this.object.posY+this.object.offset)/this.object.tileSize | 0;
+    this.object.currentX = this.floatingGridX | 0;
+    this.object.currentY = this.floatingGridY | 0;
+  },
+  onTileCenter: function(axis) {
+    if (axis === 'X') { this.floatingGridX === this.object.currentX; }
+    else { this.floatingGridX === this.object.currentX; }
   },
   nextMove: function() {
     switch (this.object.intendedDirection) {
     case 'left':
-      if (this.left === true && (this.object.posY+this.object.offset)/this.object.tileSize === this.object.currentY ) {
+      if (this.left === true && onTileCenter('Y') ) {
         this.object.velocity(-this.object.speed, 0);
         this.object.intendedDirection = null;
       }
       break;
     case 'right':
-      if (this.right === true && (this.object.posY+this.object.offset)/this.object.tileSize === this.object.currentY) {
+      if (this.right === true && onTileCenter('Y')) {
         this.object.velocity(this.object.speed, 0);
         this.object.intendedDirection = null;
       }
       break;
     case 'up':
-      if (this.up === true && (this.object.posX+this.object.offset)/this.object.tileSize === this.object.currentX) {
+      if (this.up === true && onTileCenter('X')) {
         this.object.velocity(0, -this.object.speed);
         this.object.intendedDirection = null;
       }
       break;
     case 'down':
-      if (this.down === true && (this.object.posX+this.object.offset)/this.object.tileSize === this.object.currentX) {
+      if (this.down === true && onTileCenter('X')) {
         this.object.velocity(0, this.object.speed);
         this.object.intendedDirection = null;
       }
