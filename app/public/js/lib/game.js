@@ -35,11 +35,8 @@ Game.prototype = {
           this.bodies.score = score;
           break;
         case 5:
-          console.log("Here I am before the creation");
           redGhost = new Ghost(new Image(), x, y, this.tileSize);
-          console.log("I have been created");
           this.bodies.ghosts.push(redGhost);
-          console.log(this.bodies.ghosts);
           break;
         default:
         }
