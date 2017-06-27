@@ -4,7 +4,7 @@ var PacMan = function(image, controller, gridX, gridY, tileSize){
   this.img = img;
   this.img.size = 25;
   this.frameIndex = {x:0, y:0};
-  this.frameWidth = 324/10;
+  this.frameWidth = Math.floor(324 / 10);
   this.frameHeight = 128 / 4;
   this.animationCycle = 0;
   this.xSpeed = 0;
@@ -36,7 +36,7 @@ PacMan.prototype = {
       this.intendedDirection = 'down';
     }
     this.animationCycle += 0.5;
-    this.frameIndex.x = Math.floor(this.animationCycle) % 9;
+    this.frameIndex.x = Math.floor(this.animationCycle) % 10;
     this.posX += this.xSpeed;
     this.posY += this.ySpeed;
     this.animation();
