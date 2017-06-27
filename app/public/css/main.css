@@ -20,6 +20,7 @@ canvas {
 }
 
 #pac-fixed {
+  display: none;
   z-index: 3
 }
 
