@@ -13,7 +13,9 @@ var Game = function(tileSize) {
 Game.prototype = {
   update: function() {
     this.bodies.pacman.update();
-    this.bodies.ghosts[0].update();
+    for(i=0;i<this.bodies.ghosts.length;i++){
+      this.bodies.ghosts[i].update();
+    }
     this.checkFoodCollision();
     this.checkGhostCollision();
   },
@@ -39,8 +41,8 @@ Game.prototype = {
           this.bodies.score = score;
           break;
         case 5:
-          redGhost = new Ghost(new Image(), x, y, this.tileSize);
-          this.bodies.ghosts.push(redGhost);
+          ghost = new Ghost(new Image(), x, y, this.tileSize);
+          this.bodies.ghosts.push(ghost);
           break;
         case 8:
           lives = new Lives(x, y, this.tileSize);
