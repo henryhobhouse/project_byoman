@@ -5,7 +5,7 @@ var Ghost = function(image,gridX, gridY, tileSize){
   this.img.size = 28;
   this.xSpeed = 0;
   this.ySpeed = 0;
-  this.speed = 2;
+  this.speed = 4;
   this.currentX = gridX;
   this.currentY = gridY;
   this.direction = {right: false, left: false, up: false, down: false};
@@ -41,10 +41,10 @@ Ghost.prototype = {
     this.getAvailable();
     var rand = this.options[Math.floor(Math.random() * this.options.length)];
     this.intendedDirection = rand;
+    this.findReverse();
   },
   getAvailable: function() {
     this.options = [];
-    this.findReverse();
     if(this.direction.right === true && this.reverse != 'right') {this.options.push('right');}
     if(this.direction.left === true && this.reverse != 'left') {this.options.push('left');}
     if(this.direction.up === true && this.reverse != 'up') {this.options.push('up');}
