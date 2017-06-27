@@ -16,14 +16,15 @@ body {
 }
 
 h2 {
+  font-size: 32px;
   cursor: pointer;
-  margin-top: 50px;
-  margin-left: 190px;
+  text-align: center;
   color: white;
   font-family: 'Pacfont';
 }
 
 h3 {
+  font-size: 16px;
   text-align: center;
   color: white;
   font-family: 'Krungthep';
@@ -51,7 +52,13 @@ h3 {
   z-index: 4;
 }
 
-img {
+#arrowKey {
+  margin-left: 100px;
+  width: 120px;
+  height: 40px;
+}
+
+#pacman-logo {
   width: 600px;
 }
 
