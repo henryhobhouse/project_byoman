@@ -35,11 +35,10 @@ PacMan.prototype = {
     else if (this.keyboard.keys.down) {
       this.intendedDirection = 'down';
     }
-    this.animationCycle += 0.5;
-    this.frameIndex.x = Math.floor(this.animationCycle) % 10;
+    this.pacmanAnimation();
     this.posX += this.xSpeed;
     this.posY += this.ySpeed;
-    this.animation();
+    this.pacmanOrientation();
     this.motionrules.currentGrid();
     this.motionrules.availablePath();
     this.motionrules.wallBounce();
@@ -51,7 +50,7 @@ PacMan.prototype = {
     renderer.drawSprite(this);
   },
 
-  animation: function() {
+  pacmanOrientation: function() {
     if (this.xSpeed < 0) {
       this.frameIndex.y = 1;
     } else if (this.xSpeed > 0) {
@@ -61,6 +60,11 @@ PacMan.prototype = {
     } else if (this.ySpeed > 0) {
       this.frameIndex.y = 3;
     }
+  },
+
+  pacmanAnimation: function() {
+    this.animationCycle += 0.5;
+    this.frameIndex.x = Math.floor(this.animationCycle) % 10;
   },
 
   velocity: function(x, y) {
