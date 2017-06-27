@@ -20,7 +20,7 @@ canvas {
 }
 
 #pac-fixed {
-  z-index: 3
+  z-index: 2
 }
 
 #pac-ui {
@@ -28,5 +28,5 @@ canvas {
 }
 
 #pac-animate {
-  z-index: 2
+  z-index: 3
 }

@@ -9,9 +9,11 @@ MotionRules.prototype = {
     if (this.object.posX <= -this.object.offset) {
       this.object.posX = 575 - this.object.offset;
       this.object.xSpeed = -this.object.speed;
+      this.obect.direction.left = true;
     } else if (this.object.posX >= 575 - this.object.offset) {
       this.object.posX = -this.object.offset;
       this.object.xSpeed = this.object.speed;
+      this.obect.direction.right = true;
     }
   },
   availablePath: function() {
