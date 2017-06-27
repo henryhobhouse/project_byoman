@@ -1,8 +1,12 @@
 var Ghost = function(image,gridX, gridY, tileSize){
   var img = image;
-  img.src = '/img/redGhost.png';
+  img.src = '/img/red_ghost_spritesheet.png';
   this.img = img;
   this.img.size = 28;
+  this.frameIndex = {x:0, y:0};
+  this.frameWidth = Math.floor(68/ 2);
+  this.frameHeight = 164 / 4;
+  this.animationCycle = 0;
   this.xSpeed = 0;
   this.ySpeed = 0;
   this.dirX = 1;
@@ -34,10 +38,30 @@ Ghost.prototype = {
     this.moveOptions();
     if (this.ySpeed === 0) { this.dirX = this.xSpeed; }
     if (this.xSpeed === 0) { this.dirY = this.ySpeed; }
+    this.ghostOrientation();
+    this.ghostAnimation();
+
   },
   draw: function(renderer) {
-    renderer.drawAnimatedObject(this);
+    renderer.drawSprite(this);
   },
+  ghostOrientation: function() {
+    if (this.xSpeed < 0) {
+      this.frameIndex.y = 2;
+    } else if (this.xSpeed > 0) {
+      this.frameIndex.y = 3;
+    } else if (this.ySpeed < 0) {
+      this.frameIndex.y = 0;
+    } else if (this.ySpeed > 0) {
+      this.frameIndex.y = 1;
+    }
+  },
+
+  ghostAnimation: function() {
+    this.animationCycle += 0.1;
+    this.frameIndex.x = Math.floor(this.animationCycle) % 2;
+  },
+
   velocity: function(x, y) {
     this.xSpeed = x;
     this.ySpeed = y;
