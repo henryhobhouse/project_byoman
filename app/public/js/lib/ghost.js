@@ -34,7 +34,6 @@ Ghost.prototype = {
     this.moveOptions();
     if (this.ySpeed === 0) { this.dirX = this.xSpeed; }
     if (this.xSpeed === 0) { this.dirY = this.ySpeed; }
-    console.log('update: '+(this.posX+10)/20|0)
   },
   draw: function(renderer) {
     renderer.drawAnimatedObject(this);
@@ -44,11 +43,7 @@ Ghost.prototype = {
     this.ySpeed = y;
   },
   moveOptions: function() {
-    if (this.gridMoveX === this.currentX || this.gridMoveY === this.currentY) {
-      console.log('gridx:'+this.gridMoveX)
-      console.log('gridy:'+this.gridMoveY)
-      console.log('currentx:'+this.currentX)
-      console.log('currenty:'+this.currentY)
+    if (this.gridMoveX === this.currentX && this.gridMoveY === this.currentY) {
       this.options = [];
       this.updateGrid();
     }
@@ -56,11 +51,8 @@ Ghost.prototype = {
   updateGrid: function() {
     if(this.dirX === this.xSpeed && this.dirX != 0) {
       this.newPath();
-      console.log('inupdate')
     } else if (this.dirY === this.ySpeed && this.dirY != 0) {
       this.newPath();
-      console.log('inupdate')
-
     }
   },
   newPath: function() {
@@ -91,11 +83,9 @@ Ghost.prototype = {
   setDirection: function(){
     var rand = this.options[Math.floor(Math.random() * this.options.length)];
     this.intendedDirection = rand;
-    console.log(this.intendedDirection)
-    console.log('update: '+(this.posX+10)/20|0)
-    if (this.intendedDirection === 'right') { this.gridMoveX = (this.posX+10)/20|0 + 1; }
-    if (this.intendedDirection === 'left') { this.gridMoveX = (this.posX+10)/20|0 - 1; }
-    if (this.intendedDirection === 'up') { this.gridMoveY = (this.posY+10)/20|0 - 1; }
-    if (this.intendedDirection === 'down') { this.gridMoveY = (this.posY+10)/20|0 + 1; }
+    if (this.intendedDirection === 'right') { this.gridMoveX = this.currentX + 1; }
+    if (this.intendedDirection === 'left') { this.gridMoveX = this.currentX - 1; }
+    if (this.intendedDirection === 'up') { this.gridMoveY = this.currentY - 1; }
+    if (this.intendedDirection === 'down') { this.gridMoveY = this.currentY + 1; }
   },
 };
