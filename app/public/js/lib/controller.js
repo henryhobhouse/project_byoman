@@ -36,15 +36,15 @@ Controller.prototype = {
       this.fps(this); // For development purposes. Remove for production
       requestAnimationFrame(this.tick.bind(this));
       this.delayStatic();
-      this.checkFoodUpdate();
-      this.renderer.drawUi(this.game.bodies);
-    } else { alert('Seems you had one too many accidents and have left the world a forgotten'); }
+      this.checkUiUpdate();
+    } else { alert('Seems you had one too many accidents and your instance has been purged. Bad times.'); }
   },
 
-  checkFoodUpdate: function() {
-    if (this.game.foodUpdate === true) {
-      // this.renderer.drawUi(this.game.bodies);
-      this.game.foodUpdate = false;
+  checkUiUpdate: function() {
+    if (this.game.foodUpdate === true || this.game.ghostUpdate === true) {
+      this.renderer.drawUi(this.game.bodies);
+      if (this.game.foodUpdate === true) { this.game.foodUpdate = false; }
+      else if (this.game.ghostUpdate === true) { this.game.ghostUpdate = false; }
     }
   },
 

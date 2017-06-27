@@ -7,8 +7,8 @@ var Game = function(tileSize) {
   this.mapObjects();
   this.load = false;
   this.foodUpdate = false;
+  this.ghostUpdate = false;
   this.finish = false;
-  this.collision.ghost = false;
 };
 
 Game.prototype = {
@@ -72,9 +72,11 @@ Game.prototype = {
     this.foodUpdate = true;
   },
   killPacman: function() {
-    if (this.bodies.lives > 0) {
-      this.bodies.pacman.lives.removeLife;
+    if (this.bodies.lives.remaining > 0) {
+      this.bodies.lives.removeLife();
+      this.bodies.pacman.deathReset();
       this.bodies.lives.update();
+      this.ghostUpdate = true;
     }
     else { this.finish = true; }
   }

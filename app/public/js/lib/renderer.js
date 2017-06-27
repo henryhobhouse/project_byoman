@@ -29,7 +29,7 @@ Renderer.prototype = {
   },
   // drawFps temp function. Remove for production
   drawFps: function(frames) {
-    this.animateCtx.font = '24px Pacfont';
+    this.animateCtx.font = '24px Arial';
     this.animateCtx.fillStyle = 'white';
     this.animateCtx.fillText(
       'FPS: ' + frames,
@@ -55,13 +55,13 @@ Renderer.prototype = {
       this.tileSize
     );
   },
-  drawText: function(body) {
-    this.uiCtx.font = body.font;
-    this.uiCtx.fillStyle = body.color;
+  drawText: function(font, color, text, posX, posY) {
+    this.uiCtx.font = font;
+    this.uiCtx.fillStyle = color;
     this.uiCtx.fillText(
-      body.text,
-      body.posX,
-      body.posY + this.tileSize
+      text,
+      posX,
+      posY + this.tileSize
     );
   },
   drawCircle: function(body, circlestart, circlefinish) {
