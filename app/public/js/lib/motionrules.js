@@ -36,8 +36,8 @@ MotionRules.prototype = {
     }
   },
   currentGrid: function() {
-    this.floatingGridX = (this.object.posX+this.object.offset+(this.object.tileSize/2))/this.object.tileSize;
-    this.floatingGridY = (this.object.posY+this.object.offset+(this.object.tileSize/2))/this.object.tileSize;
+    this.floatingGridX = (this.object.posX+this.object.offset+(this.tileSize/2))/this.tileSize;
+    this.floatingGridY = (this.object.posY+this.object.offset+(this.tileSize/2))/this.tileSize;
     this.object.currentX = this.floatingGridX | 0;
     this.object.currentY = this.floatingGridY | 0;
   },
@@ -81,10 +81,10 @@ MotionRules.prototype = {
     }
   },
   _yGridAlign: function() {
-    this.object.posY = this.object.currentY * this.object.tileSize - this.object.offset;
+    this.object.posY = this.object.currentY * this.tileSize - this.object.offset;
   },
 
   _xGridAlign: function() {
-    this.object.posX = this.object.currentX * this.object.tileSize - this.object.offset;
+    this.object.posX = this.object.currentX * this.tileSize - this.object.offset;
   }
 };
