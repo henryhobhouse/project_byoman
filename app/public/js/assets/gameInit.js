@@ -13,6 +13,10 @@ define([
   'motionrules',
   'ghost',
   'lives'
-], function() {
+]
+);
+
+function clickStart(){
+  document.getElementById('starting_screen').style.display = 'none';
   new Controller('pac-animate', 'pac-fixed', 'pac-ui');
-});
+}

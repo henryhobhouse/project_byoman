@@ -16,10 +16,17 @@ body {
 }
 
 h2 {
+  cursor: pointer;
   margin-top: 50px;
   margin-left: 190px;
   color: blue;
   font-family: 'Pacfont';
+}
+
+h3 {
+  text-align: center;
+  color: blue;
+  font-family: 'Krungthep';
 }
 
 .gamewindow {
