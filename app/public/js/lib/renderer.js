@@ -67,6 +67,21 @@ Renderer.prototype = {
       posY + this.tileSize
     );
   },
+
+  drawSprite: function(body){
+    this.animateCtx.drawImage(
+      body.img,
+      body.frameIndex.x * body.frameWidth,
+      body.frameIndex.y * body.frameHeight,
+      body.img.width/10,
+      body.frameHeight,
+      body.posX,
+      body.posY,
+      body.img.size,
+      body.img.size
+    );
+  },
+
   drawCircle: function(body, circlestart, circlefinish) {
     this.uiCtx.beginPath();
     this.uiCtx.arc(
