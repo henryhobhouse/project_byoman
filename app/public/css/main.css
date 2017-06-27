@@ -30,6 +30,13 @@ body {
   z-index: 0;
 }
 
+#starting_screen {
+  background: red;
+  width: 600px;
+  height: 720px;
+  z-index: 4;
+}
+
 #pac-fixed {
   display: none;
   z-index: 3
