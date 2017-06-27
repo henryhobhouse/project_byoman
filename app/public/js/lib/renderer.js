@@ -73,7 +73,7 @@ Renderer.prototype = {
       body.img,
       body.frameIndex.x * body.frameWidth,
       body.frameIndex.y * body.frameHeight,
-      body.img.width/10,
+      body.frameWidth,
       body.frameHeight,
       body.posX,
       body.posY,
