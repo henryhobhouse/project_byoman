@@ -31,10 +31,14 @@ body {
 }
 
 #starting_screen {
-  background: red;
+  background: black;
   width: 600px;
   height: 720px;
   z-index: 4;
+}
+
+img {
+  width: 600px;
 }
 
 #pac-fixed {
