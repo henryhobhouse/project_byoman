@@ -16,7 +16,7 @@ var PacMan = function(image, controller, gridX, gridY, tileSize){
   this.posY = this.currentY * this.tileSize - this.offset;
   this.keyboard = controller;
   this.intendedDirection = 'left';
-  this.motionrules = new MotionRules(this);
+  this.motionrules = new MotionRules(this, tileSize);
 };
 
 PacMan.prototype = {
@@ -35,6 +35,9 @@ PacMan.prototype = {
   },
   draw: function(renderer) {
     renderer.drawAnimatedObject(this);
+  },
+  deathReset: function() {
+  
   },
   velocity: function(x, y) {
     this.xSpeed = x;

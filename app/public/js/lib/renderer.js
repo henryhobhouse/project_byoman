@@ -29,12 +29,12 @@ Renderer.prototype = {
   },
   // drawFps temp function. Remove for production
   drawFps: function(frames) {
-    this.animateCtx.font = '24px pacfont';
+    this.animateCtx.font = '24px Pacfont';
     this.animateCtx.fillStyle = 'white';
     this.animateCtx.fillText(
       'FPS: ' + frames,
-      400,
-      20
+      470,
+      710
     );
   },
   drawAnimatedObject: function(body){

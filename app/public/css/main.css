@@ -4,7 +4,7 @@ body {
 
 @font-face {
     font-family: 'Pacfont';
-    src: url('css/PAC-FONT.ttf');
+    src: url('./PAC-FONT.TTF');
 }
 
 #game {

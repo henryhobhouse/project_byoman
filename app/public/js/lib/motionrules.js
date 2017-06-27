@@ -1,6 +1,7 @@
 // Animated Object Helper to keep code DRY
-var MotionRules = function(object) {
+var MotionRules = function(object, tileSize) {
   this.object = object;
+  this.tileSize = tileSize;
 };
 
 MotionRules.prototype = {
