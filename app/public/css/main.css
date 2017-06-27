@@ -15,6 +15,13 @@ body {
     border: 2px solid blue;
 }
 
+h2 {
+  margin-top: 50px;
+  margin-left: 190px;
+  color: blue;
+  font-family: 'Pacfont';
+}
+
 .gamewindow {
   position: absolute;
 }
