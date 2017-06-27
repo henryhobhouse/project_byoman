@@ -15,8 +15,19 @@ body {
     border: 2px solid blue;
 }
 
-canvas {
+.gamewindow {
   position: absolute;
+}
+
+#maze {
+  background-image: url("../img/maze.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  bottom: 45px;
+  width: 600px;
+  height: 720px;
+  z-index: 0;
 }
 
 #pac-fixed {
