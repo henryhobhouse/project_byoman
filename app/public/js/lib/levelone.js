@@ -9,6 +9,7 @@ Array value key0
   5: Red Ghost
   6: Pink Ghost
   7: Blue Ghost
+  8: Orange Ghost
 */
 
 var levelone = {
