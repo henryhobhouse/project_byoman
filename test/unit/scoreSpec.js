@@ -16,11 +16,11 @@ define(['score', 'levelone'], function() {
       })
 
       it('font is 24px big', function(){
-        expect(score.font).toContain('24px')
+        expect(score.font).toContain('20px')
       })
 
       it('has text showing the score value', function(){
-        expect(score.text).toEqual('Score: 0')
+        expect(score.text).toEqual('Score: ')
       })
     });
 
@@ -42,7 +42,7 @@ define(['score', 'levelone'], function() {
       it("changes score text to show new score", function() {
         score.scoreFood();
         score.update();
-        expect(score.text).toEqual('Score: 10')
+        expect(score.score).toEqual('10')
       });
     });
   });

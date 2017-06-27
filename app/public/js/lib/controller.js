@@ -30,21 +30,22 @@ Controller.prototype = {
     }
   },
   tick: function() {
-    this.game.update();
-    this.renderer.drawAnimate(this.game.bodies, this.framesLastSecond);
-    this.fps(this); // For development purposes. Remove for production
-    requestAnimationFrame(this.tick.bind(this));
-    this.delayStatic();
-    this.checkFoodUpdate();
+    if (this.game.finish === false) {
+      this.game.update();
+      this.renderer.drawAnimate(this.game.bodies, this.framesLastSecond);
+      this.fps(this); // For development purposes. Remove for production
+      requestAnimationFrame(this.tick.bind(this));
+      this.delayStatic();
+      this.checkUiUpdate();
+    } else { alert('Seems you had one too many accidents and your instance has been purged. Bad times.'); }
   },
 
-  checkFoodUpdate: function() {
-    if (this.game.foodUpdate === true) {
+  checkUiUpdate: function() {
+    if (this.game.uiUpdate === true) {
       this.renderer.drawUi(this.game.bodies);
-      this.game.foodUpdate = false;
+      this.game.uiUpdate = this.game.uiUpdate === true;
     }
   },
-
   // As renderer doesn't know about game, this method allows game to load first
   delayStatic: function() {
     // Will only call this method for the first second.

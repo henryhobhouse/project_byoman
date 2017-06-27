@@ -10,7 +10,10 @@ Renderer.prototype = {
   drawAnimate: function(bodies, frames) {
     this.animateCtx.clearRect(0, 0, this.canvasSize.x, this.canvasSize.y);
     bodies.pacman.draw(this);
-    bodies.ghosts[0].draw(this);
+
+    for(k=0;k<bodies.ghosts.length;k++){
+      bodies.ghosts[k].draw(this);
+    }
     // The below function is purely for development testing
     this.drawFps(frames);
   },
@@ -25,15 +28,16 @@ Renderer.prototype = {
       bodies.foods[i].draw(this);
     }
     bodies.score.draw(this);
+    bodies.lives.draw(this);
   },
   // drawFps temp function. Remove for production
   drawFps: function(frames) {
-    this.animateCtx.font = '24px pacfont';
+    this.animateCtx.font = '24px Arial';
     this.animateCtx.fillStyle = 'white';
     this.animateCtx.fillText(
       'FPS: ' + frames,
-      400,
-      20
+      470,
+      710
     );
   },
   drawAnimatedObject: function(body){
@@ -54,13 +58,13 @@ Renderer.prototype = {
       this.tileSize
     );
   },
-  drawText: function(body) {
-    this.uiCtx.font = body.font;
-    this.uiCtx.fillStyle = body.color;
+  drawText: function(font, color, text, posX, posY) {
+    this.uiCtx.font = font;
+    this.uiCtx.fillStyle = color;
     this.uiCtx.fillText(
-      body.text,
-      body.posX,
-      body.posY + 20
+      text,
+      posX,
+      posY + this.tileSize
     );
   },
 

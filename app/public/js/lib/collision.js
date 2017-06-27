@@ -1,19 +1,33 @@
 var Collision = function(tileSize) {
   this.tileSize = tileSize;
   this.food = false;
+  this.ghost = false;
+  this.pacman = null;
+  this.halfTile = this.tileSize/2;
 };
 
 Collision.prototype = {
-  foodColliding: function(obj1, obj2) {
-    isColliding(obj1, obj2, this.tileSize) ? this.food = true : this.food = false;
+  updatePacman: function() {
+    this.pacmanXCenter = this.pacman.posX + this.halfTile;
+    this.pacmanYCenter = this.pacman.posY + this.halfTile;
+  },
+  foodColliding: function(obj2) {
+    var offset = this.pacman.img.size / 2 - 3;
+    this.food = this.isColliding(obj2.posX, obj2.posY, offset);
+  },
+  ghostColliding: function(obj2) {
+    var offset = this.pacman.img.size / 2 + 3;
+    var obj2posX = obj2.posX + this.halfTile;
+    var obj2posY = obj2.posY + this.halfTile;
+    this.ghost = this.isColliding(obj2posX, obj2posY, offset);
+  },
+  isColliding: function(obj2PosX, obj2PosY, offset) {
+    this.updatePacman();
+    return  !(
+      this.pacmanXCenter <= obj2PosX - offset ||
+      this.pacmanYCenter <=  obj2PosY - offset ||
+      this.pacmanXCenter >= obj2PosX + offset ||
+      this.pacmanYCenter >= obj2PosY + offset
+    );
   }
-};
-
-var isColliding = function(obj1, obj2, tileSize) {
-  return  !(
-    obj1.posX + tileSize <= obj2.posX ||
-    obj1.posY + tileSize <=  obj2.posY ||
-    obj1.posX >= obj2.posX ||
-    obj1.posY >= obj2.posY
-  );
 };
