@@ -6,8 +6,7 @@ var Game = function(tileSize) {
   this.collision = new Collision(this.tileSize);
   this.mapObjects();
   this.load = false;
-  this.foodUpdate = false;
-  this.ghostUpdate = false;
+  this.uiUpdate = false;
   this.finish = false;
 };
 
@@ -69,14 +68,14 @@ Game.prototype = {
     this.bodies.foods.splice(index, 1);
     this.bodies.score.scoreFood();
     this.bodies.score.update();
-    this.foodUpdate = true;
+    this.uiUpdate = true;
   },
   killPacman: function() {
     if (this.bodies.lives.remaining > 0) {
       this.bodies.lives.removeLife();
       this.bodies.pacman.deathReset();
       this.bodies.lives.update();
-      this.ghostUpdate = true;
+      this.uiUpdate = true;
     }
     else { this.finish = true; }
   }

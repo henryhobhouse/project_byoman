@@ -41,13 +41,11 @@ Controller.prototype = {
   },
 
   checkUiUpdate: function() {
-    if (this.game.foodUpdate === true || this.game.ghostUpdate === true) {
+    if (this.game.uiUpdate === true) {
       this.renderer.drawUi(this.game.bodies);
-      if (this.game.foodUpdate === true) { this.game.foodUpdate = false; }
-      else if (this.game.ghostUpdate === true) { this.game.ghostUpdate = false; }
+      this.game.uiUpdate = this.game.uiUpdate === true;
     }
   },
-
   // As renderer doesn't know about game, this method allows game to load first
   delayStatic: function() {
     // Will only call this method for the first second.
