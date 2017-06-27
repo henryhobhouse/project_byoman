@@ -28,7 +28,6 @@ Ghost.prototype = {
     this.motionrules.wallBounce();
     this.motionrules.nextMove();
     this.motionrules.escapeSide();
-    this.stopReverse();
   },
   draw: function(renderer) {
     renderer.drawAnimatedObject(this);
@@ -41,12 +40,6 @@ Ghost.prototype = {
 
   },
   setDirection: function(){
-    var available = this.direction
-    if (this.xSpeed < 0) { available.right = false; }
-    else if (this.xSpeed > 0) { available.left = false;}
-    else if (this.ySpeed > 0) { available.up = false;}
-    else if (this.ySpeed < 0) { available.down = false;}
-    delete available['false'];
-    console.log(available)
+
   }
 };

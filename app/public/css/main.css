@@ -2,6 +2,11 @@ body {
   background-color: black;
 }
 
+@font-face {
+    font-family: 'Pacfont';
+    src: url('css/PAC-FONT.ttf');
+}
+
 #game {
     width: 600px;
     height: 720px;

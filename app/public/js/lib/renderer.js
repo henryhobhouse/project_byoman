@@ -25,6 +25,7 @@ Renderer.prototype = {
       bodies.foods[i].draw(this);
     }
     bodies.score.draw(this);
+    bodies.lives.draw(this);
   },
   // drawFps temp function. Remove for production
   drawFps: function(frames) {
@@ -60,7 +61,7 @@ Renderer.prototype = {
     this.uiCtx.fillText(
       body.text,
       body.posX,
-      body.posY + 20
+      body.posY + this.tileSize
     );
   },
   drawCircle: function(body, circlestart, circlefinish) {

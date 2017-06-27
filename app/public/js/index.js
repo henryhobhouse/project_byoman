@@ -13,6 +13,7 @@ requirejs.config({
     levelone: 'levelone.js',
     wall: 'wall.js',
     motionrules: 'motionrules.js',
-    ghost: 'ghost.js'
+    ghost: 'ghost.js',
+    lives: 'lives.js'
   }
 });

@@ -1,12 +1,14 @@
 //controls game logic. Does not see canvas or anything to do with rendering
 var Game = function(tileSize) {
   this.tileSize = tileSize;
-  this.bodies = { pacman: null, foods: [], score: null, walls: [], ghosts: [] };
+  this.bodies = { pacman: null, foods: [], score: null, walls: [], ghosts: [], lives: null };
   this.coordinates = [];
   this.collision = new Collision(this.tileSize);
   this.mapObjects();
   this.load = false;
   this.foodUpdate = false;
+  this.finish = false;
+  this.collision.ghost = false;
 };
 
 Game.prototype = {
@@ -14,6 +16,7 @@ Game.prototype = {
     this.bodies.pacman.update();
     this.bodies.ghosts[0].update();
     this.checkFoodCollision();
+    this.checkGhostCollision();
   },
   mapObjects: function(){
     for(var y = 0; y < levelone.map.length; y++) {
@@ -30,6 +33,7 @@ Game.prototype = {
         case 3:
           var pacman = new PacMan(new Image(), new Keyboard(), x, y, this.tileSize);
           this.bodies.pacman = pacman;
+          this.collision.pacman = pacman;
           break;
         case 4:
           score = new Score(x, y, this.tileSize);
@@ -39,6 +43,10 @@ Game.prototype = {
           redGhost = new Ghost(new Image(), x, y, this.tileSize);
           this.bodies.ghosts.push(redGhost);
           break;
+        case 8:
+          lives = new Lives(x, y, this.tileSize);
+          this.bodies.lives = lives;
+          break;
         default:
         }
       }
@@ -46,10 +54,14 @@ Game.prototype = {
   },
   checkFoodCollision: function() {
     for (var i = 0; i < this.bodies.foods.length; i++) {
-      this.collision.foodColliding(this.bodies.pacman, this.bodies.foods[i]);
-      if (this.collision.food == true) {
-        this.destroyFood(i);
-      }
+      this.collision.foodColliding(this.bodies.foods[i]);
+      if (this.collision.food == true) { this.destroyFood(i); }
+    }
+  },
+  checkGhostCollision: function() {
+    for (var i = 0; i < this.bodies.ghosts.length; i++) {
+      this.collision.ghostColliding(this.bodies.ghosts[i]);
+      if (this.collision.ghost === true) { this.killPacman(); }
     }
   },
   destroyFood: function(j) {
@@ -59,4 +71,11 @@ Game.prototype = {
     this.bodies.score.update();
     this.foodUpdate = true;
   },
+  killPacman: function() {
+    if (this.bodies.lives > 0) {
+      this.bodies.pacman.lives.removeLife;
+      this.bodies.lives.update();
+    }
+    else { this.finish = true; }
+  }
 };

@@ -11,7 +11,8 @@ define([
   'levelone',
   'wall',
   'motionrules',
-  'ghost'
+  'ghost',
+  'lives'
 ], function() {
   new Controller('pac-animate', 'pac-fixed', 'pac-ui');
 });

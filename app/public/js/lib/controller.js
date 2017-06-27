@@ -30,17 +30,20 @@ Controller.prototype = {
     }
   },
   tick: function() {
-    this.game.update();
-    this.renderer.drawAnimate(this.game.bodies, this.framesLastSecond);
-    this.fps(this); // For development purposes. Remove for production
-    requestAnimationFrame(this.tick.bind(this));
-    this.delayStatic();
-    this.checkFoodUpdate();
+    if (this.game.finish === false) {
+      this.game.update();
+      this.renderer.drawAnimate(this.game.bodies, this.framesLastSecond);
+      this.fps(this); // For development purposes. Remove for production
+      requestAnimationFrame(this.tick.bind(this));
+      this.delayStatic();
+      this.checkFoodUpdate();
+      this.renderer.drawUi(this.game.bodies);
+    } else { alert('Seems you had one too many accidents and have left the world a forgotten'); }
   },
 
   checkFoodUpdate: function() {
     if (this.game.foodUpdate === true) {
-      this.renderer.drawUi(this.game.bodies);
+      // this.renderer.drawUi(this.game.bodies);
       this.game.foodUpdate = false;
     }
   },

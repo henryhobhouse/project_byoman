@@ -6,6 +6,7 @@ var PacMan = function(image, controller, gridX, gridY, tileSize){
   this.xSpeed = 0;
   this.ySpeed = 0;
   this.speed = 3;
+  this.lives = 3;
   this.tileSize = tileSize;
   this.currentX = gridX;
   this.currentY = gridY;
