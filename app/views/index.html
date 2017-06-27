@@ -14,9 +14,18 @@
   </head>
   <body>
     <div id="game">
-      <canvas id="pac-fixed" width="600" height="720"></canvas>
-      <canvas id="pac-ui" width="600" height="720"></canvas>
-      <canvas id="pac-animate" width="600" height="720"></canvas>
+      <div id="starting_screen" class="gamewindow">
+        <img src="/img/startImg.gif">
+        <h2 id="start" onclick="clickStart()">START GAME</h2>
+        <h3>By Slaiman, Henry, Paul and Bertie</h3>
+      </div>
+      <canvas id="pac-fixed" class="gamewindow" width="600" height="720"></canvas>
+      <canvas id="pac-ui" class="gamewindow" width="600" height="720"></canvas>
+      <canvas id="pac-animate" class="gamewindow" width="600" height="720"></canvas>
+      <div id="maze"></div>
     </div>
+
+    <script>
+    </script>
   </body>
 </html>
