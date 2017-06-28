@@ -83,7 +83,7 @@ Game.prototype = {
   },
   checkFoodCollision: function() {
     for (var i = 0; i < this.bodies.foods.length; i++) {
-      this.collision.foodColliding(this.bodies.foods[i]);
+      this.collision.foodColliding(this.bodies.foods[i], 'food');
       if (this.collision.food === true) { this.destroyFood(i); }
     }
   },
@@ -99,7 +99,7 @@ Game.prototype = {
       if (this.collision.superFood === true) { this.destroySuper(i); }
     }
   },
-  destroySuper: function() {
+  destroySuper: function(j) {
     var index = this.bodies.superFood.indexOf(this.bodies.superFood[j]);
     this.bodies.superFood.splice(index, 1);
     this.bodies.ghostFactory.frightened();

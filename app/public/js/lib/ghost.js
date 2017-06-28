@@ -72,7 +72,7 @@ Ghost.prototype = {
       this.setTile.y = this.tilePosY;
       this.direction = {right: false, left: false, up: false, down: false};
       this.motionrules.availablePath();
-      if (this.frightened === false) { this.removeReverse(); }
+      this.removeReverse();
       this.determineTile();
     }
   },
@@ -95,7 +95,7 @@ Ghost.prototype = {
   },
   randomDir: function(options) {
     var rand = options[Math.floor(Math.random() * options.length)];
-    this.changeIntended(rand);
+    this.getDir(rand);
   },
   tileHunt: function(options) {
     var distances = [];
