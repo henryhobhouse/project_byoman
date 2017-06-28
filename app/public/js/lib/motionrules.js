@@ -6,14 +6,10 @@ var MotionRules = function(object, tileSize) {
 
 MotionRules.prototype = {
   escapeSide: function() {
-    if (this.object.posX <= -this.object.offset) {
-      this.object.posX = 575 - this.object.offset;
-      this.object.xSpeed = -this.object.speed;
-      this.obect.direction.left = true;
-    } else if (this.object.posX >= 575 - this.object.offset) {
-      this.object.posX = -this.object.offset;
-      this.object.xSpeed = this.object.speed;
-      this.obect.direction.right = true;
+    if (this.object.posX <= this.tileSize) {
+      this.object.posX = 575 - this.tileSize;
+    } else if (this.object.posX >= 575 - this.tileSize) {
+      this.object.posX = this.tileSize;
     }
   },
   availablePath: function() {
@@ -85,7 +81,6 @@ MotionRules.prototype = {
   _yGridAlign: function() {
     this.object.posY = this.object.currentY * this.tileSize - this.object.offset;
   },
-
   _xGridAlign: function() {
     this.object.posX = this.object.currentX * this.tileSize - this.object.offset;
   }

@@ -11,6 +11,7 @@ var PacMan = function(image, controller, gridX, gridY, tileSize){
   this.ySpeed = 0;
   this.dirX = 0;
   this.dirY = 0;
+  this.setGrid = {};
   this.speed = 3;
   this.currentX = gridX;
   this.currentY = gridY;
@@ -53,7 +54,7 @@ PacMan.prototype = {
     renderer.drawSprite(this);
   },
   updateDirection: function() {
-    
+
   },
   deathReset: function() {
     this.posX = this.posXStart;

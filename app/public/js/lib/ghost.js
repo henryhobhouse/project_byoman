@@ -12,10 +12,9 @@ var Ghost = function(image,gridX, gridY, tileSize){
   this.dirX = 1;
   this.dirY = 0;
   this.speed = 1;
+  this.setGrid = {x: gridX, y: gridY};
   this.currentX = gridX;
   this.currentY = gridY;
-  this.gridMoveX = this.currentX + 1;
-  this.gridMoveY = this.currentY;
   this.direction = {right: false, left: false, up: false, down: false};
   this.targetX = 20;
   this.targetY = 0;
@@ -26,6 +25,14 @@ var Ghost = function(image,gridX, gridY, tileSize){
   this.intendedDirection = 'right';
 };
 
+/*
+To get this working
+
+1. Current direction to ensure non reversing
+2. Current grid
+3. Available Grids
+
+*/
 Ghost.prototype = {
   update: function() {
     this.posX += this.xSpeed;
@@ -35,12 +42,9 @@ Ghost.prototype = {
     this.motionrules.wallBounce();
     this.motionrules.nextMove();
     this.motionrules.escapeSide();
-    this.moveOptions();
-    if (this.ySpeed === 0) { this.dirX = this.xSpeed; }
-    if (this.xSpeed === 0) { this.dirY = this.ySpeed; }
     this.ghostOrientation();
     this.ghostAnimation();
-
+    this.updateMove();
   },
   draw: function(renderer) {
     renderer.drawSprite(this);
@@ -56,7 +60,6 @@ Ghost.prototype = {
       this.frameIndex.y = 1;
     }
   },
-
   ghostAnimation: function() {
     this.animationCycle += 0.1;
     this.frameIndex.x = Math.floor(this.animationCycle) % 2;
@@ -66,50 +69,14 @@ Ghost.prototype = {
     this.xSpeed = x;
     this.ySpeed = y;
   },
-  moveOptions: function() {
-    if (this.gridMoveX === this.currentX && this.gridMoveY === this.currentY) {
-      this.options = [];
-      this.updateGrid();
+  updateMove: function() {
+    if (this.setGrid.x != this.currentX || this.setGrid.y != this.currentY) {
+      this.setGrid.x = this.currentX;
+      this.setGrid.y = this.currentY;
+      console.log('setgrid: '+this.setGrid.x)
+      console.log('currentx '+this.currentX)
     }
-  },
-  updateGrid: function() {
-    if(this.dirX === this.xSpeed && this.dirX != 0) {
-      this.newPath();
-    } else if (this.dirY === this.ySpeed && this.dirY != 0) {
-      this.newPath();
-    }
-  },
-  newPath: function() {
-    switch(this.dirX) {
-    case this.speed:
-      if(levelone.path[this.currentY][this.currentX+2] === 1) {this.options.push('right');}
-      if(levelone.path[this.currentY+1][this.currentX+1] === 1) {this.options.push('down');}
-      if(levelone.path[this.currentY-1][this.currentX+1] === 1) {this.options.push('up');}
-      break;
-    case -this.speed:
-      if(levelone.path[this.currentY][this.currentX-2] === 1) {this.options.push('left');}
-      if(levelone.path[this.currentY+1][this.currentX-1] === 1) {this.options.push('down');}
-      if(levelone.path[this.currentY-1][this.currentX-1] === 1) {this.options.push('up');}
-    }
-    switch(this.dirY) {
-    case this.speed:
-      if(levelone.path[this.currentY+2][this.currentX] === 1) {this.options.push('down');}
-      if(levelone.path[this.currentY+1][this.currentX-1] === 1) {this.options.push('left');}
-      if(levelone.path[this.currentY+1][this.currentX+1] === 1) {this.options.push('right');}
-      break;
-    case -this.speed:
-      if(levelone.path[this.currentY-2][this.currentX] === 1) {this.options.push('up');}
-      if(levelone.path[this.currentY-1][this.currentX+1] === 1) {this.options.push('right');}
-      if(levelone.path[this.currentY-1][this.currentX-1] === 1) {this.options.push('left');}
-    }
-    this.setDirection();
-  },
-  setDirection: function(){
-    var rand = this.options[Math.floor(Math.random() * this.options.length)];
-    this.intendedDirection = rand;
-    if (this.intendedDirection === 'right') { this.gridMoveX = this.currentX + 1; }
-    if (this.intendedDirection === 'left') { this.gridMoveX = this.currentX - 1; }
-    if (this.intendedDirection === 'up') { this.gridMoveY = this.currentY - 1; }
-    if (this.intendedDirection === 'down') { this.gridMoveY = this.currentY + 1; }
-  },
+  }
+
+
 };
