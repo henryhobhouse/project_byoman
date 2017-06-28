@@ -42,5 +42,63 @@ define(['motionrules', 'pacman'], function() {
         });
       });
     });
+
+    describe('availablePath', function() {
+      describe("if object's grid position has a 1 on the grid to the right", function() {
+        it("sets object's right direction to true", function() {
+          levelone.path[motionrules.object.tilePosY][motionrules.object.tilePosX+1] = 1
+          motionrules.availablePath();
+          expect(motionrules.object.direction.right).toEqual(true);
+        });
+
+        it("if not sets object's right direction to false", function() {
+          levelone.path[motionrules.object.tilePosY][motionrules.object.tilePosX+1] = 0
+          motionrules.availablePath();
+          expect(motionrules.object.direction.right).toEqual(false);
+        });
+      });
+
+      describe("if object's grid position has a 1 on the grid to the left", function() {
+        it("sets object's left direction to true", function() {
+          levelone.path[motionrules.object.tilePosY][motionrules.object.tilePosX-1] = 1
+          motionrules.availablePath();
+          expect(motionrules.object.direction.left).toEqual(true);
+        });
+
+        it("if not sets object's left direction to false", function() {
+          levelone.path[motionrules.object.tilePosY][motionrules.object.tilePosX-1] = 0
+          motionrules.availablePath();
+          expect(motionrules.object.direction.left).toEqual(false);
+        });
+      });
+
+      describe("if object's grid position has a 1 on the grid to the top", function() {
+        it("sets object's up direction to true", function() {
+          levelone.path[motionrules.object.tilePosY-1][motionrules.object.tilePosX] = 1
+          motionrules.availablePath();
+          expect(motionrules.object.direction.up).toEqual(true);
+        });
+
+        it("if not sets object's up direction to false", function() {
+          levelone.path[motionrules.object.tilePosY-1][motionrules.object.tilePosX] = 0
+          motionrules.availablePath();
+          expect(motionrules.object.direction.up).toEqual(false);
+        });
+      });
+
+      describe("if object's grid position has a 1 on the grid to the bottom", function() {
+        it("sets object's down direction to true", function() {
+          levelone.path[motionrules.object.tilePosY+1][motionrules.object.tilePosX] = 1
+          motionrules.availablePath();
+          expect(motionrules.object.direction.down).toEqual(true);
+        });
+
+        it("if not sets object's down direction to false", function() {
+          levelone.path[motionrules.object.tilePosY+1][motionrules.object.tilePosX] = 0
+          motionrules.availablePath();
+          expect(motionrules.object.direction.down).toEqual(false);
+        });
+      });
+    });
   });
 });
