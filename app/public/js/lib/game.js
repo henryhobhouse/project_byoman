@@ -18,6 +18,7 @@ Game.prototype = {
     }
     this.checkFoodCollision();
     this.checkGhostCollision();
+    this.gameOver();
   },
   mapObjects: function(){
     for(var y = 0; y < levelone.map.length; y++) {
@@ -80,5 +81,10 @@ Game.prototype = {
       this.uiUpdate = true;
     }
     else { this.finish = true; }
+  },
+  gameOver: function(){
+    if (this.bodies.foods.length == 0) {
+      alert('Congratulations. A Winner is you!!!!!!');
+    }
   }
 };
