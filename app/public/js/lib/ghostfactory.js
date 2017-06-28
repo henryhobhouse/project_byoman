@@ -53,6 +53,7 @@ GhostFactory.prototype = {
     this.ghosts[1].speed = this.pacmanSpeed * 0.75;
   },
   updateHenry: function(){
+    this.ghosts[2].speed = this.pacmanSpeed * 0.75;
     if (this.ghosts[2].currentX + 8 >= this.pacmanX || this.ghosts[2].currentX - 8 >= this.pacmanX || this.ghosts[2].currentY + 8 <= this.pacmanY || this.ghosts[2].currentY - 8 <= this.pacmanY){
       this.ghosts[2].huntTile.x = 2;
       this.ghosts[2].huntTile.y = 25;
@@ -62,6 +63,7 @@ GhostFactory.prototype = {
     }
   },
   updateSulaiman: function(){
+    this.ghosts[3].speed = this.pacmanSpeed * 0.75;
     var tempTargetX = 0;
     var tempTargetY = 0;
     var bertieX = this.ghosts[0].currentX;
@@ -86,6 +88,11 @@ GhostFactory.prototype = {
       tempTargetY = this.pacmanY - 2;
       this.ghosts[3].huntTile.x = tempTargetX + (this.pacmanX - bertieX);
       this.ghosts[3].huntTile.y = tempTargetY + (this.pacmanY - bertieY);
+    }
+  },
+  resetPacDeath: function() {
+    for(i=0;i<this.ghosts.length;i++) {
+      this.ghosts[i].resetDeath();
     }
   }
 };
