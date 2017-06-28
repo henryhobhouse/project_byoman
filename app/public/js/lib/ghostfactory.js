@@ -70,22 +70,22 @@ GhostFactory.prototype = {
       tempTargetX = this.pacmanX + 2;
       tempTargetY = this.pacmanY;
       this.ghosts[3].huntTile.x = tempTargetX + (this.pacmanX - bertieX);
-      this.ghosts[3].huntTile.y = tempTargetY + (2 * (this.pacmanY - bertieY));
+      this.ghosts[3].huntTile.y = tempTargetY + (this.pacmanY - bertieY);
     } else if (this.pacmanXSpeed < 0) { //Pacman's X speed is less than 0 so he is moving left
       tempTargetX = this.pacmanX - 2;
       tempTargetY = this.pacmanY;
       this.ghosts[3].huntTile.x = tempTargetX + (this.pacmanX - bertieX);
-      this.ghosts[3].huntTile.y = tempTargetY + (2 * (this.pacmanY - bertieY));
+      this.ghosts[3].huntTile.y = tempTargetY + ((this.pacmanY - bertieY);
     } else if (this.pacmanYSpeed > 0) { //Pacman's Y speed is greater that 0 so he is moving down
       tempTargetX = this.pacmanX;
       tempTargetY = this.pacmanY + 2;
       this.ghosts[3].huntTile.x = tempTargetX + (this.pacmanX - bertieX);
-      this.ghosts[3].huntTile.y = tempTargetY + (2 * (this.pacmanY - bertieY));
+      this.ghosts[3].huntTile.y = tempTargetY + (this.pacmanY - bertieY);
     } else if (this.pacmanYSpeed < 0) { //Pacman's Y speed is less than 0 so he is moving Up
       tempTargetX = this.pacmanX;
       tempTargetY = this.pacmanY - 2;
       this.ghosts[3].huntTile.x = tempTargetX + (this.pacmanX - bertieX);
-      this.ghosts[3].huntTile.y = tempTargetY + (2 * (this.pacmanY - bertieY));
+      this.ghosts[3].huntTile.y = tempTargetY + (this.pacmanY - bertieY);
     }
   }
 };
