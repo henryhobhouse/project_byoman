@@ -1,7 +1,8 @@
-var Ghost = function(image,gridX, gridY, tileSize){
+var Ghost = function(name,image,gridX, gridY, tileSize){
   var img = image;
   img.src = '/img/red_ghost_spritesheet.png';
   this.img = img;
+  this.name = name;
   this.img.size = 28;
   this.frameIndex = {x:0, y:0};
   this.frameWidth = Math.floor(68/ 2);
@@ -97,11 +98,11 @@ Ghost.prototype = {
       dist = Math.sqrt((xPow + yPow), 0.5);
       distances.push(dist);
     }
-    index = this.indexOfMax(distances);
+    index = this.indexOfMin(distances);
     this.getDir(options[index]);
   },
-  indexOfMax: function(distances) {
-    var min = 400;
+  indexOfMin: function(distances) {
+    var min = 2000;
     var minIndex = 0;
     for (var i = 0; i < distances.length; i++) {
       if (distances[i] < min) {

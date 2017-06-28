@@ -30,14 +30,12 @@ Controller.prototype = {
     }
   },
   tick: function() {
-    if (this.game.finish === false) {
-      this.game.update();
-      this.renderer.drawAnimate(this.game.bodies, this.framesLastSecond);
-      this.fps(this); // For development purposes. Remove for production
-      requestAnimationFrame(this.tick.bind(this));
-      this.delayStatic();
-      this.checkUiUpdate();
-    } else { alert('You are a victim of random behaviour. Predictable. Drop Mic.'); }
+    this.game.update();
+    this.renderer.drawAnimate(this.game.bodies, this.framesLastSecond);
+    this.fps(this); // For development purposes. Remove for production
+    requestAnimationFrame(this.tick.bind(this));
+    this.delayStatic();
+    this.checkUiUpdate();
   },
 
   checkUiUpdate: function() {
