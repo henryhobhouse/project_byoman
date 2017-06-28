@@ -25,8 +25,8 @@ GhostFactory.prototype = {
     this.pacmanYSpeed = ySpeed;
     this.pacmanSpeed = speed;
     this.updateBertie();
-    // this.updatePaul();
-    // this.updateHenry();
+    this.updatePaul();
+    this.updateHenry();
     this.updateSulaiman();
   },
   updateBertie: function() {
