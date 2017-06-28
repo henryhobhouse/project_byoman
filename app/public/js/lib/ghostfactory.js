@@ -10,7 +10,7 @@ GhostFactory.prototype = {
       return new Ghost(new Image(),tileX, tileY, this.tileSize);
     case 'Paul': // Hunt 4 Tiles in Front of Pacman
       return new Ghost(new Image(),tileX, tileY, this.tileSize);
-    case 'Henry': //Random when outside 8 tiles. Otherwise hunt Pacman
+    case 'Henry': //Runs away whn Pacman is within 8 tiles. Otherwise hunt Pacman
       return new Ghost(new Image(),tileX, tileY, this.tileSize);
     case 'Sulaiman': //Takes tile two in front pacman and then takes opposing vector from that and Bertie
       return new Ghost(new Image(),tileX, tileY, this.tileSize);
@@ -24,9 +24,9 @@ GhostFactory.prototype = {
     this.pacmanXSpeed = xSpeed;
     this.pacmanYSpeed = ySpeed;
     this.pacmanSpeed = speed;
-    // this.updateBertie();
-    // this.updatePaul();
-    // updateHenry();
+    this.updateBertie();
+    this.updatePaul();
+    this.updateHenry();
     // updateSulaiman();
   },
   updateBertie: function() {
@@ -36,6 +36,7 @@ GhostFactory.prototype = {
   },
   updatePaul: function() {
     // Use speed to determin direction and then use that to create +4 onto position vector. -3 is Left, +3 is right. -3 is Up, +3 is down
+    this.ghosts[1].speed = this.pacmanSpeed * 0.75;
     if (this.pacmanXSpeed > 0) { //Pacman's X speed is greater than 0 so he is moving right
       this.ghosts[1].huntTile.x = this.pacmanX + 4;
       this.ghosts[1].huntTile.y = this.pacmanY;
@@ -50,5 +51,14 @@ GhostFactory.prototype = {
       this.ghosts[1].huntTile.y = this.pacmanY - 4;
     }
     this.ghosts[1].speed = this.pacmanSpeed * 0.75;
+  },
+  updateHenry: function(){
+    if (this.ghosts[2].currentX + 8 >= this.pacmanX || this.ghosts[2].currentX - 8 >= this.pacmanX || this.ghosts[2].currentY + 8 <= this.pacmanY || this.ghosts[2].currentY - 8 <= this.pacmanY){
+      this.ghosts[2].huntTile.x = 2;
+      this.ghosts[2].huntTile.y = 25;
+    } else {
+      this.ghosts[2].huntTile.x = this.pacmanX;
+      this.ghosts[2].huntTile.y = this.pacmanY;
+    }
   }
 };
