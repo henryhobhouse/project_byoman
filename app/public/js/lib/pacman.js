@@ -17,10 +17,10 @@ var PacMan = function(image, controller, tileX, tileY, tileSize){
   this.tilePosY = tileY;
   this.direction = {right: false, left: false, up: false, down: false};
   this.offset = (this.img.size - tileSize)/2;
-  this.posXStart = this.tilePosX * tileSize - this.offset;
-  this.posYStart = this.tilePosY * tileSize - this.offset;
-  this.posX = this.posXStart;
-  this.posY = this.posYStart;
+  this.startPosX = this.tilePosX * tileSize - this.offset;
+  this.startPosY = this.tilePosY * tileSize - this.offset;
+  this.posX = this.startPosX;
+  this.posY = this.startPosY;
   this.keyboard = controller;
   this.intendedDirection = 'left';
   this.motionrules = new MotionRules(this, tileSize);
@@ -54,8 +54,8 @@ PacMan.prototype = {
     renderer.drawSprite(this);
   },
   deathReset: function() {
-    this.posX = this.posXStart;
-    this.posY = this.posYStart;
+    this.posX = this.startPosX;
+    this.posY = this.startPosY;
     this.motionrules.currentTile();
   },
   pacmanOrientation: function() {

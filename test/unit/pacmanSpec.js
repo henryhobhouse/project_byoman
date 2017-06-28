@@ -85,5 +85,12 @@ define(['pacman', 'pmspechelper', 'motionrules'], function() {
         });
       });
     });
+
+    describe('velocity', function() {
+      it("changes pacman's direction and speed", function() {
+        pacman.velocity(3, 0);
+        expect(pacman.xSpeed).toEqual(3)
+      });
+    });
   });
 });

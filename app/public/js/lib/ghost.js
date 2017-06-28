@@ -16,10 +16,10 @@ var Ghost = function(image, tileX, tileY, tileSize){
   this.tilePosY = tileY;
   this.direction = {right: false, left: false, up: false, down: false};
   this.offset = (this.img.size - tileSize)/2;
-  this.posXStart = tileX * tileSize - this.offset;
-  this.posYStart = tileY * tileSize - this.offset;
-  this.posX = this.posXStart;
-  this.posY = this.posYStart;
+  this.startPosX = tileX * tileSize - this.offset;
+  this.startPosY = tileY * tileSize - this.offset;
+  this.posX = this.startPosX;
+  this.posY = this.startPosY;
   this.motionrules = new MotionRules(this, tileSize);
   this.motionrules.availablePath();
   this.intendedDirection = 'right';
@@ -60,8 +60,8 @@ Ghost.prototype = {
     this.ySpeed = y;
   },
   resetDeath: function() {
-    this.posX = this.posXStart;
-    this.posY = this.posYStart;
+    this.posX = this.startPosX;
+    this.posY = this.startPosY;
     this.motionrules.currentTile();
   },
   onNewTile: function() {
