@@ -11,8 +11,8 @@ var PacMan = function(image, controller, gridX, gridY, tileSize){
   this.ySpeed = 0;
   this.dirX = 0;
   this.dirY = 0;
-  this.setGrid = {};
   this.speed = 3;
+  this.setGrid = {x: gridX, y: gridY};
   this.currentX = gridX;
   this.currentY = gridY;
   this.direction = {right: false, left: false, up: false, down: false};
@@ -24,6 +24,7 @@ var PacMan = function(image, controller, gridX, gridY, tileSize){
   this.keyboard = controller;
   this.intendedDirection = 'left';
   this.motionrules = new MotionRules(this, tileSize);
+  this.motionrules.availablePath();
 };
 
 PacMan.prototype = {
@@ -45,16 +46,21 @@ PacMan.prototype = {
     this.posY += this.ySpeed;
     this.pacmanOrientation();
     this.motionrules.currentGrid();
-    this.motionrules.availablePath();
     this.motionrules.wallBounce();
     this.motionrules.nextMove();
     this.motionrules.escapeSide();
+    this.onNewGrid();
   },
   draw: function(renderer) {
     renderer.drawSprite(this);
   },
-  updateDirection: function() {
-
+  onNewGrid: function() {
+    if (this.setGrid.x != this.currentX || this.setGrid.y != this.currentY) {
+      this.setGrid.x = this.currentX;
+      this.setGrid.y = this.currentY;
+      this.direction = {right: false, left: false, up: false, down: false};
+      this.motionrules.availablePath();
+    }
   },
   deathReset: function() {
     this.posX = this.posXStart;

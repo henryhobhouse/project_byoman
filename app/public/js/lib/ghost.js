@@ -34,7 +34,7 @@ Ghost.prototype = {
     this.motionrules.escapeSide();
     this.ghostOrientation();
     this.ghostAnimation();
-    this.updateMove();
+    this.onNewGrid();
   },
   draw: function(renderer) {
     renderer.drawSprite(this);
@@ -59,7 +59,7 @@ Ghost.prototype = {
     this.xSpeed = x;
     this.ySpeed = y;
   },
-  updateMove: function() {
+  onNewGrid: function() {
     if (this.setGrid.x != this.currentX || this.setGrid.y != this.currentY) {
       this.setGrid.x = this.currentX;
       this.setGrid.y = this.currentY;
