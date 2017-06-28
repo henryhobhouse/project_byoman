@@ -102,9 +102,9 @@ Game.prototype = {
   },
   gameOver: function() {
     if (this.bodies.foods.length === 0) {
-      alert('Congratulations. A Winner is you!!!!!!');
+      // alert('Congratulations. A Winner is you!!!!!!');
     } else {
-      alert('You are a victim of random behaviour. Predictable. Drop Mic.');
+      // alert('You are a victim of random behaviour. Predictable. Drop Mic.');
     }
   }
 };
