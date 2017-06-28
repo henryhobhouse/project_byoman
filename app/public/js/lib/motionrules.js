@@ -13,6 +13,7 @@ MotionRules.prototype = {
     }
   },
   availablePath: function() {
+    console.log(this.object.currentX)
     this.object.direction.right = levelone.path[this.object.currentY][this.object.currentX+1] === 1;
     this.object.direction.left = levelone.path[this.object.currentY][this.object.currentX-1] === 1;
     this.object.direction.down = levelone.path[this.object.currentY+1][this.object.currentX] === 1;
