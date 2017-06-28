@@ -10,7 +10,7 @@ var Ghost = function(image,gridX, gridY, tileSize){
   this.xSpeed = 0;
   this.ySpeed = 0;
   this.speed = 2;
-  this.huntGrid = {x: 1, y: 1};
+  this.huntGrid = {x: 0, y: 0};
   this.setGrid = {x: gridX, y: gridY};
   this.currentX = gridX;
   this.currentY = gridY;
@@ -92,8 +92,8 @@ Ghost.prototype = {
     var yPow = 0.0;
     var dist = 0.0;
     for(i=0;i<options.length;i++) {
-      xPow = Math.pow((options[i][0] + this.huntGrid.x),2);
-      yPow = Math.pow((options[i][1] + this.huntGrid.y),2);
+      xPow = Math.pow((this.huntGrid.x - options[i][0]),2);
+      yPow = Math.pow((this.huntGrid.y - options[i][1]),2);
       dist = Math.sqrt((xPow + yPow), 0.5);
       distances.push(dist);
     }
