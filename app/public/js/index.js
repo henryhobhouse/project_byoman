@@ -14,6 +14,7 @@ requirejs.config({
     wall: 'wall.js',
     motionrules: 'motionrules.js',
     ghost: 'ghost.js',
-    lives: 'lives.js'
+    lives: 'lives.js',
+    ghostfactory: 'ghostfactory.js'
   }
 });

@@ -9,7 +9,10 @@ var PacMan = function(image, controller, gridX, gridY, tileSize){
   this.animationCycle = 0;
   this.xSpeed = 0;
   this.ySpeed = 0;
+  this.dirX = 0;
+  this.dirY = 0;
   this.speed = 3;
+  this.setGrid = {x: gridX, y: gridY};
   this.currentX = gridX;
   this.currentY = gridY;
   this.direction = {right: false, left: false, up: false, down: false};
@@ -37,16 +40,15 @@ PacMan.prototype = {
     else if (this.keyboard.keys.down) {
       this.intendedDirection = 'down';
     }
+    this.motionrules.availablePath();
     this.pacmanAnimation();
     this.posX += this.xSpeed;
     this.posY += this.ySpeed;
     this.pacmanOrientation();
-    this.motionrules.currentGrid();
-    this.motionrules.availablePath();
     this.motionrules.wallBounce();
-    this.motionrules.nextMove();
     this.motionrules.escapeSide();
-
+    this.motionrules.nextMove();
+    this.motionrules.currentGrid();
   },
   draw: function(renderer) {
     renderer.drawSprite(this);
@@ -55,7 +57,6 @@ PacMan.prototype = {
     this.posX = this.posXStart;
     this.posY = this.posYStart;
   },
-
   pacmanOrientation: function() {
     if (this.xSpeed < 0) {
       this.frameIndex.y = 1;
@@ -67,12 +68,10 @@ PacMan.prototype = {
       this.frameIndex.y = 3;
     }
   },
-
   pacmanAnimation: function() {
     this.animationCycle += 0.5;
     this.frameIndex.x = Math.floor(this.animationCycle) % 10;
   },
-
   velocity: function(x, y) {
     this.xSpeed = x;
     this.ySpeed = y;

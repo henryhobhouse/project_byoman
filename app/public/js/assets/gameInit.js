@@ -12,9 +12,9 @@ define([
   'wall',
   'motionrules',
   'ghost',
-  'lives'
-]
-);
+  'lives',
+  'ghostfactory'
+]);
 
 function clickStart(){
   document.getElementById('starting_screen').style.display = 'none';

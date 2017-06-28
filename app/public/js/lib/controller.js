@@ -30,14 +30,12 @@ Controller.prototype = {
     }
   },
   tick: function() {
-    if (this.game.finish === false) {
-      this.game.update();
-      this.renderer.drawAnimate(this.game.bodies, this.framesLastSecond);
-      this.fps(this); // For development purposes. Remove for production
-      requestAnimationFrame(this.tick.bind(this));
-      this.delayStatic();
-      this.checkUiUpdate();
-    } else { alert('Seems you had one too many accidents and your instance has been purged. Bad times.'); }
+    this.game.update();
+    this.renderer.drawAnimate(this.game.bodies, this.framesLastSecond);
+    this.fps(this); // For development purposes. Remove for production
+    requestAnimationFrame(this.tick.bind(this));
+    this.delayStatic();
+    this.checkUiUpdate();
   },
 
   checkUiUpdate: function() {
