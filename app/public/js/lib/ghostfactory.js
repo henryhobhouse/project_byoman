@@ -10,7 +10,7 @@ GhostFactory.prototype = {
       return new Ghost(new Image(),tileX, tileY, this.tileSize);
     case 'Paul': // Hunt 4 Tiles in Front of Pacman
       return new Ghost(new Image(),tileX, tileY, this.tileSize);
-    case 'Henry': //Runs away whn Pacman is within 8 tiles. Otherwise hunt Pacman
+    case 'Henry': //Runs away when Pacman is within 8 tiles. Otherwise hunt Pacman
       return new Ghost(new Image(),tileX, tileY, this.tileSize);
     case 'Sulaiman': //Takes tile two in front pacman and then takes opposing vector from that and Bertie
       return new Ghost(new Image(),tileX, tileY, this.tileSize);
