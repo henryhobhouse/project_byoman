@@ -9,6 +9,9 @@ var PacMan = function(image, controller, gridX, gridY, tileSize){
   this.animationCycle = 0;
   this.xSpeed = 0;
   this.ySpeed = 0;
+  this.dirX = 0;
+  this.dirY = 0;
+  this.setGrid = {};
   this.speed = 3;
   this.currentX = gridX;
   this.currentY = gridY;
@@ -46,16 +49,17 @@ PacMan.prototype = {
     this.motionrules.wallBounce();
     this.motionrules.nextMove();
     this.motionrules.escapeSide();
-
   },
   draw: function(renderer) {
     renderer.drawSprite(this);
+  },
+  updateDirection: function() {
+
   },
   deathReset: function() {
     this.posX = this.posXStart;
     this.posY = this.posYStart;
   },
-
   pacmanOrientation: function() {
     if (this.xSpeed < 0) {
       this.frameIndex.y = 1;
@@ -67,12 +71,10 @@ PacMan.prototype = {
       this.frameIndex.y = 3;
     }
   },
-
   pacmanAnimation: function() {
     this.animationCycle += 0.5;
     this.frameIndex.x = Math.floor(this.animationCycle) % 10;
   },
-
   velocity: function(x, y) {
     this.xSpeed = x;
     this.ySpeed = y;
