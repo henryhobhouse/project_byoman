@@ -48,19 +48,19 @@ Game.prototype = {
           this.bodies.score = score;
           break;
         case 5:
-          ghost = this.bodies.ghostFactory.new('Bertie', x, y);
+          ghost = this.bodies.ghostFactory.new('Bertie', x, y, 0);
           this.ghosts.push(ghost);
           break;
         case 6:
-          ghost = this.bodies.ghostFactory.new('Paul', x, y);
+          ghost = this.bodies.ghostFactory.new('Paul', x, y, 4);
           this.ghosts.push(ghost);
           break;
         case 7:
-          ghost = this.bodies.ghostFactory.new('Henry', x, y);
+          ghost = this.bodies.ghostFactory.new('Henry', x, y, 8);
           this.ghosts.push(ghost);
           break;
         case 8:
-          ghost = this.bodies.ghostFactory.new('Sulaiman', x, y);
+          ghost = this.bodies.ghostFactory.new('Sulaiman', x, y, 12);
           this.ghosts.push(ghost);
           break;
         case 9:
