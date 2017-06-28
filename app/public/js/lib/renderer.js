@@ -27,6 +27,9 @@ Renderer.prototype = {
     for ( var i = 0; i < bodies.foods.length; i++) {
       bodies.foods[i].draw(this);
     }
+    for ( var s = 0; s < bodies.superFood.length; s++) {
+      bodies.superFood[s].draw(this);
+    }
     bodies.score.draw(this);
     bodies.lives.draw(this);
   },

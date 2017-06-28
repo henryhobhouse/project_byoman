@@ -12,7 +12,8 @@ define([
   'wall',
   'motionrules',
   'ghost',
-  'lives'
+  'lives',
+  'super_food'
 ]
 );
 
