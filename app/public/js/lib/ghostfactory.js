@@ -27,5 +27,10 @@ GhostFactory.prototype = {
   updateBertie: function(posX, posY) {
     this.ghosts[0].huntTile.x = posX;
     this.ghosts[0].huntTile.y = posY;
+  },
+  resetPacDeath: function() {
+    for(i=0;i<this.ghosts.length;i++) {
+      this.ghosts[i].resetDeath();
+    }
   }
 };

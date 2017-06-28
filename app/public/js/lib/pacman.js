@@ -56,6 +56,7 @@ PacMan.prototype = {
   deathReset: function() {
     this.posX = this.posXStart;
     this.posY = this.posYStart;
+    this.motionrules.currentTile();
   },
   pacmanOrientation: function() {
     if (this.xSpeed < 0) {

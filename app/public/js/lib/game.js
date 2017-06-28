@@ -1,7 +1,7 @@
 //controls game logic. Does not see canvas or anything to do with rendering
 var Game = function(tileSize) {
   this.tileSize = tileSize;
-  this.bodies = { pacman: null, foods: [], score: null, walls: [], ghostFactory: new GhostFactory(tileSize), lives: null };
+  this.bodies = { pacman: null, foods: [], score: null, walls: [], ghostFactory: new GhostFactory(tileSize), lives: null,superFood:[] };
   this.coordinates = [];
   this.ghosts = this.bodies.ghostFactory.ghosts;
   this.collision = new Collision(this.tileSize);
@@ -25,6 +25,10 @@ Game.prototype = {
     for(var y = 0; y < levelone.map.length; y++) {
       for(var x = 0; x < levelone.map[0].length; x++){
         switch(levelone.map[y][x]) {
+        case s:
+          var superFood = new SuperFood(x,y, this.tileSize);
+          this.bodies.superFood.push(superFood);
+          break;
         case 0:
           var wall = new Wall(new Image(),x,y, this.tileSize);
           this.bodies.walls.push(wall);
@@ -89,9 +93,10 @@ Game.prototype = {
   killPacman: function() {
     if (this.bodies.lives.remaining > 0 && this.bodies.foods.length > 0) {
       this.bodies.lives.removeLife();
-      this.bodies.pacman.deathReset();
       this.bodies.lives.update();
       this.uiUpdate = true;
+      this.bodies.pacman.deathReset();
+      this.bodies.ghostFactory.resetPacDeath();
     }
     else { this.gameOver(); }
   },
