@@ -15,6 +15,7 @@ requirejs.config({
     motionrules: 'motionrules.js',
     ghost: 'ghost.js',
     lives: 'lives.js',
-    superFood: 'super_food.js'
+    superFood: 'super_food.js',
+    ghostfactory: 'ghostfactory.js'
   }
 });
