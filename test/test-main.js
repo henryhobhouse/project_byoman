@@ -25,7 +25,8 @@ require.config({
     'score': 'lib/score',
     'pmspechelper': 'helpers/pmspechelper',
     'levelone': 'lib/levelone',
-    'ghost': 'lib/ghost'
+    'ghost': 'lib/ghost',
+    'motionrules': 'lib/motionrules'
   },
 
   shim: {

@@ -1,30 +1,42 @@
-define(['pacman', 'pmspechelper'], function() {
+define(['pacman', 'pmspechelper', 'motionrules'], function() {
   describe("Pacman", function() {
+    var canvasPos;
+    var image;
+    var keyboard;
+    var pacman;
     beforeEach(function() {
       image = new fakeImage();
       keyboard = new fakeKeyboard();
-      pacman = new PacMan(image, keyboard, 1, 1, 20)
-      pacman.up = null;
+      var tileX = 15;
+      var tileY = 26;
+      var tileSize = 20;
+      pacman = new PacMan(image, keyboard, tileX, tileY, tileSize);
     });
 
     describe('initialization', function() {
+      beforeEach(function() {
+        canvasPos = { x: pacman.posX, y: pacman.posY }
+      });
 
-      // it('has an image source', function() {
-      //   expect(pacman.img.src).toEqual('/img/pacman.png');
-      // });
-      //
-      // it('has a speed of 0 on the x axis', function() {
-      //   expect(pacman.xSpeed).toEqual(0);
-      // });
-      //
-      // it('has a speed of 0 on the y axis', function() {
-      //   expect(pacman.ySpeed).toEqual(0);
-      // });
-      //
-      // it('positioned on the canvas where x and y are equal to 100', function() {
-      //   expect(pacman.posX).toEqual(16);
-      //   expect(pacman.posY).toEqual(16);
-      // });
+      it('has a spirte sheet source', function() {
+        expect(pacman.img.src).toEqual('/img/pacman_sprite.png');
+      });
+
+      it('has a speed of 0 on the x axis', function() {
+        expect(pacman.xSpeed).toEqual(0);
+      });
+
+      it('has a speed of 0 on the y axis', function() {
+        expect(pacman.ySpeed).toEqual(0);
+      });
+
+      it('x position of pacman is x: 297.5 on the canvas', function() {
+        expect(canvasPos.x).toEqual(297.5);
+      });
+
+      it('y position of pacman is y: 517.5 on the canvas', function() {
+        expect(canvasPos.y).toEqual(517.5);
+      });
       //
       // it('has a keyboard to control input', function() {
       //   expect(pacman.keyboard).toEqual(keyboard)
