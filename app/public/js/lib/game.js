@@ -18,7 +18,7 @@ Game.prototype = {
     for(i=0;i<this.ghosts.length;i++){
       this.ghosts[i].update();
     }
-    this.bodies.ghostFactory.update(pacman.currentX, pacman.currentY, pacman.xSpeed, pacman.ySpeed);
+    this.bodies.ghostFactory.update(pacman.currentX, pacman.currentY, pacman.xSpeed, pacman.ySpeed,pacman.speed);
     this.checkFoodCollision();
     this.checkGhostCollision();
   },

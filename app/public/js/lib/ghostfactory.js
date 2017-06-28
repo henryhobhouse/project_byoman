@@ -18,23 +18,37 @@ GhostFactory.prototype = {
     }
   },
 
-  update: function(posX, posY, xSpeed, ySpeed) {
-    this.posX = posX;
-    this.posY = posY;
-    this.xSpeed = xSpeed;
-    this.ySpeed = ySpeed;
-    this.updateBertie();
-    this.updatePaul();
+  update: function(posX, posY, xSpeed, ySpeed, speed) {
+    this.pacmanX = posX;
+    this.pacmanY = posY;
+    this.pacmanXSpeed = xSpeed;
+    this.pacmanYSpeed = ySpeed;
+    this.pacmanSpeed = speed;
+    // this.updateBertie();
+    // this.updatePaul();
     // updateHenry();
     // updateSulaiman();
   },
   updateBertie: function() {
-    this.ghosts[0].huntTile.x = this.posX;
-    this.ghosts[0].huntTile.y = this.posY;
+    this.ghosts[0].huntTile.x = this.pacmanX;
+    this.ghosts[0].huntTile.y = this.pacmanY;
+    this.ghosts[0].speed = (this.pacmanSpeed * 0.75);
   },
   updatePaul: function() {
-    // Use speed to determin direction and then use that to create +4 onto position vector
-    this.ghosts[1].huntTile.x = this.posX;
-    this.ghosts[1].huntTile.y = this.posY;
+    // Use speed to determin direction and then use that to create +4 onto position vector. -3 is Left, +3 is right. -3 is Up, +3 is down
+    if (this.pacmanXSpeed > 0) { //Pacman's X speed is greater than 0 so he is moving right
+      this.ghosts[1].huntTile.x = this.pacmanX + 4;
+      this.ghosts[1].huntTile.y = this.pacmanY;
+    } else if (this.pacmanXSpeed < 0) { //Pacman's X speed is less than 0 so he is moving left
+      this.ghosts[1].huntTile.x = this.pacmanX - 4;
+      this.ghosts[1].huntTile.y = this.pacmanY;
+    } else if (this.pacmanYSpeed > 0) { //Pacman's Y speed is greater that 0 so he is moving down
+      this.ghosts[1].huntTile.x = this.pacmanX;
+      this.ghosts[1].huntTile.y = this.pacmanY + 4;
+    } else if (this.pacmanYSpeed < 0) { //Pacman's Y speed is less than 0 so he is moving Up
+      this.ghosts[1].huntTile.x = this.pacmanX;
+      this.ghosts[1].huntTile.y = this.pacmanY - 4;
+    }
+    this.ghosts[1].speed = this.pacmanSpeed * 0.75;
   }
 };
