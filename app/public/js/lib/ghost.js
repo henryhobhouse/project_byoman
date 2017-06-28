@@ -12,14 +12,14 @@ var Ghost = function(image, tileX, tileY, tileSize){
   this.speed = 2;
   this.huntTile = {x: 1, y: 1};
   this.setTile = {x: tileX, y: tileY};
-  this.currentX = tileX;
-  this.currentY = tileY;
+  this.tilePosX = tileX;
+  this.tilePosY = tileY;
   this.direction = {right: false, left: false, up: false, down: false};
   this.offset = (this.img.size - tileSize)/2;
-  this.posXStart = tileX * tileSize - this.offset;
-  this.posYStart = tileY * tileSize - this.offset;
-  this.posX = this.posXStart;
-  this.posY = this.posYStart;
+  this.startPosX = tileX * tileSize - this.offset;
+  this.startPosY = tileY * tileSize - this.offset;
+  this.posX = this.startPosX;
+  this.posY = this.startPosY;
   this.motionrules = new MotionRules(this, tileSize);
   this.motionrules.availablePath();
   this.intendedDirection = 'right';
@@ -60,14 +60,14 @@ Ghost.prototype = {
     this.ySpeed = y;
   },
   resetDeath: function() {
-    this.posX = this.posXStart;
-    this.posY = this.posYStart;
+    this.posX = this.startPosX;
+    this.posY = this.startPosY;
     this.motionrules.currentTile();
   },
   onNewTile: function() {
-    if (this.setTile.x != this.currentX || this.setTile.y != this.currentY) {
-      this.setTile.x = this.currentX;
-      this.setTile.y = this.currentY;
+    if (this.setTile.x != this.tilePosX || this.setTile.y != this.tilePosY) {
+      this.setTile.x = this.tilePosX;
+      this.setTile.y = this.tilePosY;
       this.direction = {right: false, left: false, up: false, down: false};
       this.motionrules.availablePath();
       this.removeReverse();
@@ -82,10 +82,10 @@ Ghost.prototype = {
   },
   determineTile: function() {
     var options = [];
-    if (this.direction.right === true) {options.push([this.currentX+1, this.currentY]);}
-    if (this.direction.left === true) {options.push([this.currentX-1, this.currentY]);}
-    if (this.direction.up === true) {options.push([this.currentX, this.currentY-1]);}
-    if (this.direction.down === true) {options.push([this.currentX, this.currentY+1]);}
+    if (this.direction.right === true) {options.push([this.tilePosX+1, this.tilePosY]);}
+    if (this.direction.left === true) {options.push([this.tilePosX-1, this.tilePosY]);}
+    if (this.direction.up === true) {options.push([this.tilePosX, this.tilePosY-1]);}
+    if (this.direction.down === true) {options.push([this.tilePosX, this.tilePosY+1]);}
     this.tileHunt(options);
   },
   changeIntended: function(dir) {
@@ -118,10 +118,10 @@ Ghost.prototype = {
   },
   getDir: function(tile) {
     var dir = null;
-    if (tile[0] > this.currentX) { dir = 'right'; }
-    else if (tile[0] < this.currentX) { dir = 'left'; }
-    else if (tile[1] < this.currentY) { dir = 'up'; }
-    else if (tile[1] > this.currentY) { dir = 'down'; }
+    if (tile[0] > this.tilePosX) { dir = 'right'; }
+    else if (tile[0] < this.tilePosX) { dir = 'left'; }
+    else if (tile[1] < this.tilePosY) { dir = 'up'; }
+    else if (tile[1] > this.tilePosY) { dir = 'down'; }
     this.changeIntended(dir);
   }
 };

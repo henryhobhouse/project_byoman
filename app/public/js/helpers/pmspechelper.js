@@ -1,4 +1,5 @@
-fakeCanvasSize = { x: 640, y: 540};
+var fakeKeyboard;
+var fakeImage;
 
 fakeKeyboard = function() {
   var Keys = {
@@ -12,7 +13,6 @@ fakeKeyboard = function() {
 };
 
 fakeImage = function() {
-  this.src = '/img/pacman.png';
-  this.height = 50;
-  this.width = 50;
+  this.src = '/img/pacman_sprite.png';
+  this.size = 25;
 };
