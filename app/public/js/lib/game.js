@@ -24,7 +24,7 @@ Game.prototype = {
     for(var y = 0; y < levelone.map.length; y++) {
       for(var x = 0; x < levelone.map[0].length; x++){
         switch(levelone.map[y][x]) {
-        case 'S':
+        case s:
           var superFood = new SuperFood(x,y, this.tileSize);
           this.bodies.superFood.push(superFood);
           break;
