@@ -9,17 +9,17 @@ var Ghost = function(image,gridX, gridY, tileSize){
   this.animationCycle = 0;
   this.xSpeed = 0;
   this.ySpeed = 0;
-  this.dirX = 1;
-  this.dirY = 0;
   this.speed = 2;
-  this.huntGrid = {x: 0, y: 0};
+  this.huntGrid = {x: 1, y: 1};
   this.setGrid = {x: gridX, y: gridY};
   this.currentX = gridX;
   this.currentY = gridY;
   this.direction = {right: false, left: false, up: false, down: false};
   this.offset = (this.img.size - tileSize)/2;
-  this.posX = this.currentX * tileSize - this.offset;
-  this.posY = this.currentY * tileSize - this.offset;
+  this.posXStart = gridX * tileSize - this.offset;
+  this.posYStart = gridY * tileSize - this.offset;
+  this.posX = this.posXStart;
+  this.posY = this.posYStart;
   this.motionrules = new MotionRules(this, tileSize);
   this.motionrules.availablePath();
   this.intendedDirection = 'right';
@@ -55,7 +55,6 @@ Ghost.prototype = {
     this.animationCycle += 0.1;
     this.frameIndex.x = Math.floor(this.animationCycle) % 2;
   },
-
   velocity: function(x, y) {
     this.xSpeed = x;
     this.ySpeed = y;
@@ -78,17 +77,46 @@ Ghost.prototype = {
   },
   determineGrid: function() {
     var options = [];
-    if (this.direction.right === true) {options.push('right');}
-    if (this.direction.left === true) {options.push('left');}
-    if (this.direction.up === true) {options.push('up');}
-    if (this.direction.down === true) {options.push('down');}
-    this.changeIntended(options);
+    if (this.direction.right === true) {options.push([this.currentX+1, this.currentY]);}
+    if (this.direction.left === true) {options.push([this.currentX-1, this.currentY]);}
+    if (this.direction.up === true) {options.push([this.currentX, this.currentY-1]);}
+    if (this.direction.down === true) {options.push([this.currentX, this.currentY+1]);}
+    this.gridHunt(options);
   },
-  changeIntended: function(options) {
-    var randDir = options[Math.floor(Math.random() * options.length)];
-    this.intendedDirection = randDir;
+  changeIntended: function(dir) {
+    this.intendedDirection = dir;
   },
   gridHunt: function(options) {
-
+    var distances = [];
+    var xPow = 0.0;
+    var yPow = 0.0;
+    var dist = 0.0;
+    for(i=0;i<options.length;i++) {
+      xPow = Math.pow((options[i][0] + this.huntGrid.x),2);
+      yPow = Math.pow((options[i][1] + this.huntGrid.y),2);
+      dist = Math.sqrt((xPow + yPow), 0.5);
+      distances.push(dist);
+    }
+    index = this.indexOfMax(distances);
+    this.getDir(options[index]);
   },
+  indexOfMax: function(distances) {
+    var min = 400;
+    var minIndex = 0;
+    for (var i = 0; i < distances.length; i++) {
+      if (distances[i] < min) {
+        minIndex = i;
+        min = distances[i];
+      }
+    }
+    return minIndex;
+  },
+  getDir: function(grid) {
+    var dir = null;
+    if (grid[0] > this.currentX) { dir = 'right'; }
+    else if (grid[0] < this.currentX) { dir = 'left'; }
+    else if (grid[1] < this.currentY) { dir = 'up'; }
+    else if (grid[1] > this.currentY) { dir = 'down'; }
+    this.changeIntended(dir);
+  }
 };

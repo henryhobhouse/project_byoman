@@ -24,8 +24,6 @@ var PacMan = function(image, controller, gridX, gridY, tileSize){
   this.keyboard = controller;
   this.intendedDirection = 'left';
   this.motionrules = new MotionRules(this, tileSize);
-  this.motionrules.nextMove();
-
 };
 
 PacMan.prototype = {
