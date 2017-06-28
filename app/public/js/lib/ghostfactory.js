@@ -6,7 +6,7 @@ var GhostFactory = function(tileSize) {
 GhostFactory.prototype = {
   new: function(name, tileX, tileY) {
     switch(name){
-    case 'Bertie': //Hunt Pacman Current
+    case 'Bertie': //Hunt Pacman Current. POS 0 in array
       return new Ghost(new Image(),tileX, tileY, this.tileSize);
     case 'Paul': // Hunt 4 Tiles in Front of Pacman
       return new Ghost(new Image(),tileX, tileY, this.tileSize);
@@ -18,14 +18,23 @@ GhostFactory.prototype = {
     }
   },
 
-  update: function(posX, posY) {
-    this.updateBertie(posX, posY);
-    // updatePaul(posX, posY);
-    // updateHenry(posX, posY);
-    // updateSulaiman(posX, posY);
+  update: function(posX, posY, xSpeed, ySpeed) {
+    this.posX = posX;
+    this.posY = posY;
+    this.xSpeed = xSpeed;
+    this.ySpeed = ySpeed;
+    this.updateBertie();
+    this.updatePaul();
+    // updateHenry();
+    // updateSulaiman();
   },
-  updateBertie: function(posX, posY) {
-    this.ghosts[0].huntTile.x = posX;
-    this.ghosts[0].huntTile.y = posY;
+  updateBertie: function() {
+    this.ghosts[0].huntTile.x = this.posX;
+    this.ghosts[0].huntTile.y = this.posY;
+  },
+  updatePaul: function() {
+    // Use speed to determin direction and then use that to create +4 onto position vector
+    this.ghosts[1].huntTile.x = this.posX;
+    this.ghosts[1].huntTile.y = this.posY;
   }
 };
