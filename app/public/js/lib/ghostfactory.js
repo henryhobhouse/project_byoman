@@ -4,16 +4,16 @@ var GhostFactory = function(tileSize) {
 };
 
 GhostFactory.prototype = {
-  new: function(name, tileX, tileY) {
+  new: function(name, tileX, tileY, ghostSpriteNumber) {
     switch(name){
     case 'Bertie': //Hunt Pacman Current. POS 0 in array
-      return new Ghost(new Image(),tileX, tileY, this.tileSize);
+      return new Ghost(new Image(),tileX, tileY, this.tileSize, ghostSpriteNumber);
     case 'Paul': // Hunt 4 Tiles in Front of Pacman
-      return new Ghost(new Image(),tileX, tileY, this.tileSize);
-    case 'Henry': //Runs away whn Pacman is within 8 tiles. Otherwise hunt Pacman
-      return new Ghost(new Image(),tileX, tileY, this.tileSize);
+      return new Ghost(new Image(),tileX, tileY, this.tileSize, ghostSpriteNumber);
+    case 'Henry': //Runs away when Pacman is within 8 tiles. Otherwise hunt Pacman
+      return new Ghost(new Image(),tileX, tileY, this.tileSize, ghostSpriteNumber);
     case 'Sulaiman': //Takes tile two in front pacman and then takes opposing vector from that and Bertie
-      return new Ghost(new Image(),tileX, tileY, this.tileSize);
+      return new Ghost(new Image(),tileX, tileY, this.tileSize, ghostSpriteNumber);
     default:
     }
   },
