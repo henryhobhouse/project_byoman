@@ -1,11 +1,11 @@
 var Ghost = function(image, tileX, tileY, tileSize){
   var img = image;
-  img.src = '/img/red_ghost_spritesheet.png';
+  img.src = '/img/ghosts_spritesheet-v2.png';
   this.img = img;
   this.img.size = 28;
   this.frameIndex = {x:0, y:0};
   this.frameWidth = Math.floor(68/ 2);
-  this.frameHeight = 164 / 4;
+  this.frameHeight = 756 / 18;
   this.animationCycle = 0;
   this.xSpeed = 0;
   this.ySpeed = 0;
@@ -42,13 +42,13 @@ Ghost.prototype = {
   },
   ghostOrientation: function() {
     if (this.xSpeed < 0) {
-      this.frameIndex.y = 2;
+      this.frameIndex.y = 6;
     } else if (this.xSpeed > 0) {
-      this.frameIndex.y = 3;
+      this.frameIndex.y = 7;
     } else if (this.ySpeed < 0) {
-      this.frameIndex.y = 0;
+      this.frameIndex.y = 4;
     } else if (this.ySpeed > 0) {
-      this.frameIndex.y = 1;
+      this.frameIndex.y = 5;
     }
   },
   ghostAnimation: function() {
