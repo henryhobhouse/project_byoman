@@ -59,6 +59,11 @@ Ghost.prototype = {
     this.xSpeed = x;
     this.ySpeed = y;
   },
+  resetDeath: function() {
+    this.posX = this.posXStart;
+    this.posY = this.posYStart;
+    this.motionrules.currentTile();
+  },
   onNewTile: function() {
     if (this.setTile.x != this.currentX || this.setTile.y != this.currentY) {
       this.setTile.x = this.currentX;
