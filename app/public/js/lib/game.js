@@ -13,11 +13,12 @@ var Game = function(tileSize) {
 
 Game.prototype = {
   update: function() {
-    this.bodies.pacman.update();
+    pacman = this.bodies.pacman;
+    pacman.update();
     for(i=0;i<this.ghosts.length;i++){
       this.ghosts[i].update();
     }
-    this.bodies.ghostFactory.update(this.bodies.pacman.currentX, this.bodies.pacman.currentY);
+    this.bodies.ghostFactory.update(pacman.currentX, pacman.currentY, pacman.xSpeed, pacman.ySpeed,pacman.speed);
     this.checkFoodCollision();
     this.checkGhostCollision();
   },
