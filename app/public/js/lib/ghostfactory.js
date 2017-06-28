@@ -54,7 +54,7 @@ GhostFactory.prototype = {
   },
   updateHenry: function(){
     this.ghosts[2].speed = this.pacmanSpeed * 0.75;
-    if (this.ghosts[2].currentX + 8 >= this.pacmanX || this.ghosts[2].currentX - 8 >= this.pacmanX || this.ghosts[2].currentY + 8 <= this.pacmanY || this.ghosts[2].currentY - 8 <= this.pacmanY){
+    if (this.ghosts[2].tilePosX + 8 >= this.pacmanX || this.ghosts[2].tilePosX - 8 >= this.pacmanX || this.ghosts[2].tilePosY + 8 <= this.pacmanY || this.ghosts[2].tilePosY - 8 <= this.pacmanY){
       this.ghosts[2].huntTile.x = 2;
       this.ghosts[2].huntTile.y = 25;
     } else {
@@ -66,8 +66,8 @@ GhostFactory.prototype = {
     this.ghosts[3].speed = this.pacmanSpeed * 0.75;
     var tempTargetX = 0;
     var tempTargetY = 0;
-    var bertieX = this.ghosts[0].currentX;
-    var bertieY = this.ghosts[0].currentY;
+    var bertieX = this.ghosts[0].tilePosX;
+    var bertieY = this.ghosts[0].tilePosY;
     if (this.pacmanXSpeed > 0) { //Pacman's X speed is greater than 0 so he is moving right
       tempTargetX = this.pacmanX + 2;
       tempTargetY = this.pacmanY;
