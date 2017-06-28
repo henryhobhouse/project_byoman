@@ -19,23 +19,23 @@ MotionRules.prototype = {
     this.object.direction.up = levelone.path[this.object.tilePosY-1][this.object.tilePosX] === 1;
   },
   wallBounce: function() {
-    if (this.object.direction.right === false && this.object.xSpeed > 0 && this.onTileCenter('X-RIGHT') === true ) {
+    if (!this.object.direction.right && this.object.xSpeed > 0 && this.onTileCenter('X-RIGHT') ) {
       this.object.velocity(0,0);
       this._xTileAlign();
-    } else if (this.object.direction.left === false && this.object.xSpeed < 0 && this.onTileCenter('X-LEFT') === true ) {
+    } else if (!this.object.direction.left && this.object.xSpeed < 0 && this.onTileCenter('X-LEFT') ) {
       this.object.velocity(0,0);
       this._xTileAlign();
-    } else if (this.object.direction.up === false && this.object.ySpeed < 0 &&  this.onTileCenter('Y-UP') === true ) {
+    } else if (!this.object.direction.up && this.object.ySpeed < 0 && this.onTileCenter('Y-UP') ) {
       this.object.velocity(0,0);
       this._yTileAlign();
-    } else if (this.object.direction.down === false && this.object.ySpeed > 0 && this.onTileCenter('Y-DOWN')  === true ) {
+    } else if (!this.object.direction.down && this.object.ySpeed > 0 && this.onTileCenter('Y-DOWN') ) {
       this.object.velocity(0,0);
       this._yTileAlign();
     }
   },
   currentTile: function() {
-    this.floatingTileX = (this.object.posX+this.object.offset+(this.tileSize/2))/this.tileSize;
-    this.floatingTileY = (this.object.posY+this.object.offset+(this.tileSize/2))/this.tileSize;
+    this.floatingTileX = (this.object.posX+this.object.offset+(this.tileSize/2))/ this.tileSize;
+    this.floatingTileY = (this.object.posY+this.object.offset+(this.tileSize/2))/ this.tileSize;
     this.object.tilePosX = this.floatingTileX | 0;
     this.object.tilePosY = this.floatingTileY | 0;
   },
@@ -48,29 +48,29 @@ MotionRules.prototype = {
   nextMove: function() {
     switch (this.object.intendedDirection) {
     case 'left':
-      if (this.object.direction.left === true && this.object.ySpeed <= 0 && this.onTileCenter('Y-DOWN') ||
-          this.object.direction.left === true && this.object.ySpeed >= 0 && this.onTileCenter('Y-UP')) {
+      if (this.object.direction.left && this.object.ySpeed <= 0 && this.onTileCenter('Y-DOWN') ||
+          this.object.direction.left && this.object.ySpeed >= 0 && this.onTileCenter('Y-UP')) {
         this.object.velocity(-this.object.speed, 0);
         this._yTileAlign();
       }
       break;
     case 'right':
-      if (this.object.direction.right === true && this.object.ySpeed <= 0 &&  this.onTileCenter('Y-DOWN') ||
-          this.object.direction.right === true && this.object.ySpeed >= 0 && this.onTileCenter('Y-UP')) {
+      if (this.object.direction.right && this.object.ySpeed <= 0 &&  this.onTileCenter('Y-DOWN') ||
+          this.object.direction.right && this.object.ySpeed >= 0 && this.onTileCenter('Y-UP')) {
         this.object.velocity(this.object.speed, 0);
         this._yTileAlign();
       }
       break;
     case 'up':
-      if (this.object.direction.up === true && this.object.xSpeed >= 0 && this.onTileCenter('X-RIGHT') ||
-          this.object.direction.up === true && this.object.xSpeed <= 0 && this.onTileCenter('X-LEFT')) {
+      if (this.object.direction.up && this.object.xSpeed >= 0 && this.onTileCenter('X-RIGHT') ||
+          this.object.direction.up && this.object.xSpeed <= 0 && this.onTileCenter('X-LEFT')) {
         this.object.velocity(0, -this.object.speed);
         this._xTileAlign();
       }
       break;
     case 'down':
-      if (this.object.direction.down === true && this.object.xSpeed >= 0 && this.onTileCenter('X-RIGHT') ||
-          this.object.direction.down === true && this.object.xSpeed <= 0 && this.onTileCenter('X-LEFT') ) {
+      if (this.object.direction.down && this.object.xSpeed >= 0 && this.onTileCenter('X-RIGHT') ||
+          this.object.direction.down && this.object.xSpeed <= 0 && this.onTileCenter('X-LEFT') ) {
         this.object.velocity(0, this.object.speed);
         this._xTileAlign();
       }

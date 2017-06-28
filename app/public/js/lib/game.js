@@ -74,7 +74,7 @@ Game.prototype = {
   checkFoodCollision: function() {
     for (var i = 0; i < this.bodies.foods.length; i++) {
       this.collision.foodColliding(this.bodies.foods[i]);
-      if (this.collision.food == true) { this.destroyFood(i); }
+      if (this.collision.food === true) { this.destroyFood(i); }
     }
   },
   checkGhostCollision: function() {
