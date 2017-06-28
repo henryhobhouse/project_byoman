@@ -58,8 +58,6 @@ define(['pacman', 'pmspechelper', 'motionrules'], function() {
           pacman.keyboard.keys.up = true;
           pacman.direction.up = true;
           pacman.update();
-          console.log(pacman.xSpeed)
-          console.log(pacman.ySpeed)
           expect(pacman.intendedDirection).toEqual('up');
         });
       });
