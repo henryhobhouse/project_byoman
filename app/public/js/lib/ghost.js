@@ -2,7 +2,6 @@ var Ghost = function(name,image,gridX, gridY, tileSize){
   var img = image;
   img.src = '/img/red_ghost_spritesheet.png';
   this.img = img;
-  this.name = name;
   this.img.size = 28;
   this.frameIndex = {x:0, y:0};
   this.frameWidth = Math.floor(68/ 2);
