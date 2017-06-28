@@ -39,68 +39,76 @@ define(['pacman', 'pmspechelper', 'motionrules'], function() {
       });
 
       it('has a keyboard to control input', function() {
-        expect(pacman.keyboard).toEqual(keyboard)
+        expect(pacman.keyboard).toEqual(keyboard);
       });
+
+      it('has a starting direction of left', function() {
+        expect(pacman.intendedDirection).toEqual('left');
+      });
+
+      it('has a starting speed of 3', function() {
+        expect(pacman.speed).toEqual(3);
+      });
+
     });
 
-    // describe('update', function() {
-    //   describe('When the up arrow key is pressed', function() {
-    //     it('updates the y axis speed of pacman to -3', function() {
-    //       pacman.keyboard.keys.up = true;
-    //       pacman.up = true;
-    //       pacman.update();
-    //       expect(pacman.ySpeed).toEqual(-3);
-    //     });
-    //
-    //     it("updates the position of pacman on the y axis", function() {
-    //       pacman.keyboard.keys.up = true;
-    //       pacman.update();
-    //       expect(pacman.posY).toEqual(20 - 3)
-    //     });
-    //   });
-    //
-    //   describe('When the down arrow key is pressed', function() {
-    //     it('updates the y axis speed of pacman to 3', function() {
-    //       pacman.keyboard.keys.down = true;
-    //       pacman.update()
-    //       expect(pacman.ySpeed).toEqual(3)
-    //     });
-    //
-    //     it("updates the position of pacman on the y axis", function() {
-    //       pacman.keyboard.keys.down = true;
-    //       pacman.update();
-    //       expect(pacman.posY).toEqual(20 + 3)
-    //     });
-    //
-    //   });
-    //
-    //   describe('When the right arrow key is pressed', function() {
-    //     it('updates the x axis speed of pacman to 3', function() {
-    //       pacman.keyboard.keys.right = true;
-    //       pacman.update()
-    //       expect(pacman.xSpeed).toEqual(3)
-    //     });
-    //
-    //     it("updates the position of pacman on the x axis", function() {
-    //       pacman.keyboard.keys.right = true;
-    //       pacman.update();
-    //       expect(pacman.posX).toEqual(20 + 3)
-    //     });
-    //   });
-    //
-    //   describe('When the left arrow key is pressed', function() {
-    //     it('updates the x axis speed of pacman to -3', function() {
-    //       pacman.keyboard.keys.left = true;
-    //       pacman.update()
-    //       expect(pacman.xSpeed).toEqual(-3)
-    //     });
-    //
-    //     it("updates the position of pacman on the x axis", function() {
-    //       pacman.keyboard.keys.left = true;
-    //       pacman.update();
-    //       expect(pacman.posX).toEqual(20 - 3)
-    //     });
-    //   });
-    // });
+    describe('update', function() {
+      describe('When the up arrow key is pressed', function() {
+        it("sets pacman's intendedDirection attribute to up", function() {
+          pacman.keyboard.keys.up = true;
+          pacman.update();
+          expect(pacman.intendedDirection).toEqual('up');
+        });
+        //
+        // it("updates the position of pacman on the y axis", function() {
+        //   pacman.keyboard.keys.up = true;
+        //   pacman.update();
+        //   expect(pacman.posY).toEqual(20 - 3)
+        // });
+      });
+
+      describe('When the down arrow key is pressed', function() {
+        it("sets pacman's intendedDirection attribute to down", function() {
+          pacman.keyboard.keys.down = true;
+          pacman.update();
+          expect(pacman.intendedDirection).toEqual('down');
+        });
+        //
+        // it("updates the position of pacman on the y axis", function() {
+        //   pacman.keyboard.keys.down = true;
+        //   pacman.update();
+        //   expect(pacman.posY).toEqual(20 + 3)
+        // });
+
+      });
+
+      describe('When the right arrow key is pressed', function() {
+        it("sets pacman's intendedDirection attribute to right", function() {
+          pacman.keyboard.keys.right = true;
+          pacman.update();
+          expect(pacman.intendedDirection).toEqual('right');
+        });
+        //
+        // it("updates the position of pacman on the x axis", function() {
+        //   pacman.keyboard.keys.right = true;
+        //   pacman.update();
+        //   expect(pacman.posX).toEqual(20 + 3)
+        // });
+      });
+
+      describe('When the left arrow key is pressed', function() {
+        it("sets pacman's intendedDirection attribute to left", function() {
+          pacman.keyboard.keys.left = true;
+          pacman.update();
+          expect(pacman.intendedDirection).toEqual('left');
+        });
+
+        // it("updates the position of pacman on the x axis", function() {
+        //   pacman.keyboard.keys.left = true;
+        //   pacman.update();
+        //   expect(pacman.posX).toEqual(20 - 3)
+        // });
+      });
+    });
   });
 });
