@@ -19,7 +19,7 @@ GhostFactory.prototype = {
   },
 
   update: function(posX, posY) {
-    updateBertie(posX, posY);
+    this.updateBertie(posX, posY);
     // updatePaul(posX, posY);
     // updateHenry(posX, posY);
     // updateSulaiman(posX, posY);
