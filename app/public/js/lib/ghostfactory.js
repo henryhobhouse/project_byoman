@@ -25,9 +25,9 @@ GhostFactory.prototype = {
     this.pacmanYSpeed = ySpeed;
     this.pacmanSpeed = speed;
     this.updateBertie();
-    this.updatePaul();
-    this.updateHenry();
-    // updateSulaiman();
+    // this.updatePaul();
+    // this.updateHenry();
+    this.updateSulaiman();
   },
   updateBertie: function() {
     this.ghosts[0].huntTile.x = this.pacmanX;
@@ -60,5 +60,34 @@ GhostFactory.prototype = {
       this.ghosts[2].huntTile.x = this.pacmanX;
       this.ghosts[2].huntTile.y = this.pacmanY;
     }
+  },
+  updateSulaiman: function(){
+    var tempTargetX = 0;
+    var tempTargetY = 0;
+    var bertieX = this.ghosts[0].currentX;
+    var bertieY = this.ghosts[0].currentY;
+    if (this.pacmanXSpeed > 0) { //Pacman's X speed is greater than 0 so he is moving right
+      tempTargetX = this.pacmanX + 2;
+      tempTargetY = this.pacmanY;
+      this.ghosts[3].huntTile.x = tempTargetX + (this.pacmanX - bertieX);
+      this.ghosts[3].huntTile.y = tempTargetY + (2 * (this.pacmanY - bertieY));
+    } else if (this.pacmanXSpeed < 0) { //Pacman's X speed is less than 0 so he is moving left
+      tempTargetX = this.pacmanX - 2;
+      tempTargetY = this.pacmanY;
+      this.ghosts[3].huntTile.x = tempTargetX + (this.pacmanX - bertieX);
+      this.ghosts[3].huntTile.y = tempTargetY + (2 * (this.pacmanY - bertieY));
+    } else if (this.pacmanYSpeed > 0) { //Pacman's Y speed is greater that 0 so he is moving down
+      tempTargetX = this.pacmanX;
+      tempTargetY = this.pacmanY + 2;
+      this.ghosts[3].huntTile.x = tempTargetX + (this.pacmanX - bertieX);
+      this.ghosts[3].huntTile.y = tempTargetY + (2 * (this.pacmanY - bertieY));
+    } else if (this.pacmanYSpeed < 0) { //Pacman's Y speed is less than 0 so he is moving Up
+      tempTargetX = this.pacmanX;
+      tempTargetY = this.pacmanY - 2;
+      this.ghosts[3].huntTile.x = tempTargetX + (this.pacmanX - bertieX);
+      this.ghosts[3].huntTile.y = tempTargetY + (2 * (this.pacmanY - bertieY));
+    }
   }
 };
+
+//IF TIME REFACTOR SO PAC MAN'S DIRECTION PERSISTS
