@@ -1,6 +1,6 @@
 var Lives = function(x, y, tileSize) {
   this.remaining = 3;
-  this.font = '20px pacfont';
+  this.font = '18px pacfont';
   this.color = 'white';
   this.posX = x * tileSize;
   this.posY = y * tileSize;
