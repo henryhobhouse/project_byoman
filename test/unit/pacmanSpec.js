@@ -37,10 +37,10 @@ define(['pacman', 'pmspechelper', 'motionrules'], function() {
       it('y position of pacman is y: 517.5 on the canvas', function() {
         expect(canvasPos.y).toEqual(517.5);
       });
-      //
-      // it('has a keyboard to control input', function() {
-      //   expect(pacman.keyboard).toEqual(keyboard)
-      // });
+
+      it('has a keyboard to control input', function() {
+        expect(pacman.keyboard).toEqual(keyboard)
+      });
     });
 
     // describe('update', function() {

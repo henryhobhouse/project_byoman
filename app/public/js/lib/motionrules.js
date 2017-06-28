@@ -13,10 +13,10 @@ MotionRules.prototype = {
     }
   },
   availablePath: function() {
-    this.object.direction.right = levelone.path[this.object.currentY][this.object.currentX+1] === 1;
-    this.object.direction.left = levelone.path[this.object.currentY][this.object.currentX-1] === 1;
-    this.object.direction.down = levelone.path[this.object.currentY+1][this.object.currentX] === 1;
-    this.object.direction.up = levelone.path[this.object.currentY-1][this.object.currentX] === 1;
+    this.object.direction.right = levelone.path[this.object.tilePosY][this.object.tilePosX+1] === 1;
+    this.object.direction.left = levelone.path[this.object.tilePosY][this.object.tilePosX-1] === 1;
+    this.object.direction.down = levelone.path[this.object.tilePosY+1][this.object.tilePosX] === 1;
+    this.object.direction.up = levelone.path[this.object.tilePosY-1][this.object.tilePosX] === 1;
   },
   wallBounce: function() {
     if (this.object.direction.right === false && this.object.xSpeed > 0 && this.onTileCenter('X-RIGHT') === true ) {
@@ -36,14 +36,14 @@ MotionRules.prototype = {
   currentTile: function() {
     this.floatingTileX = (this.object.posX+this.object.offset+(this.tileSize/2))/this.tileSize;
     this.floatingTileY = (this.object.posY+this.object.offset+(this.tileSize/2))/this.tileSize;
-    this.object.currentX = this.floatingTileX | 0;
-    this.object.currentY = this.floatingTileY | 0;
+    this.object.tilePosX = this.floatingTileX | 0;
+    this.object.tilePosY = this.floatingTileY | 0;
   },
   onTileCenter: function(axis) {
-    if (axis === 'X-LEFT') { return this.floatingTileX <= this.object.currentX+0.5; }
-    else if (axis === 'X-RIGHT') { return this.floatingTileX >= this.object.currentX+0.5; }
-    else if (axis === 'Y-UP') { return this.floatingTileY <= this.object.currentY+0.5; }
-    else if (axis === 'Y-DOWN') { return this.floatingTileY >= this.object.currentY+0.5; }
+    if (axis === 'X-LEFT') { return this.floatingTileX <= this.object.tilePosX+0.5; }
+    else if (axis === 'X-RIGHT') { return this.floatingTileX >= this.object.tilePosX+0.5; }
+    else if (axis === 'Y-UP') { return this.floatingTileY <= this.object.tilePosY+0.5; }
+    else if (axis === 'Y-DOWN') { return this.floatingTileY >= this.object.tilePosY+0.5; }
   },
   nextMove: function() {
     switch (this.object.intendedDirection) {
@@ -79,9 +79,9 @@ MotionRules.prototype = {
     }
   },
   _yTileAlign: function() {
-    this.object.posY = this.object.currentY * this.tileSize - this.object.offset;
+    this.object.posY = this.object.tilePosY * this.tileSize - this.object.offset;
   },
   _xTileAlign: function() {
-    this.object.posX = this.object.currentX * this.tileSize - this.object.offset;
+    this.object.posX = this.object.tilePosX * this.tileSize - this.object.offset;
   }
 };
