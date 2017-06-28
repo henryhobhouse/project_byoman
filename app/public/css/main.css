@@ -40,10 +40,10 @@ h3 {
   background-size: cover;
   background-repeat: no-repeat;
   position: relative;
-  bottom: 45px;
+  bottom: 43px;
   width: 600px;
-  height: 720px;
-
+  height: 740px;
+  z-index: 2;
 }
 
 #starting_screen {
