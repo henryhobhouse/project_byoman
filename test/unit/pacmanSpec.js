@@ -1,6 +1,6 @@
 define(['pacman', 'pmspechelper', 'motionrules'], function() {
   describe("Pacman", function() {
-    var canvasPos;
+    var pos;
     var image;
     var keyboard;
     var pacman;
@@ -15,7 +15,7 @@ define(['pacman', 'pmspechelper', 'motionrules'], function() {
 
     describe('initialization', function() {
       beforeEach(function() {
-        canvasPos = { x: pacman.posX, y: pacman.posY }
+        pos = { x: pacman.posX, y: pacman.posY }
       });
 
       it('has a spirte sheet source', function() {
@@ -31,11 +31,11 @@ define(['pacman', 'pmspechelper', 'motionrules'], function() {
       });
 
       it('x position of pacman is x: 297.5 on the canvas', function() {
-        expect(canvasPos.x).toEqual(297.5);
+        expect(pos.x).toEqual(297.5);
       });
 
       it('y position of pacman is y: 517.5 on the canvas', function() {
-        expect(canvasPos.y).toEqual(517.5);
+        expect(pos.y).toEqual(517.5);
       });
 
       it('has a keyboard to control input', function() {
