@@ -94,6 +94,11 @@ GhostFactory.prototype = {
     for(i=0;i<this.ghosts.length;i++) {
       this.ghosts[i].resetDeath();
     }
+  },
+  frightened: function() {
+    for(i=0;i<this.ghosts.length;i++) {
+      this.ghosts[i].frightened = true;
+    }
   }
 };
 

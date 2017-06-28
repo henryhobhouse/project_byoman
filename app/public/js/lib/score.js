@@ -17,6 +17,10 @@ Score.prototype = {
     this.value += 10;
   },
 
+  scoreSuperFood: function() {
+    this.value += 50;
+  },
+
   scoreEatGhost: function() {
     this.value += 200;
   },

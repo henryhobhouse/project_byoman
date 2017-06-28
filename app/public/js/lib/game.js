@@ -1,7 +1,15 @@
 //controls game logic. Does not see canvas or anything to do with rendering
 var Game = function(tileSize) {
   this.tileSize = tileSize;
-  this.bodies = { pacman: null, foods: [], score: null, walls: [], ghostFactory: new GhostFactory(tileSize), lives: null,superFood:[] };
+  this.bodies = {
+    pacman: null,
+    foods: [],
+    score: null,
+    walls: [],
+    ghostFactory: new GhostFactory(tileSize),
+    lives: null,
+    superFood: []
+  };
   this.coordinates = [];
   this.ghosts = this.bodies.ghostFactory.ghosts;
   this.collision = new Collision(this.tileSize);
@@ -21,6 +29,7 @@ Game.prototype = {
     this.bodies.ghostFactory.update(pacman.tilePosX, pacman.tilePosY, pacman.xSpeed, pacman.ySpeed, pacman.speed);
     this.checkFoodCollision();
     this.checkGhostCollision();
+    this.checkSuperFoodCollision();
   },
   mapObjects: function(){
     for(var y = 0; y < levelone.map.length; y++) {
@@ -83,6 +92,19 @@ Game.prototype = {
       this.collision.ghostColliding(this.ghosts[i]);
       if (this.collision.ghost === true) { this.killPacman(); }
     }
+  },
+  checkSuperFoodCollision: function() {
+    for (var i = 0; i < this.bodies.superFood.length; i++) {
+      this.collision.foodColliding(this.bodies.superFood[i]);
+      if (this.collision.superFood === true) { this.destroySuper(i); }
+    }
+  },
+  destroySuper: function() {
+    var index = this.bodies.superFood.indexOf(this.bodies.superFood[j]);
+    this.bodies.superFood.splice(index, 1);
+    this.bodies.ghostFactory.frightened();
+    this.bodies.score.scoreSuperFood();
+    this.bodies.score.update();
   },
   destroyFood: function(j) {
     var index = this.bodies.foods.indexOf(this.bodies.foods[j]);

@@ -24,6 +24,7 @@ var Ghost = function(image, tileX, tileY, tileSize, ghostSpriteNumber){
   this.motionrules.availablePath();
   this.intendedDirection = 'right';
   this.ghostSpriteNumber =  ghostSpriteNumber;
+  this.frightened = false;
 };
 
 Ghost.prototype = {
@@ -71,7 +72,7 @@ Ghost.prototype = {
       this.setTile.y = this.tilePosY;
       this.direction = {right: false, left: false, up: false, down: false};
       this.motionrules.availablePath();
-      this.removeReverse();
+      if (this.frightened === false) { this.removeReverse(); }
       this.determineTile();
     }
   },
@@ -87,10 +88,14 @@ Ghost.prototype = {
     if (this.direction.left === true) {options.push([this.tilePosX-1, this.tilePosY]);}
     if (this.direction.up === true) {options.push([this.tilePosX, this.tilePosY-1]);}
     if (this.direction.down === true) {options.push([this.tilePosX, this.tilePosY+1]);}
-    this.tileHunt(options);
+    this.frightened === false ? this.tileHunt(options) : this.randomDir(options);
   },
   changeIntended: function(dir) {
     this.intendedDirection = dir;
+  },
+  randomDir: function(options) {
+    var rand = options[Math.floor(Math.random() * options.length)];
+    this.changeIntended(rand);
   },
   tileHunt: function(options) {
     var distances = [];
