@@ -89,9 +89,10 @@ Game.prototype = {
   killPacman: function() {
     if (this.bodies.lives.remaining > 0 && this.bodies.foods.length > 0) {
       this.bodies.lives.removeLife();
-      this.bodies.pacman.deathReset();
       this.bodies.lives.update();
       this.uiUpdate = true;
+      this.bodies.pacman.deathReset();
+      this.bodies.ghostFactory.resetPacDeath();
     }
     else { this.gameOver(); }
   },
