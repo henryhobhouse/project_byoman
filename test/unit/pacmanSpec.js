@@ -87,9 +87,14 @@ define(['pacman', 'pmspechelper', 'motionrules'], function() {
     });
 
     describe('velocity', function() {
-      it("changes pacman's direction and speed", function() {
+      it("changes pacman's direction and speed on the x axis", function() {
         pacman.velocity(3, 0);
         expect(pacman.xSpeed).toEqual(3)
+      });
+
+      it("changes pacman's direction and speed on the y axis", function() {
+        pacman.velocity(0, 3);
+        expect(pacman.ySpeed).toEqual(3)
       });
     });
   });
