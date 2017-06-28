@@ -1,4 +1,4 @@
-var PacMan = function(image, controller, gridX, gridY, tileSize){
+var PacMan = function(image, controller, tileX, tileY, tileSize){
   var img = image;
   img.src = '/img/pacman_sprite.png';
   this.img = img;
@@ -12,9 +12,9 @@ var PacMan = function(image, controller, gridX, gridY, tileSize){
   this.dirX = 0;
   this.dirY = 0;
   this.speed = 3;
-  this.setGrid = {x: gridX, y: gridY};
-  this.currentX = gridX;
-  this.currentY = gridY;
+  this.setTile = {x: tileX, y: tileY};
+  this.currentX = tileX;
+  this.currentY = tileY;
   this.direction = {right: false, left: false, up: false, down: false};
   this.offset = (this.img.size - tileSize)/2;
   this.posXStart = this.currentX * tileSize - this.offset;
@@ -48,7 +48,7 @@ PacMan.prototype = {
     this.motionrules.wallBounce();
     this.motionrules.escapeSide();
     this.motionrules.nextMove();
-    this.motionrules.currentGrid();
+    this.motionrules.currentTile();
   },
   draw: function(renderer) {
     renderer.drawSprite(this);
