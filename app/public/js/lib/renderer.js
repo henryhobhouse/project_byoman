@@ -11,8 +11,8 @@ Renderer.prototype = {
     this.animateCtx.clearRect(0, 0, this.canvasSize.x, this.canvasSize.y);
     bodies.pacman.draw(this);
 
-    for(k=0;k<bodies.ghosts.length;k++){
-      bodies.ghosts[k].draw(this);
+    for(k=0;k<bodies.ghostFactory.ghosts.length;k++){
+      bodies.ghostFactory.ghosts[k].draw(this);
     }
     // The below function is purely for development testing
     this.drawFps(frames);

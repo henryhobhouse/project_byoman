@@ -1,8 +1,9 @@
 //controls game logic. Does not see canvas or anything to do with rendering
 var Game = function(tileSize) {
   this.tileSize = tileSize;
-  this.bodies = { pacman: null, foods: [], score: null, walls: [], ghosts: [], lives: null };
+  this.bodies = { pacman: null, foods: [], score: null, walls: [], ghostFactory: new GhostFactory(tileSize), lives: null };
   this.coordinates = [];
+  this.ghosts = this.bodies.ghostFactory.ghosts;
   this.collision = new Collision(this.tileSize);
   this.mapObjects();
   this.load = false;
@@ -13,12 +14,12 @@ var Game = function(tileSize) {
 Game.prototype = {
   update: function() {
     this.bodies.pacman.update();
-    for(i=0;i<this.bodies.ghosts.length;i++){
-      this.bodies.ghosts[i].update();
+    for(i=0;i<this.ghosts.length;i++){
+      this.ghosts[i].update();
     }
+    this.bodies.ghostFactory.update(this.bodies.pacman.currentX, this.bodies.pacman.currentY);
     this.checkFoodCollision();
     this.checkGhostCollision();
-    this.gameOver();
   },
   mapObjects: function(){
     for(var y = 0; y < levelone.map.length; y++) {
@@ -42,10 +43,22 @@ Game.prototype = {
           this.bodies.score = score;
           break;
         case 5:
-          ghost = new Ghost(new Image(), x, y, this.tileSize);
-          this.bodies.ghosts.push(ghost);
+          ghost = this.bodies.ghostFactory.new('Bertie', x, y);
+          this.ghosts.push(ghost);
+          break;
+        case 6:
+          ghost = this.bodies.ghostFactory.new('Paul', x, y);
+          this.ghosts.push(ghost);
+          break;
+        case 7:
+          ghost = this.bodies.ghostFactory.new('Henry', x, y);
+          this.ghosts.push(ghost);
           break;
         case 8:
+          ghost = this.bodies.ghostFactory.new('Sulaiman', x, y);
+          this.ghosts.push(ghost);
+          break;
+        case 9:
           lives = new Lives(x, y, this.tileSize);
           this.bodies.lives = lives;
           break;
@@ -61,8 +74,8 @@ Game.prototype = {
     }
   },
   checkGhostCollision: function() {
-    for (var i = 0; i < this.bodies.ghosts.length; i++) {
-      this.collision.ghostColliding(this.bodies.ghosts[i]);
+    for (var i = 0; i < this.ghosts.length; i++) {
+      this.collision.ghostColliding(this.ghosts[i]);
       if (this.collision.ghost === true) { this.killPacman(); }
     }
   },
@@ -74,17 +87,19 @@ Game.prototype = {
     this.uiUpdate = true;
   },
   killPacman: function() {
-    if (this.bodies.lives.remaining > 0) {
+    if (this.bodies.lives.remaining > 0 && this.bodies.foods.length > 0) {
       this.bodies.lives.removeLife();
       this.bodies.pacman.deathReset();
       this.bodies.lives.update();
       this.uiUpdate = true;
     }
-    else { this.finish = true; }
+    else { this.gameOver(); }
   },
-  gameOver: function(){
-    if (this.bodies.foods.length == 0) {
+  gameOver: function() {
+    if (this.bodies.foods.length === 0) {
       alert('Congratulations. A Winner is you!!!!!!');
+    } else {
+      alert('You are a victim of random behaviour. Predictable. Drop Mic.');
     }
   }
 };

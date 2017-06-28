@@ -1,4 +1,4 @@
-var Ghost = function(image,gridX, gridY, tileSize){
+var Ghost = function(image, tileX, tileY, tileSize){
   var img = image;
   img.src = '/img/red_ghost_spritesheet.png';
   this.img = img;
@@ -10,31 +10,32 @@ var Ghost = function(image,gridX, gridY, tileSize){
   this.xSpeed = 0;
   this.ySpeed = 0;
   this.speed = 2;
-  this.currentX = gridX;
-  this.currentY = gridY;
+  this.huntTile = {x: 1, y: 1};
+  this.setTile = {x: tileX, y: tileY};
+  this.currentX = tileX;
+  this.currentY = tileY;
   this.direction = {right: false, left: false, up: false, down: false};
-  this.targetX = 20;
-  this.targetY = 0;
   this.offset = (this.img.size - tileSize)/2;
-  this.posX = this.currentX * tileSize - this.offset;
-  this.posY = this.currentY * tileSize - this.offset;
+  this.posXStart = tileX * tileSize - this.offset;
+  this.posYStart = tileY * tileSize - this.offset;
+  this.posX = this.posXStart;
+  this.posY = this.posYStart;
   this.motionrules = new MotionRules(this, tileSize);
-  this.intendedDirection = this.setDirection();
-  this.reverse = null;
+  this.motionrules.availablePath();
+  this.intendedDirection = 'right';
 };
 
 Ghost.prototype = {
   update: function() {
     this.posX += this.xSpeed;
     this.posY += this.ySpeed;
-    this.motionrules.currentGrid();
-    this.motionrules.availablePath();
-    this.motionrules.wallBounce();
     this.motionrules.nextMove();
+    this.motionrules.currentTile();
+    this.motionrules.wallBounce();
     this.motionrules.escapeSide();
-    this.setDirection();
     this.ghostOrientation();
     this.ghostAnimation();
+    this.onNewTile();
   },
   draw: function(renderer) {
     renderer.drawSprite(this);
@@ -50,33 +51,72 @@ Ghost.prototype = {
       this.frameIndex.y = 1;
     }
   },
-
   ghostAnimation: function() {
     this.animationCycle += 0.1;
     this.frameIndex.x = Math.floor(this.animationCycle) % 2;
   },
-
   velocity: function(x, y) {
     this.xSpeed = x;
     this.ySpeed = y;
   },
-  setDirection: function(){
-    this.getAvailable();
-    var rand = this.options[Math.floor(Math.random() * this.options.length)];
-    this.intendedDirection = rand;
-    this.findReverse();
+  onNewTile: function() {
+    if (this.setTile.x != this.currentX || this.setTile.y != this.currentY) {
+      this.setTile.x = this.currentX;
+      this.setTile.y = this.currentY;
+      this.direction = {right: false, left: false, up: false, down: false};
+      this.motionrules.availablePath();
+      this.removeReverse();
+      this.determineTile();
+    }
   },
-  getAvailable: function() {
-    this.options = [];
-    if(this.direction.right === true && this.reverse != 'right') {this.options.push('right');}
-    if(this.direction.left === true && this.reverse != 'left') {this.options.push('left');}
-    if(this.direction.up === true && this.reverse != 'up') {this.options.push('up');}
-    if(this.direction.down === true && this.reverse != 'down') {this.options.push('down');}
+  removeReverse: function() {
+    if (this.xSpeed > 0) {this.direction.left = false; }
+    else if (this.xSpeed < 0) {this.direction.right = false; }
+    else if (this.ySpeed > 0) {this.direction.up = false; }
+    else if (this.ySpeed < 0) {this.direction.down = false; }
   },
-  findReverse: function() {
-    if(this.xSpeed < 0) {this.reverse = 'right';}
-    else if(this.xSpeed > 0) {this.reverse = 'left';}
-    else if(this.ySpeed > 0) {this.reverse = 'up';}
-    else if(this.ySpeed < 0) {this.reverse = 'down';}
+  determineTile: function() {
+    var options = [];
+    if (this.direction.right === true) {options.push([this.currentX+1, this.currentY]);}
+    if (this.direction.left === true) {options.push([this.currentX-1, this.currentY]);}
+    if (this.direction.up === true) {options.push([this.currentX, this.currentY-1]);}
+    if (this.direction.down === true) {options.push([this.currentX, this.currentY+1]);}
+    this.tileHunt(options);
   },
+  changeIntended: function(dir) {
+    this.intendedDirection = dir;
+  },
+  tileHunt: function(options) {
+    var distances = [];
+    var xPow = 0.0;
+    var yPow = 0.0;
+    var dist = 0.0;
+    for(i=0;i<options.length;i++) {
+      xPow = Math.pow((this.huntTile.x - options[i][0]),2);
+      yPow = Math.pow((this.huntTile.y - options[i][1]),2);
+      dist = Math.sqrt((xPow + yPow), 0.5);
+      distances.push(dist);
+    }
+    index = this.indexOfMin(distances);
+    this.getDir(options[index]);
+  },
+  indexOfMin: function(distances) {
+    var min = 2000;
+    var minIndex = 0;
+    for (var i = 0; i < distances.length; i++) {
+      if (distances[i] < min) {
+        minIndex = i;
+        min = distances[i];
+      }
+    }
+    return minIndex;
+  },
+  getDir: function(tile) {
+    var dir = null;
+    if (tile[0] > this.currentX) { dir = 'right'; }
+    else if (tile[0] < this.currentX) { dir = 'left'; }
+    else if (tile[1] < this.currentY) { dir = 'up'; }
+    else if (tile[1] > this.currentY) { dir = 'down'; }
+    this.changeIntended(dir);
+  }
 };
