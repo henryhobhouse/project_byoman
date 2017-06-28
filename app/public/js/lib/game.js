@@ -18,7 +18,7 @@ Game.prototype = {
     for(i=0;i<this.ghosts.length;i++){
       this.ghosts[i].update();
     }
-    this.bodies.ghostFactory.update(pacman.currentX, pacman.currentY, pacman.xSpeed, pacman.ySpeed,pacman.speed);
+    this.bodies.ghostFactory.update(pacman.tilePosX, pacman.tilePosY, pacman.xSpeed, pacman.ySpeed,pacman.speed);
     this.checkFoodCollision();
     this.checkGhostCollision();
   },
@@ -75,7 +75,7 @@ Game.prototype = {
   checkFoodCollision: function() {
     for (var i = 0; i < this.bodies.foods.length; i++) {
       this.collision.foodColliding(this.bodies.foods[i]);
-      if (this.collision.food == true) { this.destroyFood(i); }
+      if (this.collision.food === true) { this.destroyFood(i); }
     }
   },
   checkGhostCollision: function() {
