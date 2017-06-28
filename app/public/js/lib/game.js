@@ -74,7 +74,7 @@ Game.prototype = {
     this.uiUpdate = true;
   },
   killPacman: function() {
-    if (this.bodies.lives.remaining > 0) {
+    if (this.bodies.lives.remaining > 1) {
       this.bodies.lives.removeLife();
       this.bodies.pacman.deathReset();
       this.bodies.lives.update();

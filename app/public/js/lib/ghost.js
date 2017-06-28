@@ -12,6 +12,7 @@ var Ghost = function(image,gridX, gridY, tileSize){
   this.dirX = 1;
   this.dirY = 0;
   this.speed = 2;
+  this.huntGrid = {x: 0, y: 0};
   this.setGrid = {x: gridX, y: gridY};
   this.currentX = gridX;
   this.currentY = gridY;
@@ -66,7 +67,7 @@ Ghost.prototype = {
       this.direction = {right: false, left: false, up: false, down: false};
       this.motionrules.availablePath();
       this.removeReverse();
-      this.setDirection();
+      this.determineGrid();
     }
   },
   removeReverse: function() {
@@ -75,7 +76,7 @@ Ghost.prototype = {
     else if (this.ySpeed > 0) {this.direction.up = false; }
     else if (this.ySpeed < 0) {this.direction.down = false; }
   },
-  setDirection: function() {
+  determineGrid: function() {
     var options = [];
     if (this.direction.right === true) {options.push('right');}
     if (this.direction.left === true) {options.push('left');}
@@ -86,5 +87,8 @@ Ghost.prototype = {
   changeIntended: function(options) {
     var randDir = options[Math.floor(Math.random() * options.length)];
     this.intendedDirection = randDir;
-  }
+  },
+  gridHunt: function(options) {
+
+  },
 };
