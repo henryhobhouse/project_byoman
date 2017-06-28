@@ -26,9 +26,21 @@ define(['motionrules', 'pacman'], function() {
     });
 
     describe('escapeSide', function() {
-      // it('takes in an object', function() {
-      //   expect(motionrules.object).toEqual(pacman);
-      // });
+      describe("if object's x position is off the left side of tile", function() {
+        it("sets object's x position to oppossite side of canvas", function() {
+          motionrules.object.posX = tileSize;
+          motionrules.escapeSide();
+          expect(motionrules.object.posX).toEqual(575 - tileSize);
+        });
+      });
+
+      describe("if object's x position is off the right side of tile", function() {
+        it("sets object's x position to oppossite side of canvas", function() {
+          motionrules.object.posX = 575 - tileSize;
+          motionrules.escapeSide();
+          expect(motionrules.object.posX).toEqual(tileSize);
+        });
+      });
     });
   });
 });
