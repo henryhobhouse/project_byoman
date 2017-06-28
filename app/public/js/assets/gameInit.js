@@ -13,8 +13,10 @@ define([
   'motionrules',
   'ghost',
   'lives',
+  'super_food',
   'ghostfactory'
 ]);
+
 
 function clickStart(){
   document.getElementById('starting_screen').style.display = 'none';
