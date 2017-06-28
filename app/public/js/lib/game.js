@@ -42,10 +42,22 @@ Game.prototype = {
           this.bodies.score = score;
           break;
         case 5:
-          ghost = new Ghost(new Image(), x, y, this.tileSize);
+          ghost = new Ghost(new Image(),'/img/red_ghost_spritesheet.png', x, y, this.tileSize);
+          this.bodies.ghosts.push(ghost);
+          break;
+        case 6:
+          ghost = new Ghost(new Image(),'/img/Pinky.png', x, y, this.tileSize);
+          this.bodies.ghosts.push(ghost);
+          break;
+        case 7:
+          ghost = new Ghost(new Image(),'/img/Inky.png', x, y, this.tileSize);
           this.bodies.ghosts.push(ghost);
           break;
         case 8:
+          ghost = new Ghost(new Image(),'/img/Clyde.png', x, y, this.tileSize);
+          this.bodies.ghosts.push(ghost);
+          break;
+        case 9:
           lives = new Lives(x, y, this.tileSize);
           this.bodies.lives = lives;
           break;

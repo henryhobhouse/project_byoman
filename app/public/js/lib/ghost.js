@@ -1,6 +1,6 @@
-var Ghost = function(image,gridX, gridY, tileSize){
+var Ghost = function(image,source,gridX, gridY, tileSize){
   var img = image;
-  img.src = '/img/red_ghost_spritesheet.png';
+  img.src = source;
   this.img = img;
   this.img.size = 28;
   this.frameIndex = {x:0, y:0};
