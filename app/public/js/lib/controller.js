@@ -37,7 +37,7 @@ Controller.prototype = {
       requestAnimationFrame(this.tick.bind(this));
       this.delayStatic();
       this.checkUiUpdate();
-    } else { alert('Seems you had one too many accidents and your instance has been purged. Bad times.'); }
+    } else { alert('You are a victim of random behaviour. Predictable. Drop Mic.'); }
   },
 
   checkUiUpdate: function() {

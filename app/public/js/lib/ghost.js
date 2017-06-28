@@ -11,36 +11,26 @@ var Ghost = function(image,gridX, gridY, tileSize){
   this.ySpeed = 0;
   this.dirX = 1;
   this.dirY = 0;
-  this.speed = 1;
+  this.speed = 2;
   this.setGrid = {x: gridX, y: gridY};
   this.currentX = gridX;
   this.currentY = gridY;
   this.direction = {right: false, left: false, up: false, down: false};
-  this.targetX = 20;
-  this.targetY = 0;
   this.offset = (this.img.size - tileSize)/2;
   this.posX = this.currentX * tileSize - this.offset;
   this.posY = this.currentY * tileSize - this.offset;
   this.motionrules = new MotionRules(this, tileSize);
+  this.motionrules.availablePath();
   this.intendedDirection = 'right';
 };
 
-/*
-To get this working
-
-1. Current direction to ensure non reversing
-2. Current grid
-3. Available Grids
-
-*/
 Ghost.prototype = {
   update: function() {
     this.posX += this.xSpeed;
     this.posY += this.ySpeed;
-    this.motionrules.availablePath();
+    this.motionrules.nextMove();
     this.motionrules.currentGrid();
     this.motionrules.wallBounce();
-    this.motionrules.nextMove();
     this.motionrules.escapeSide();
     this.ghostOrientation();
     this.ghostAnimation();
@@ -73,10 +63,28 @@ Ghost.prototype = {
     if (this.setGrid.x != this.currentX || this.setGrid.y != this.currentY) {
       this.setGrid.x = this.currentX;
       this.setGrid.y = this.currentY;
-      console.log('setgrid: '+this.setGrid.x)
-      console.log('currentx '+this.currentX)
+      this.direction = {right: false, left: false, up: false, down: false};
+      this.motionrules.availablePath();
+      this.removeReverse();
+      this.setDirection();
     }
+  },
+  removeReverse: function() {
+    if (this.xSpeed > 0) {this.direction.left = false; }
+    else if (this.xSpeed < 0) {this.direction.right = false; }
+    else if (this.ySpeed > 0) {this.direction.up = false; }
+    else if (this.ySpeed < 0) {this.direction.down = false; }
+  },
+  setDirection: function() {
+    var options = [];
+    if (this.direction.right === true) {options.push('right');}
+    if (this.direction.left === true) {options.push('left');}
+    if (this.direction.up === true) {options.push('up');}
+    if (this.direction.down === true) {options.push('down');}
+    this.changeIntended(options);
+  },
+  changeIntended: function(options) {
+    var randDir = options[Math.floor(Math.random() * options.length)];
+    this.intendedDirection = randDir;
   }
-
-
 };
