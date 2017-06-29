@@ -101,7 +101,11 @@ Game.prototype = {
   checkGhostCollision: function() {
     for (var i = 0; i < this.ghosts.length; i++) {
       this.collision.ghostColliding(this.ghosts[i]);
-      if (this.collision.ghost === true) { this.killPacman(); }
+      if (this.collision.ghost === true && this.timerOn ) {
+        this.killGhost(i);
+      } else if (this.collision.ghost === true) {
+        this.killPacman();
+      }
     }
   },
   checkSuperFoodCollision: function() {
@@ -125,6 +129,11 @@ Game.prototype = {
     this.bodies.score.scoreFood();
     this.bodies.score.update();
     this.uiUpdate = true;
+  },
+  killGhost: function(i) {
+    this.ghosts[i].death();
+    this.bodies.score.scoreEatGhost();
+    this.bodies.score.update();
   },
   killPacman: function() {
     if (this.bodies.lives.remaining > 0 && this.bodies.foods.length > 0) {

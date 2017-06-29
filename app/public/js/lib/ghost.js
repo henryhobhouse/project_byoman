@@ -27,6 +27,7 @@ var Ghost = function(image, tileX, tileY, tileSize, ghostSpriteNumber, scatX, sc
   this.ghostSpriteNumber =  ghostSpriteNumber;
   this.scatter = true;
   this.frightened = false;
+  this.died = false;
   this.timer = new Timer();
   this.timer.start();
 };
@@ -34,6 +35,7 @@ var Ghost = function(image, tileX, tileY, tileSize, ghostSpriteNumber, scatX, sc
 Ghost.prototype = {
   update: function() {
     this.scatterCheck();
+    // if (this.died === true) { console.log(this.ifHuntTile) }
     this.posX += this.xSpeed;
     this.posY += this.ySpeed;
     this.motionrules.nextMove();
@@ -89,6 +91,16 @@ Ghost.prototype = {
       }
     }
   },
+  death: function() {
+    this.timer.reset();
+    this.timer.start();
+    this.died = true;
+    this.scatter = false;
+    startTileX = (this.startPosX + this.offset) / 20;
+    startTileY = (this.startPosY + this.offset) / 20;
+    this.ifHuntTile = { x: startTileX, y: startTileY };
+    this.speed = 5;
+  },
   onNewTile: function() {
     if (this.setTile.x != this.tilePosX || this.setTile.y != this.tilePosY) {
       this.setTile.x = this.tilePosX;
@@ -111,7 +123,7 @@ Ghost.prototype = {
     if (this.direction.left === true) {options.push([this.tilePosX-1, this.tilePosY]);}
     if (this.direction.up === true) {options.push([this.tilePosX, this.tilePosY-1]);}
     if (this.direction.down === true) {options.push([this.tilePosX, this.tilePosY+1]);}
-    this.frightened ? this.randDir(options) : this.tileHunt(options);
+    this.frightened && !this.died ? this.randDir(options) : this.tileHunt(options);
   },
   randDir: function(options) {
     var rand = options[Math.floor(Math.random() * options.length)];

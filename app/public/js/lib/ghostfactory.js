@@ -24,10 +24,10 @@ GhostFactory.prototype = {
     this.pacmanXSpeed = xSpeed;
     this.pacmanYSpeed = ySpeed;
     this.pacmanSpeed = speed;
-    this.updateBertie();
-    this.updatePaul();
-    this.updateHenry();
-    this.updateSulaiman();
+    if (this.ghosts[0].died === false) { this.updateBertie(); }
+    if (this.ghosts[1].died === false) { this.updatePaul(); }
+    if (this.ghosts[2].died === false) { this.updateHenry(); }
+    if (this.ghosts[3].died === false) { this.updateSulaiman(); }
   },
   updateBertie: function() {
     this.ghosts[0].ifHuntTile.x = this.pacmanX;
