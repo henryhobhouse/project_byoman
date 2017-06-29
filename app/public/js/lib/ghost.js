@@ -42,9 +42,7 @@ Ghost.prototype = {
     this.motionrules.currentTile();
     this.motionrules.wallBounce();
     this.motionrules.escapeSide();
-    console.log(this.frightened)
     if (this.frightened) {
-      console.log('hi')
       this.chooseAnimation();
     } else {
       this.ghostOrientation();
