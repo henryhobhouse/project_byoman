@@ -25,6 +25,20 @@ define(['motionrules', 'pacman'], function() {
       });
     });
 
+    describe('currentTile', function() {
+      it('calculates the x tile position of object', function() {
+        var calcuation = (motionrules.object.posX+motionrules.object.offset+(motionrules.tileSize/2))/ motionrules.tileSize;
+        motionrules.currentTile();
+        expect(motionrules.object.tilePosX).toEqual(calcuation | 0);
+      });
+
+      it('calculates the y tile position of object', function() {
+        var calcuation = (motionrules.object.posY+motionrules.object.offset+(motionrules.tileSize/2))/ motionrules.tileSize;
+        motionrules.currentTile();
+        expect(motionrules.object.tilePosY).toEqual(calcuation | 0);
+      });
+    });
+
     describe('escapeSide', function() {
       describe("if object's x position is off the left side of tile", function() {
         it("sets object's x position to oppossite side of canvas", function() {
