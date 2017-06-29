@@ -17,8 +17,11 @@ function start(route, handle) {
     }
   }
 
-  http.createServer(onRequest).listen(3000);
-  console.log('Server has started'); // eslint-disable-line
+  var server = http.createServer(onRequest);
+  var port = process.env.PORT || 3000;
+  server.listen(port, function() {
+      console.log("App is running on port " + port);// eslint-disable-line
+  });
 }
 
 exports.start = start;
