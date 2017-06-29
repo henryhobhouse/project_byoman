@@ -15,7 +15,7 @@ var Ghost = function(image, tileX, tileY, tileSize, ghostSpriteNumber, scatX, sc
   this.setTile = {x: tileX, y: tileY};
   this.tilePosX = tileX;
   this.tilePosY = tileY;
-  this.direction = {right: false, left: false, up: false, down: false};
+  this.canGo = {right: false, left: false, up: false, down: false};
   this.offset = (this.img.size - tileSize)/2;
   this.startPosX = tileX * tileSize - this.offset;
   this.startPosY = tileY * tileSize - this.offset;
@@ -105,25 +105,25 @@ Ghost.prototype = {
     if (this.setTile.x != this.tilePosX || this.setTile.y != this.tilePosY) {
       this.setTile.x = this.tilePosX;
       this.setTile.y = this.tilePosY;
-      this.direction = {right: false, left: false, up: false, down: false};
+      this.canGo = {right: false, left: false, up: false, down: false};
       this.motionrules.availablePath();
       this.removeReverse();
       this.determineTile();
     }
   },
   removeReverse: function() {
-    if (this.xSpeed > 0) {this.direction.left = false; }
-    else if (this.xSpeed < 0) {this.direction.right = false; }
-    else if (this.ySpeed > 0) {this.direction.up = false; }
-    else if (this.ySpeed < 0) {this.direction.down = false; }
+    if (this.xSpeed > 0) {this.canGo.left = false; }
+    else if (this.xSpeed < 0) {this.canGo.right = false; }
+    else if (this.ySpeed > 0) {this.canGo.up = false; }
+    else if (this.ySpeed < 0) {this.canGo.down = false; }
   },
   determineTile: function() {
     var options = [];
-    if (this.direction.right === true) {options.push([this.tilePosX+1, this.tilePosY]);}
-    if (this.direction.left === true) {options.push([this.tilePosX-1, this.tilePosY]);}
-    if (this.direction.up === true) {options.push([this.tilePosX, this.tilePosY-1]);}
-    if (this.direction.down === true) {options.push([this.tilePosX, this.tilePosY+1]);}
-    this.frightened && !this.died ? this.randDir(options) : this.tileHunt(options);
+    if (this.canGo.right === true) {options.push([this.tilePosX+1, this.tilePosY]);}
+    if (this.canGo.left === true) {options.push([this.tilePosX-1, this.tilePosY]);}
+    if (this.canGo.up === true) {options.push([this.tilePosX, this.tilePosY-1]);}
+    if (this.canGo.down === true) {options.push([this.tilePosX, this.tilePosY+1]);}
+    this.tileHunt(options);
   },
   randDir: function(options) {
     var rand = options[Math.floor(Math.random() * options.length)];
