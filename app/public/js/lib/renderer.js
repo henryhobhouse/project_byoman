@@ -35,13 +35,7 @@ Renderer.prototype = {
     this.uiCtx.clearRect(0, 0, this.canvasSize.x, this.canvasSize.y);
     this.animateCtx.clearRect(0, 0, this.canvasSize.x, this.canvasSize.y);
     this.fixedCtx.clearRect(0, 0, this.canvasSize.x, this.canvasSize.y);
-    this.fixedCtx.font = '36px Arial';
-    this.fixedCtx.fillStyle = 'white';
-    this.fixedCtx.fillText(
-      'Game Over - You Died',
-      250,
-      250
-    );
+    endScreen();
   },
   // drawFps temp function. Remove for production
   drawFps: function(frames) {

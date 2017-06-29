@@ -38,7 +38,6 @@ Controller.prototype = {
     this.fps(this); // For development purposes. Remove for production
     requestAnimationFrame(this.tick.bind(this));
     this.delayStatic();
-
   },
 
   checkUiUpdate: function() {

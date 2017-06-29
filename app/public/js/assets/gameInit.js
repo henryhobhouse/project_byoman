@@ -23,3 +23,7 @@ function clickStart(){
   document.getElementById('starting_screen').style.display = 'none';
   new Controller('pac-animate', 'pac-fixed', 'pac-ui');
 }
+
+function endScreen() {
+  document.getElementById('youwin').style.display = 'inherit';
+}
