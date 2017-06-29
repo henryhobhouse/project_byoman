@@ -95,14 +95,18 @@ GhostFactory.prototype = {
   },
   frightened: function() {
     for(i=0;i<this.ghosts.length;i++) {
-      this.ghosts[i].speed = this.pacmanSpeed * 0.5;
-      this.ghosts[i].randomMove = true;
+      if (this.ghosts[i].died === false) {
+        this.ghosts[i].speed = this.pacmanSpeed * 0.5;
+        this.ghosts[i].randomMove = true;
+      }
     }
   },
   frightenedRevert: function() {
     for(i=0;i<this.ghosts.length;i++) {
-      this.ghosts[i].speed = this.pacmanSpeed * 0.75;
-      this.ghosts[i].randomMove = false;
+      if (this.ghosts[i].died === false) {
+        this.ghosts[i].speed = this.pacmanSpeed * 0.75;
+        this.ghosts[i].randomMove = false;
+      }
     }
   },
 };

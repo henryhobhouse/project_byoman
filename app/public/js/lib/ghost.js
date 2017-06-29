@@ -12,13 +12,15 @@ var Ghost = function(image, tileX, tileY, tileSize, ghostSpriteNumber, scatX, sc
   this.speed = 2.25;
   this.ifHuntTile = {x: 1, y: 1};
   this.scatterTile = {x: scatX, y: scatY};
-  this.setTile = {x: tileX, y: tileY};
+  this.setCurrentTile = {x: tileX, y: tileY};
   this.tilePosX = tileX;
   this.tilePosY = tileY;
   this.canGo = {right: false, left: false, up: false, down: false};
   this.offset = (this.img.size - tileSize)/2;
   this.startPosX = tileX * tileSize - this.offset;
   this.startPosY = tileY * tileSize - this.offset;
+  this.startTileX = (this.startPosX + this.offset) / tileSize;
+  this.startTileY = (this.startPosY + this.offset) / tileSize;
   this.posX = this.startPosX;
   this.posY = this.startPosY;
   this.motionrules = new MotionRules(this, tileSize);
@@ -28,13 +30,14 @@ var Ghost = function(image, tileX, tileY, tileSize, ghostSpriteNumber, scatX, sc
   this.scatter = true;
   this.frightened = false;
   this.died = false;
-  this.timer = new Timer();
   this.randomMove = false;
-  this.timer.start();
+  this.scatterTimer = new Timer();
+  this.scatterTimer.start();
 };
 
 Ghost.prototype = {
   update: function() {
+    if (this.died === true) { this.checkHome(); }
     this.scatterCheck();
     this.posX += this.xSpeed;
     this.posY += this.ySpeed;
@@ -73,38 +76,41 @@ Ghost.prototype = {
     this.posY = this.startPosY;
     this.motionrules.currentTile();
   },
+  checkHome: function() {
+    if (this.tilePosX === this.startTileX && this.tilePosY === this.startTileY) {
+      this.died = false;
+      this.randomMove = false;
+      this.speed = 2.25;
+    }
+  },
   scatterCheck: function() {
-    this.timer.update();
-    if (this.scatter === true) {
+    this.scatterTimer.update();
+    if (this.scatter === true && this.died === false) {
       this.huntTile = this.scatterTile;
-      if (this.timer.getTimeDiff() > 700000) {
+      if (this.scatterTimer.getTimeDiff() > 700000) {
         this.scatter = false;
-        this.timer.reset();
-        this.timer.start();
+        this.scatterTimer.reset();
+        this.scatterTimer.start();
       }
     } else {
       this.huntTile = this.ifHuntTile;
-      if (this.timer.getTimeDiff() > 2000000) {
+      if (this.scatterTimer.getTimeDiff() > 2000000) {
         this.scatter = true;
-        this.timer.reset();
-        this.timer.start();
+        this.scatterTimer.reset();
+        this.scatterTimer.start();
       }
     }
   },
   death: function() {
-    this.timer.reset();
-    this.timer.start();
     this.died = true;
     this.scatter = false;
-    startTileX = (this.startPosX + this.offset) / 20;
-    startTileY = (this.startPosY + this.offset) / 20;
-    this.ifHuntTile = { x: startTileX, y: startTileY };
+    this.ifHuntTile = { x: this.startTileX, y: this.startTileY };
     this.speed = 5;
   },
   onNewTile: function() {
-    if (this.setTile.x != this.tilePosX || this.setTile.y != this.tilePosY) {
-      this.setTile.x = this.tilePosX;
-      this.setTile.y = this.tilePosY;
+    if (this.setCurrentTile.x != this.tilePosX || this.setCurrentTile.y != this.tilePosY) {
+      this.setCurrentTile.x = this.tilePosX;
+      this.setCurrentTile.y = this.tilePosY;
       this.canGo = {right: false, left: false, up: false, down: false};
       this.motionrules.availablePath();
       this.removeReverse();
