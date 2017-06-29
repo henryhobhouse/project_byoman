@@ -96,15 +96,13 @@ GhostFactory.prototype = {
   frightened: function() {
     for(i=0;i<this.ghosts.length;i++) {
       this.ghosts[i].speed = this.pacmanSpeed * 0.5;
-      this.ghosts[i].random = true;
-      // this.ghosts[i].img = '/img/frightened-ghosts-v1.png';
+      this.ghosts[i].randomMove = true;
     }
   },
   frightenedRevert: function() {
     for(i=0;i<this.ghosts.length;i++) {
-      this.ghosts[i].random = false;
       this.ghosts[i].speed = this.pacmanSpeed * 0.75;
-      // this.ghosts[i].img = '/img/frightened-ghosts-v1.png';
+      this.ghosts[i].randomMove = false;
     }
   },
 };
