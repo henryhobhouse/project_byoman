@@ -128,6 +128,7 @@ Game.prototype = {
     this.timer.start();
     this.timerOn = true;
   },
+
   destroyFood: function(j) {
     var index = this.bodies.foods.indexOf(this.bodies.foods[j]);
     this.bodies.foods.splice(index, 1);
@@ -135,13 +136,15 @@ Game.prototype = {
     this.bodies.score.update();
     this.uiUpdate = true;
   },
+
   killGhost: function(i) {
     this.ghosts[i].resetDeath();
     this.bodies.score.scoreEatGhost();
     this.bodies.score.update();
   },
+
   killPacman: function() {
-    if (this.bodies.lives.remaining > 0) {
+    if (this.bodies.lives.remaining > 1) {
       this.bodies.lives.removeLife();
       this.bodies.lives.update();
       this.uiUpdate = true;
