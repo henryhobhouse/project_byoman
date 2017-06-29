@@ -42,7 +42,13 @@ Ghost.prototype = {
     this.motionrules.currentTile();
     this.motionrules.wallBounce();
     this.motionrules.escapeSide();
-    this.ghostOrientation();
+    console.log(this.frightened)
+    if (this.frightened) {
+      console.log('hi')
+      this.chooseAnimation();
+    } else {
+      this.ghostOrientation();
+    }
     this.ghostAnimation();
     this.onNewTile();
   },
@@ -50,7 +56,7 @@ Ghost.prototype = {
     renderer.drawSprite(this);
   },
   chooseAnimation: function() {
-    this.frameindex.y = 1
+    this.frameIndex.y = 17;
   },
   ghostOrientation: function() {
     if (this.xSpeed < 0) {
