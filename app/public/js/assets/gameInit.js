@@ -14,7 +14,8 @@ define([
   'ghost',
   'lives',
   'super_food',
-  'ghostfactory'
+  'ghostfactory',
+  'timer'
 ]);
 
 

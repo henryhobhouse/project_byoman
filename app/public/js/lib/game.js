@@ -1,7 +1,15 @@
 //controls game logic. Does not see canvas or anything to do with rendering
 var Game = function(tileSize) {
   this.tileSize = tileSize;
-  this.bodies = { pacman: null, foods: [], score: null, walls: [], ghostFactory: new GhostFactory(tileSize), lives: null,superFood:[] };
+  this.bodies = {
+    pacman: null,
+    foods: [],
+    score: null,
+    walls: [],
+    ghostFactory: new GhostFactory(tileSize),
+    lives: null,
+    superFood: []
+  };
   this.coordinates = [];
   this.ghosts = this.bodies.ghostFactory.ghosts;
   this.collision = new Collision(this.tileSize);
@@ -9,6 +17,9 @@ var Game = function(tileSize) {
   this.load = false;
   this.uiUpdate = false;
   this.finish = false;
+  this.timerOn = false;
+  this.timer = new Timer();
+  this.game = true;
 };
 
 Game.prototype = {
@@ -21,6 +32,16 @@ Game.prototype = {
     this.bodies.ghostFactory.update(pacman.tilePosX, pacman.tilePosY, pacman.xSpeed, pacman.ySpeed, pacman.speed);
     this.checkFoodCollision();
     this.checkGhostCollision();
+    this.checkSuperFoodCollision();
+    if (this.timerOn) { this.checktimer(); }
+  },
+  checktimer: function() {
+    this.timer.update();
+    if (this.timer.getTimeDiff() > 500000) {
+      this.timer.reset();
+      this.timerOn = false;
+      this.bodies.ghostFactory.frightenedRevert();
+    }
   },
   mapObjects: function(){
     for(var y = 0; y < levelone.map.length; y++) {
@@ -48,19 +69,19 @@ Game.prototype = {
           this.bodies.score = score;
           break;
         case 5:
-          ghost = this.bodies.ghostFactory.new('Bertie', x, y, 0);
+          ghost = this.bodies.ghostFactory.new('Bertie', x, y, 0, 19, 0);
           this.ghosts.push(ghost);
           break;
         case 6:
-          ghost = this.bodies.ghostFactory.new('Paul', x, y, 4);
+          ghost = this.bodies.ghostFactory.new('Paul', x, y, 4, 3, 0);
           this.ghosts.push(ghost);
           break;
         case 7:
-          ghost = this.bodies.ghostFactory.new('Henry', x, y, 8);
+          ghost = this.bodies.ghostFactory.new('Henry', x, y, 8, 0, 35);
           this.ghosts.push(ghost);
           break;
         case 8:
-          ghost = this.bodies.ghostFactory.new('Sulaiman', x, y, 12);
+          ghost = this.bodies.ghostFactory.new('Sulaiman', x, y, 12, 19, 35);
           this.ghosts.push(ghost);
           break;
         case 9:
@@ -74,15 +95,34 @@ Game.prototype = {
   },
   checkFoodCollision: function() {
     for (var i = 0; i < this.bodies.foods.length; i++) {
-      this.collision.foodColliding(this.bodies.foods[i]);
+      this.collision.foodColliding(this.bodies.foods[i], 'food');
       if (this.collision.food === true) { this.destroyFood(i); }
     }
   },
   checkGhostCollision: function() {
     for (var i = 0; i < this.ghosts.length; i++) {
       this.collision.ghostColliding(this.ghosts[i]);
-      if (this.collision.ghost === true) { this.killPacman(); }
+      if (this.collision.ghost === true && this.timerOn ) {
+        this.killGhost(i);
+      } else if (this.collision.ghost === true) {
+        this.killPacman();
+      }
     }
+  },
+  checkSuperFoodCollision: function() {
+    for (var i = 0; i < this.bodies.superFood.length; i++) {
+      this.collision.foodColliding(this.bodies.superFood[i]);
+      if (this.collision.superFood === true) { this.destroySuper(i); }
+    }
+  },
+  destroySuper: function(j) {
+    var index = this.bodies.superFood.indexOf(this.bodies.superFood[j]);
+    this.bodies.superFood.splice(index, 1);
+    this.bodies.ghostFactory.frightened();
+    this.bodies.score.scoreSuperFood();
+    this.bodies.score.update();
+    this.timer.start();
+    this.timerOn = true;
   },
   destroyFood: function(j) {
     var index = this.bodies.foods.indexOf(this.bodies.foods[j]);
@@ -91,21 +131,19 @@ Game.prototype = {
     this.bodies.score.update();
     this.uiUpdate = true;
   },
+  killGhost: function(i) {
+    this.ghosts[i].death();
+    this.bodies.score.scoreEatGhost();
+    this.bodies.score.update();
+  },
   killPacman: function() {
-    if (this.bodies.lives.remaining > 0 && this.bodies.foods.length > 0) {
+    if (this.bodies.lives.remaining > 1 && this.bodies.foods.length > 0) {
       this.bodies.lives.removeLife();
       this.bodies.lives.update();
       this.uiUpdate = true;
       this.bodies.pacman.deathReset();
       this.bodies.ghostFactory.resetPacDeath();
     }
-    else { this.gameOver(); }
-  },
-  gameOver: function() {
-    if (this.bodies.foods.length === 0) {
-      // alert('Congratulations. A Winner is you!!!!!!');
-    } else {
-      // alert('You are a victim of random behaviour. Predictable. Drop Mic.');
-    }
+    else { this.game = false; }
   }
 };

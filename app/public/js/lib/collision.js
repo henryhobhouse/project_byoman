@@ -1,6 +1,7 @@
 var Collision = function(tileSize) {
   this.tileSize = tileSize;
   this.food = false;
+  this.superFood = false;
   this.ghost = false;
   this.pacman = null;
   this.halfTile = this.tileSize/2;
@@ -11,9 +12,13 @@ Collision.prototype = {
     this.pacmanXCenter = this.pacman.posX + this.halfTile;
     this.pacmanYCenter = this.pacman.posY + this.halfTile;
   },
-  foodColliding: function(obj2) {
+  foodColliding: function(obj2, type) {
     var offset = 4;
-    this.food = this.isColliding(obj2.posX, obj2.posY, offset);
+    if (type === 'food') {
+      this.food = this.isColliding(obj2.posX, obj2.posY, offset);
+    } else {
+      this.superFood = this.isColliding(obj2.posX, obj2.posY, offset);
+    }
   },
   ghostColliding: function(obj2) {
     var offset = this.pacman.img.size / 2 + 3;

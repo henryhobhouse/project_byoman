@@ -30,12 +30,15 @@ Controller.prototype = {
     }
   },
   tick: function() {
-    this.game.update();
-    this.renderer.drawAnimate(this.game.bodies, this.framesLastSecond);
+    if (this.game.game) {
+      this.game.update();
+      this.renderer.drawAnimate(this.game.bodies, this.framesLastSecond);
+      this.checkUiUpdate();
+    } else { this.renderer.endGameDead(); }
     this.fps(this); // For development purposes. Remove for production
     requestAnimationFrame(this.tick.bind(this));
     this.delayStatic();
-    this.checkUiUpdate();
+
   },
 
   checkUiUpdate: function() {
