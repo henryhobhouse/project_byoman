@@ -13,22 +13,22 @@ MotionRules.prototype = {
     }
   },
   availablePath: function() {
-    this.object.direction.right = levelone.path[this.object.tilePosY][this.object.tilePosX+1] === 1;
-    this.object.direction.left = levelone.path[this.object.tilePosY][this.object.tilePosX-1] === 1;
-    this.object.direction.down = levelone.path[this.object.tilePosY+1][this.object.tilePosX] === 1;
-    this.object.direction.up = levelone.path[this.object.tilePosY-1][this.object.tilePosX] === 1;
+    this.object.canGo.right = levelone.path[this.object.tilePosY][this.object.tilePosX+1] === 1;
+    this.object.canGo.left = levelone.path[this.object.tilePosY][this.object.tilePosX-1] === 1;
+    this.object.canGo.down = levelone.path[this.object.tilePosY+1][this.object.tilePosX] === 1;
+    this.object.canGo.up = levelone.path[this.object.tilePosY-1][this.object.tilePosX] === 1;
   },
   wallBounce: function() {
-    if (!this.object.direction.right && this.object.xSpeed > 0 && this.onTileCenter('X-RIGHT') ) {
+    if (!this.object.canGo.right && this.object.xSpeed > 0 && this.onTileCenter('X-RIGHT') ) {
       this.object.velocity(0,0);
       this._xTileAlign();
-    } else if (!this.object.direction.left && this.object.xSpeed < 0 && this.onTileCenter('X-LEFT') ) {
+    } else if (!this.object.canGo.left && this.object.xSpeed < 0 && this.onTileCenter('X-LEFT') ) {
       this.object.velocity(0,0);
       this._xTileAlign();
-    } else if (!this.object.direction.up && this.object.ySpeed < 0 && this.onTileCenter('Y-UP') ) {
+    } else if (!this.object.canGo.up && this.object.ySpeed < 0 && this.onTileCenter('Y-UP') ) {
       this.object.velocity(0,0);
       this._yTileAlign();
-    } else if (!this.object.direction.down && this.object.ySpeed > 0 && this.onTileCenter('Y-DOWN') ) {
+    } else if (!this.object.canGo.down && this.object.ySpeed > 0 && this.onTileCenter('Y-DOWN') ) {
       this.object.velocity(0,0);
       this._yTileAlign();
     }
@@ -48,29 +48,29 @@ MotionRules.prototype = {
   nextMove: function() {
     switch (this.object.intendedDirection) {
     case 'left':
-      if (this.object.direction.left && this.object.ySpeed <= 0 && this.onTileCenter('Y-DOWN') ||
-          this.object.direction.left && this.object.ySpeed >= 0 && this.onTileCenter('Y-UP')) {
+      if (this.object.canGo.left && this.object.ySpeed <= 0 && this.onTileCenter('Y-DOWN') ||
+          this.object.canGo.left && this.object.ySpeed >= 0 && this.onTileCenter('Y-UP')) {
         this.object.velocity(-this.object.speed, 0);
         this._yTileAlign();
       }
       break;
     case 'right':
-      if (this.object.direction.right && this.object.ySpeed <= 0 &&  this.onTileCenter('Y-DOWN') ||
-          this.object.direction.right && this.object.ySpeed >= 0 && this.onTileCenter('Y-UP')) {
+      if (this.object.canGo.right && this.object.ySpeed <= 0 &&  this.onTileCenter('Y-DOWN') ||
+          this.object.canGo.right && this.object.ySpeed >= 0 && this.onTileCenter('Y-UP')) {
         this.object.velocity(this.object.speed, 0);
         this._yTileAlign();
       }
       break;
     case 'up':
-      if (this.object.direction.up && this.object.xSpeed >= 0 && this.onTileCenter('X-RIGHT') ||
-          this.object.direction.up && this.object.xSpeed <= 0 && this.onTileCenter('X-LEFT')) {
+      if (this.object.canGo.up && this.object.xSpeed >= 0 && this.onTileCenter('X-RIGHT') ||
+          this.object.canGo.up && this.object.xSpeed <= 0 && this.onTileCenter('X-LEFT')) {
         this.object.velocity(0, -this.object.speed);
         this._xTileAlign();
       }
       break;
     case 'down':
-      if (this.object.direction.down && this.object.xSpeed >= 0 && this.onTileCenter('X-RIGHT') ||
-          this.object.direction.down && this.object.xSpeed <= 0 && this.onTileCenter('X-LEFT') ) {
+      if (this.object.canGo.down && this.object.xSpeed >= 0 && this.onTileCenter('X-RIGHT') ||
+          this.object.canGo.down && this.object.xSpeed <= 0 && this.onTileCenter('X-LEFT') ) {
         this.object.velocity(0, this.object.speed);
         this._xTileAlign();
       }
