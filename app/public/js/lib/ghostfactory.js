@@ -97,7 +97,8 @@ GhostFactory.prototype = {
   },
   frightened: function() {
     for(i=0;i<this.ghosts.length;i++) {
-      this.ghosts[i].frightened = true;
+      this.ghosts[i].speed = true;
+      // this.ghosts[i].img = '/img/frightened-ghosts-v1.png';
     }
   }
 };

@@ -16,6 +16,7 @@ requirejs.config({
     ghost: 'ghost.js',
     lives: 'lives.js',
     superFood: 'super_food.js',
-    ghostfactory: 'ghostfactory.js'
+    ghostfactory: 'ghostfactory.js',
+    timer: 'timer'
   }
 });
