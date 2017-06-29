@@ -1,38 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Project BYOMAN</title>
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <script data-main="/js/index" src="/js/assets/require.js"></script>
-    <script>
-    require(['index'], function() {
-      require(['/js/assets/gameInit.js'])
-    });
-    </script>
-  </head>
-  <body>
-    <div id="game">
-      <div id="youwin" class="gamewindow">
-        <h1>YOU ARE A WINNER!!</h1>
-      </div>
-      <div id="starting_screen" class="gamewindow">
-        <img id="pacman-logo" src="/img/startImg.gif">
-        <h2 id="start" onclick="clickStart()">START GAME</h2>
-        <h3>This version built by Slaiman, Henry, Paul and Bertie</h3>
-        <img id="arrowKey" src="/img/arrowKey.png">
-
-      </div>
-      <canvas id="pac-fixed" class="gamewindow" width="600" height="740"></canvas>
-      <canvas id="pac-ui" class="gamewindow" width="600" height="740"></canvas>
-      <canvas id="pac-animate" class="gamewindow" width="600" height="740"></canvas>
-      <div id="maze" class="maze"></div>
+<head>
+  <meta charset="utf-8">
+  <title>Project BYOMAN</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <script data-main="/js/index" src="/js/assets/require.js"></script>
+  <script>
+  require(['index'], function() {
+    require(['/js/assets/gameInit.js'])
+  });
+  </script>
+</head>
+<body>
+  <div id="game">
+    <div id="youwin" class="gamewindow">
+      <h1>GAME OVER</h1>
+      <h2 id="start" onclick="clickStart()">PLAY AGAIN</h2>
+      <h3 id="score"></h3>
+    </div>
+    <div id="starting_screen" class="gamewindow">
+      <img id="pacman-logo" src="/img/startImg.gif">
+      <h2 id="start" onclick="clickStart()">START GAME</h2>
+      <img id="arrowKey" src="/img/arrowKey.png">
+       <p id=rules>Use the arrows on your keyboard to control pacman through the maze and collect the food to maximise your score. Avoid the ghosts unless you find a power-up!</p>
+       <h3>This version built by Slaiman, Henry, Paul and Bertie</h3>
     </div>
     <canvas id="pac-fixed" class="gamewindow" width="600" height="740"></canvas>
     <canvas id="pac-ui" class="gamewindow" width="600" height="740"></canvas>
     <canvas id="pac-animate" class="gamewindow" width="600" height="740"></canvas>
-    <div class="maze"></div>
+    <div id="maze" class="maze"></div>
   </div>
 
   <script>
