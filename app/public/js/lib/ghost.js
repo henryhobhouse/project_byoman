@@ -123,15 +123,14 @@ Ghost.prototype = {
     if (this.canGo.left === true) {options.push([this.tilePosX-1, this.tilePosY]);}
     if (this.canGo.up === true) {options.push([this.tilePosX, this.tilePosY-1]);}
     if (this.canGo.down === true) {options.push([this.tilePosX, this.tilePosY+1]);}
-    if (this.died === false && randomMove != true) { this.tileHunt(options); }
+    if (this.died === false && this.randomMove != true) { this.tileHunt(options); }
     else {
-      randDir(options);
-      console.log('random');
+      this.randDir(options);
     }
   },
   randDir: function(options) {
     var rand = options[Math.floor(Math.random() * options.length)];
-    this.changeIntended(rand);
+    this.getDir(rand);
   },
   changeIntended: function(dir) {
     this.intendedDirection = dir;

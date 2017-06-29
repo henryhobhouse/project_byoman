@@ -137,7 +137,7 @@ Game.prototype = {
     this.bodies.score.update();
   },
   killPacman: function() {
-    if (this.bodies.lives.remaining > 1 && this.bodies.foods.length > 0) {
+    if (this.bodies.lives.remaining >= 0 && this.bodies.foods.length >= 0) {
       this.bodies.lives.removeLife();
       this.bodies.lives.update();
       this.uiUpdate = true;
