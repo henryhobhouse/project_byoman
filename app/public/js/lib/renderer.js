@@ -18,9 +18,7 @@ Renderer.prototype = {
     this.drawFps(frames);
   },
   drawFixed: function(walls) {
-    for ( var j = 0; j < walls.length; j++) {
-      walls[j].draw(this);
-    }
+
   },
   drawUi: function(bodies) {
     this.uiCtx.clearRect(0, 0, this.canvasSize.x, this.canvasSize.y);
@@ -32,6 +30,18 @@ Renderer.prototype = {
     }
     bodies.score.draw(this);
     bodies.lives.draw(this);
+  },
+  endGameDead: function() {
+    this.uiCtx.clearRect(0, 0, this.canvasSize.x, this.canvasSize.y);
+    this.animateCtx.clearRect(0, 0, this.canvasSize.x, this.canvasSize.y);
+    this.fixedCtx.clearRect(0, 0, this.canvasSize.x, this.canvasSize.y);
+    this.fixedCtx.font = '36px Arial';
+    this.fixedCtx.fillStyle = 'white';
+    this.fixedCtx.fillText(
+      'Game Over - You Died',
+      250,
+      250
+    );
   },
   // drawFps temp function. Remove for production
   drawFps: function(frames) {

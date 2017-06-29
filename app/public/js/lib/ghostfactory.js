@@ -24,6 +24,7 @@ GhostFactory.prototype = {
     this.pacmanXSpeed = xSpeed;
     this.pacmanYSpeed = ySpeed;
     this.pacmanSpeed = speed;
+
     if (this.ghosts[0].died === false) { this.updateBertie(); }
     if (this.ghosts[1].died === false) { this.updatePaul(); }
     if (this.ghosts[2].died === false) { this.updateHenry(); }

@@ -19,6 +19,7 @@ var Game = function(tileSize) {
   this.finish = false;
   this.timerOn = false;
   this.timer = new Timer();
+  this.game = true;
 };
 
 Game.prototype = {
@@ -36,7 +37,7 @@ Game.prototype = {
   },
   checktimer: function() {
     this.timer.update();
-    if (this.timer.getTimeDiff() > 340000) {
+    if (this.timer.getTimeDiff() > 500000) {
       this.timer.reset();
       this.timerOn = false;
       this.bodies.ghostFactory.frightenedRevert();
@@ -136,20 +137,13 @@ Game.prototype = {
     this.bodies.score.update();
   },
   killPacman: function() {
-    if (this.bodies.lives.remaining > 0 && this.bodies.foods.length > 0) {
+    if (this.bodies.lives.remaining > 1 && this.bodies.foods.length > 0) {
       this.bodies.lives.removeLife();
       this.bodies.lives.update();
       this.uiUpdate = true;
       this.bodies.pacman.deathReset();
       this.bodies.ghostFactory.resetPacDeath();
     }
-    else { this.gameOver(); }
-  },
-  gameOver: function() {
-    if (this.bodies.foods.length === 0) {
-      // alert('Congratulations. A Winner is you!!!!!!');
-    } else {
-      // alert('You are a victim of random behaviour. Predictable. Drop Mic.');
-    }
+    else { this.game = false; }
   }
 };
