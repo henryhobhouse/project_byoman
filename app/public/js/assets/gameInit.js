@@ -29,5 +29,10 @@ function clickStart(){
 
 function endScreen() {
   document.getElementById('youwin').style.display = 'inherit';
+  if (controller.game.bodies.foods.length == 0){
+    document.getElementById('outcome').innerHTML = 'YOU SMASHED IT!';
+  } else if (controller.game.bodies.score.value > 3500) {
+    document.getElementById('outcome').innerHTML = 'YOU LEGEND!';
+  }
   document.getElementById('score').innerHTML = 'YOUR SCORE:  ' + controller.game.bodies.score.value;
 }
