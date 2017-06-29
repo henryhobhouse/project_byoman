@@ -25,17 +25,19 @@ h2 {
 }
 
 h3 {
-  font-size: 16px;
+  font-size: 13px;
   text-align: center;
   color: white;
   font-family: 'Krungthep';
 }
 
 #rules {
-  font-size: 12px;
-  text-align: center;
+  font-size: 16px;
+  text-align:left;
   color: white;
   font-family: 'Krungthep';
+  margin-left: 50px;
+  margin-right: 50px;
 }
 
 
