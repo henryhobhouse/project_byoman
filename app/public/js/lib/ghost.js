@@ -1,11 +1,11 @@
 var Ghost = function(image, tileX, tileY, tileSize, ghostSpriteNumber, scatX, scatY){
   var img = image;
-  img.src = '/img/ghosts_spritesheet-v3.png';
+  img.src = '/img/ghosts_spritesheet-v4.png';
   this.img = img;
   this.img.size = 28;
   this.frameIndex = {x:0, y:0};
   this.frameWidth = Math.floor(68/ 2);
-  this.frameHeight = 697 / 16;
+  this.frameHeight = 871 / 20;
   this.animationCycle = 0;
   this.xSpeed = 0;
   this.ySpeed = 0;
