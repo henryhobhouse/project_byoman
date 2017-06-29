@@ -47,10 +47,6 @@ Game.prototype = {
     for(var y = 0; y < levelone.map.length; y++) {
       for(var x = 0; x < levelone.map[0].length; x++){
         switch(levelone.map[y][x]) {
-        case s:
-          var superFood = new SuperFood(x,y, this.tileSize);
-          this.bodies.superFood.push(superFood);
-          break;
         case 0:
           var wall = new Wall(new Image(),x,y, this.tileSize);
           this.bodies.walls.push(wall);
@@ -87,6 +83,10 @@ Game.prototype = {
         case 9:
           lives = new Lives(x, y, this.tileSize);
           this.bodies.lives = lives;
+          break;
+        case 10:
+          var superFood = new SuperFood(x,y, this.tileSize);
+          this.bodies.superFood.push(superFood);
           break;
         default:
         }
