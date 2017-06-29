@@ -59,60 +59,66 @@ define(['motionrules', 'pacman'], function() {
 
     describe('availablePath', function() {
       describe("if object's grid position has a 1 on the grid to the right", function() {
-        it("sets object's right direction to true", function() {
+        it("object can go right", function() {
           levelone.path[motionrules.object.tilePosY][motionrules.object.tilePosX+1] = 1
           motionrules.availablePath();
-          expect(motionrules.object.direction.right).toEqual(true);
+          expect(motionrules.object.canGo.right).toEqual(true);
         });
 
-        it("if not sets object's right direction to false", function() {
+        it("if not, object can not go right", function() {
           levelone.path[motionrules.object.tilePosY][motionrules.object.tilePosX+1] = 0
           motionrules.availablePath();
-          expect(motionrules.object.direction.right).toEqual(false);
+          expect(motionrules.object.canGo.right).toEqual(false);
         });
       });
 
       describe("if object's grid position has a 1 on the grid to the left", function() {
-        it("sets object's left direction to true", function() {
+        it("object can go left", function() {
           levelone.path[motionrules.object.tilePosY][motionrules.object.tilePosX-1] = 1
           motionrules.availablePath();
-          expect(motionrules.object.direction.left).toEqual(true);
+          expect(motionrules.object.canGo.left).toEqual(true);
         });
 
-        it("if not sets object's left direction to false", function() {
+        it("if not, object can not go left", function() {
           levelone.path[motionrules.object.tilePosY][motionrules.object.tilePosX-1] = 0
           motionrules.availablePath();
-          expect(motionrules.object.direction.left).toEqual(false);
+          expect(motionrules.object.canGo.left).toEqual(false);
         });
       });
 
       describe("if object's grid position has a 1 on the grid to the top", function() {
-        it("sets object's up direction to true", function() {
+        it("object can go up", function() {
           levelone.path[motionrules.object.tilePosY-1][motionrules.object.tilePosX] = 1
           motionrules.availablePath();
-          expect(motionrules.object.direction.up).toEqual(true);
+          expect(motionrules.object.canGo.up).toEqual(true);
         });
 
-        it("if not sets object's up direction to false", function() {
+        it("if not, object can not go up", function() {
           levelone.path[motionrules.object.tilePosY-1][motionrules.object.tilePosX] = 0
           motionrules.availablePath();
-          expect(motionrules.object.direction.up).toEqual(false);
+          expect(motionrules.object.canGo.up).toEqual(false);
         });
       });
 
       describe("if object's grid position has a 1 on the grid to the bottom", function() {
-        it("sets object's down direction to true", function() {
+        it("object can go down", function() {
           levelone.path[motionrules.object.tilePosY+1][motionrules.object.tilePosX] = 1
           motionrules.availablePath();
-          expect(motionrules.object.direction.down).toEqual(true);
+          expect(motionrules.object.canGo.down).toEqual(true);
         });
 
-        it("if not sets object's down direction to false", function() {
+        it("if not, object can not go down", function() {
           levelone.path[motionrules.object.tilePosY+1][motionrules.object.tilePosX] = 0
           motionrules.availablePath();
-          expect(motionrules.object.direction.down).toEqual(false);
+          expect(motionrules.object.canGo.down).toEqual(false);
         });
       });
     });
+
+    // describe('nextMove', function() {
+    //   describe('when intendedDirection is right', function() {
+    //     describe('object moving along y axis')
+    //   });
+    // });
   });
 });
