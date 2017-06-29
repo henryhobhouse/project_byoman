@@ -1,11 +1,11 @@
 var Ghost = function(image, tileX, tileY, tileSize, ghostSpriteNumber, scatX, scatY){
   var img = image;
-  img.src = '/img/ghosts_spritesheet-v3.png';
+  img.src = '/img/ghosts_spritesheet-v6.png';
   this.img = img;
   this.img.size = 28;
   this.frameIndex = {x:0, y:0};
   this.frameWidth = Math.floor(68/ 2);
-  this.frameHeight = 697 / 16;
+  this.frameHeight = 783 / 18;
   this.animationCycle = 0;
   this.xSpeed = 0;
   this.ySpeed = 0;
@@ -42,12 +42,19 @@ Ghost.prototype = {
     this.motionrules.currentTile();
     this.motionrules.wallBounce();
     this.motionrules.escapeSide();
-    this.ghostOrientation();
+    if (this.frightened) {
+      this.chooseAnimation();
+    } else {
+      this.ghostOrientation();
+    }
     this.ghostAnimation();
     this.onNewTile();
   },
   draw: function(renderer) {
     renderer.drawSprite(this);
+  },
+  chooseAnimation: function() {
+    this.frameIndex.y = 17;
   },
   ghostOrientation: function() {
     if (this.xSpeed < 0) {
