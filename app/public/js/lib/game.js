@@ -121,6 +121,7 @@ Game.prototype = {
     this.bodies.ghostFactory.frightened();
     this.bodies.score.scoreSuperFood();
     this.bodies.score.update();
+    this.timer.reset();
     this.timer.start();
     this.timerOn = true;
   },

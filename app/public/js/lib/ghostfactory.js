@@ -97,12 +97,14 @@ GhostFactory.prototype = {
     for(i=0;i<this.ghosts.length;i++) {
       this.ghosts[i].speed = this.pacmanSpeed * 0.5;
       this.ghosts[i].randomMove = true;
+      this.ghosts[i].frightened = true;
     }
   },
   frightenedRevert: function() {
     for(i=0;i<this.ghosts.length;i++) {
       this.ghosts[i].speed = this.pacmanSpeed * 0.75;
       this.ghosts[i].randomMove = false;
+      this.ghosts[i].frightened = false;
     }
   },
 };
