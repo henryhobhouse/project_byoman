@@ -31,6 +31,14 @@ h3 {
   font-family: 'Krungthep';
 }
 
+#rules {
+  font-size: 12px;
+  text-align: center;
+  color: white;
+  font-family: 'Krungthep';
+}
+
+
 .gamewindow {
   position: absolute;
 }
