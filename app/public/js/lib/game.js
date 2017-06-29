@@ -17,6 +17,8 @@ var Game = function(tileSize) {
   this.load = false;
   this.uiUpdate = false;
   this.finish = false;
+  this.timerOn = false;
+  this.timer = new Timer();
 };
 
 Game.prototype = {
@@ -30,6 +32,15 @@ Game.prototype = {
     this.checkFoodCollision();
     this.checkGhostCollision();
     this.checkSuperFoodCollision();
+    if (this.timerOn) { this.checktimer(); }
+  },
+  checktimer: function() {
+    this.timer.update();
+    if (this.timer.getTimeDiff() > 340000) {
+      this.timer.reset();
+      this.timerOn = false;
+      this.bodies.ghostFactory.frightenedRevert();
+    }
   },
   mapObjects: function(){
     for(var y = 0; y < levelone.map.length; y++) {
@@ -105,6 +116,8 @@ Game.prototype = {
     this.bodies.ghostFactory.frightened();
     this.bodies.score.scoreSuperFood();
     this.bodies.score.update();
+    this.timer.start();
+    this.timerOn = true;
   },
   destroyFood: function(j) {
     var index = this.bodies.foods.indexOf(this.bodies.foods[j]);

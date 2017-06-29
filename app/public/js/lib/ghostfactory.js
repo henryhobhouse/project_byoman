@@ -1,7 +1,6 @@
 var GhostFactory = function(tileSize) {
   this.tileSize = tileSize;
   this.ghosts = [];
-  this.timer = new Timer();
 };
 
 GhostFactory.prototype = {
@@ -29,15 +28,6 @@ GhostFactory.prototype = {
     this.updatePaul();
     this.updateHenry();
     this.updateSulaiman();
-    if (this.timerOn) { this.checktimer(); }
-  },
-  checktimer: function() {
-    this.timer.update();
-    if (this.timer.getTimeDiff() > 340000) {
-      this.timer.reset();
-      this.timerOn = false;
-      this.frightenedRevert();
-    }
   },
   updateBertie: function() {
     this.ghosts[0].ifHuntTile.x = this.pacmanX;
@@ -103,8 +93,6 @@ GhostFactory.prototype = {
     }
   },
   frightened: function() {
-    this.timer.start();
-    this.timerOn = true;
     for(i=0;i<this.ghosts.length;i++) {
       this.ghosts[i].speed = this.pacmanSpeed * 0.5;
       this.ghosts[i].random = true;
