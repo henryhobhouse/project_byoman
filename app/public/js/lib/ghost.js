@@ -29,13 +29,13 @@ var Ghost = function(image, tileX, tileY, tileSize, ghostSpriteNumber, scatX, sc
   this.frightened = false;
   this.died = false;
   this.timer = new Timer();
+  this.randomMove = false;
   this.timer.start();
 };
 
 Ghost.prototype = {
   update: function() {
     this.scatterCheck();
-    // if (this.died === true) { console.log(this.ifHuntTile) }
     this.posX += this.xSpeed;
     this.posY += this.ySpeed;
     this.motionrules.nextMove();
@@ -123,7 +123,11 @@ Ghost.prototype = {
     if (this.canGo.left === true) {options.push([this.tilePosX-1, this.tilePosY]);}
     if (this.canGo.up === true) {options.push([this.tilePosX, this.tilePosY-1]);}
     if (this.canGo.down === true) {options.push([this.tilePosX, this.tilePosY+1]);}
-    this.tileHunt(options);
+    if (this.died === false && randomMove != true) { this.tileHunt(options); }
+    else {
+      randDir(options);
+      console.log('random');
+    }
   },
   randDir: function(options) {
     var rand = options[Math.floor(Math.random() * options.length)];
