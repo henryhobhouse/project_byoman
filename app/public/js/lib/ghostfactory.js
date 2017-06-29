@@ -1,6 +1,7 @@
 var GhostFactory = function(tileSize) {
   this.tileSize = tileSize;
   this.ghosts = [];
+  this.timer = new Timer();
 };
 
 GhostFactory.prototype = {
@@ -28,6 +29,15 @@ GhostFactory.prototype = {
     this.updatePaul();
     this.updateHenry();
     this.updateSulaiman();
+    if (this.timerOn) { this.checktimer(); }
+  },
+  checktimer: function() {
+    this.timer.update();
+    if (this.timer.getTimeDiff() > 240000) {
+      this.timer.reset();
+      this.timerOn = false;
+      this.frightenedRevert();
+    }
   },
   updateBertie: function() {
     this.ghosts[0].huntTile.x = this.pacmanX;
@@ -36,7 +46,7 @@ GhostFactory.prototype = {
   },
   updatePaul: function() {
     // Use speed to determin direction and then use that to create +4 onto position vector. -3 is Left, +3 is right. -3 is Up, +3 is down
-    this.ghosts[1].speed = this.pacmanSpeed * 0.75;
+    // this.ghosts[1].speed = this.pacmanSpeed * 0.75;
     if (this.pacmanXSpeed > 0) { //Pacman's X speed is greater than 0 so he is moving right
       this.ghosts[1].huntTile.x = this.pacmanX + 4;
       this.ghosts[1].huntTile.y = this.pacmanY;
@@ -50,10 +60,10 @@ GhostFactory.prototype = {
       this.ghosts[1].huntTile.x = this.pacmanX;
       this.ghosts[1].huntTile.y = this.pacmanY - 4;
     }
-    this.ghosts[1].speed = this.pacmanSpeed * 0.75;
+    // this.ghosts[1].speed = this.pacmanSpeed * 0.75;
   },
   updateHenry: function(){
-    this.ghosts[2].speed = this.pacmanSpeed * 0.75;
+    // this.ghosts[2].speed = this.pacmanSpeed * 0.75;
     if (this.ghosts[2].tilePosX + 8 >= this.pacmanX || this.ghosts[2].tilePosX - 8 >= this.pacmanX || this.ghosts[2].tilePosY + 8 <= this.pacmanY || this.ghosts[2].tilePosY - 8 <= this.pacmanY){
       this.ghosts[2].huntTile.x = 2;
       this.ghosts[2].huntTile.y = 25;
@@ -63,7 +73,7 @@ GhostFactory.prototype = {
     }
   },
   updateSulaiman: function(){
-    this.ghosts[3].speed = this.pacmanSpeed * 0.75;
+    // this.ghosts[3].speed = this.pacmanSpeed * 0.75;
     var tempTargetX = 0;
     var tempTargetY = 0;
     var bertieX = this.ghosts[0].tilePosX;
@@ -96,11 +106,22 @@ GhostFactory.prototype = {
     }
   },
   frightened: function() {
+    this.timer.start();
+    this.timerOn = true;
+    console.log('frightened')
     for(i=0;i<this.ghosts.length;i++) {
-      this.ghosts[i].speed = true;
+      this.ghosts[i].speed = this.pacmanSpeed * 0.5;
       // this.ghosts[i].img = '/img/frightened-ghosts-v1.png';
     }
-  }
+  },
+  frightenedRevert: function() {
+    for(i=0;i<this.ghosts.length;i++) {
+      console.log('reverted')
+
+      this.ghosts[i].speed = this.pacmanSpeed * 0.75;
+      // this.ghosts[i].img = '/img/frightened-ghosts-v1.png';
+    }
+  },
 };
 
 //IF TIME REFACTOR SO PAC MAN'S DIRECTION PERSISTS

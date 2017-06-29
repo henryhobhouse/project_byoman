@@ -15,7 +15,6 @@ var Controller = function(animateId,fixedId,uiId) {
   this.frameCount = 0;
   this.framesLastSecond = 0;
   this.tick();
-  this.timer = new Timer();
 };
 
 // As temporary method - not pushed into own onject
