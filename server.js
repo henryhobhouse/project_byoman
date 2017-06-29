@@ -17,7 +17,9 @@ function start(route, handle) {
     }
   }
 
-  http.createServer(onRequest).listen(process.env.PORT || 6000);
+  var server = http.createServer(onRequest);
+  var port = process.env.PORT || 3000;
+  server.listen(port);
   console.log('Server has started'); // eslint-disable-line
 }
 
