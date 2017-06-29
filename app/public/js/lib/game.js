@@ -132,7 +132,7 @@ Game.prototype = {
     this.uiUpdate = true;
   },
   killGhost: function(i) {
-    this.ghosts[i].death();
+    this.ghosts[i].resetDeath();
     this.bodies.score.scoreEatGhost();
     this.bodies.score.update();
   },
