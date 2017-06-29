@@ -49,6 +49,9 @@ Ghost.prototype = {
   draw: function(renderer) {
     renderer.drawSprite(this);
   },
+  chooseAnimation: function() {
+    this.frameindex.y = 1
+  },
   ghostOrientation: function() {
     if (this.xSpeed < 0) {
       this.frameIndex.y = 2 + this.ghostSpriteNumber;
