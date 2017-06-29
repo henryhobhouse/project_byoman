@@ -14,6 +14,11 @@
 </head>
 <body>
   <div id="game">
+    <div id="youwin" class="gamewindow">
+      <h1>GAME OVER</h1>
+      <h2 id="start" onclick="clickStart()">PLAY AGAIN</h2>
+      <h3 id="score"></h3>
+    </div>
     <div id="starting_screen" class="gamewindow">
       <img id="pacman-logo" src="/img/startImg.gif">
       <h2 id="start" onclick="clickStart()">START GAME</h2>
@@ -24,7 +29,7 @@
     <canvas id="pac-fixed" class="gamewindow" width="600" height="740"></canvas>
     <canvas id="pac-ui" class="gamewindow" width="600" height="740"></canvas>
     <canvas id="pac-animate" class="gamewindow" width="600" height="740"></canvas>
-    <div class="maze"></div>
+    <div id="maze" class="maze"></div>
   </div>
 
   <script>
