@@ -34,10 +34,10 @@ Controller.prototype = {
       this.game.update();
       this.renderer.drawAnimate(this.game.bodies, this.framesLastSecond);
       this.checkUiUpdate();
+      requestAnimationFrame(this.tick.bind(this));
+      this.fps(this); // For development purposes. Remove for production
+      this.delayStatic();
     } else { this.renderer.endGameDead(); }
-    this.fps(this); // For development purposes. Remove for production
-    requestAnimationFrame(this.tick.bind(this));
-    this.delayStatic();
   },
 
   checkUiUpdate: function() {
