@@ -18,9 +18,9 @@ define([
   'timer'
 ]);
 
-var controller;
 
 function clickStart(){
+  var controller;
   document.getElementById('youwin').style.display = 'none';
   document.getElementById('starting_screen').style.display = 'none';
   controller = new Controller('pac-animate', 'pac-fixed', 'pac-ui');
