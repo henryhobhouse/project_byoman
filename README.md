@@ -1,13 +1,10 @@
-# BYO Pacman Game
+# BYO Pacman Game - A PacMan version  pure Javascript with no Libraries or Frameworks
 
-## To update upon new object file
+## by Henry Hobhouse, Paul Kassar, Slaiman Ahmadshah and Bertie Wooles
 
-#### On production
-1. Add new file w/ object to /app/public/js/lib/
-2. Add constructer and file to the list in /app/public/js/index.js
-3. Update require (define) in /app/public/js/assets/gameInit.js
+A version of PacMan built in pure Javascript in 2 weeks for our final project at Maker's Academy. The game was built with no Libraries or Frameworks to increase the understanding of the code, and the help us learn and improve as developers. To play the game, please visit:
+https://project-byo-man.herokuapp.com/
 
-#### On testing
-1. Add constructer and file to the list in test/test-main.js
-2. wrap the test with: define(['<insert name of object dependency>', '<object two etc>'], function() { <insert test> }
+
+
 
