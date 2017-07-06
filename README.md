@@ -33,9 +33,10 @@ When creating the App we spent a lot of time creating, and developing, an enviro
 * Ghosts don't leave center at different times
 * No animation on Pac-Man death
 * No score acumlator on multiple ghosts being eaten on one frightened instance
-* ghosts don't make own back to center with eye animations upon being eaten
+* ghosts don't make their own way back to center, along with eye animation, upon being eaten
 * No Animation of ghosts within center of level
 * Levels with increasing difficulty
+* Ghosts do not flash when about to leave frightened state
 
 All features are planned on implementation but we simply ran out of time to complete. Expect completion on at least one of the teams own github repos soon I am sure ;)
 
